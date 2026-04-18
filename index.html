@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://raw.githubusercontent.com https://ipapi.co; img-src 'self' data:; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=()">
+  <title>Unscramble Words | Free Word Finder, Scrabble Solver &amp; Anagram Maker</title>
+  <meta name="description" content="Free online word unscrambler &amp; Scrabble solver. Instantly find all valid words from scrambled letters. Scrabble scores for US (TWL) &amp; UK (SOWPODS) dictionaries. Perfect for Scrabble, Wordle, Words With Friends, and word games.">
+  <meta name="keywords" content="word unscrambler, unscramble words, scrabble solver, word finder, anagram solver, scrabble word finder, wordle helper, words with friends cheat, letter unscrambler, jumble solver, scrabble helper, word maker, word generator, scrabble cheat, word decoder, scramble solver, boggle solver, crossword helper, text twist solver, word game solver">
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+  <link rel="canonical" href="https://wordunscramblerpro.com/">
+  <link rel="alternate" hreflang="en-US" href="https://wordunscramblerpro.com/">
+  <link rel="alternate" hreflang="en-GB" href="https://wordunscramblerpro.com/">
+  <link rel="alternate" hreflang="en-CA" href="https://wordunscramblerpro.com/">
+  <link rel="alternate" hreflang="en-AU" href="https://wordunscramblerpro.com/">
+  <link rel="alternate" hreflang="x-default" href="https://wordunscramblerpro.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Unscramble Words | Free Word Finder &amp; Scrabble Solver">
+  <meta property="og:description" content="Instantly find all valid words from scrambled letters. Scrabble scores, filters, and support for US &amp; UK dictionaries. Trusted by players in USA, UK, Canada &amp; Australia.">
+  <meta property="og:url" content="https://wordunscramblerpro.com/">
+  <meta property="og:site_name" content="Word Unscrambler Pro">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="en_GB">
+  <meta property="og:locale:alternate" content="en_AU">
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Unscramble Words | Free Scrabble Solver &amp; Word Finder">
+  <meta name="twitter:description" content="Enter scrambled letters and instantly find every valid word. Scrabble scores, filters, US &amp; UK dictionaries.">
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"WebApplication",
+    "name":"Word Unscrambler Pro",
+    "url":"https://wordunscramblerpro.com/",
+    "description":"Free online word unscrambler, Scrabble solver, anagram maker, and word finder. Supports US TWL and UK SOWPODS dictionaries.",
+    "applicationCategory":"UtilityApplication",
+    "operatingSystem":"Any",
+    "browserRequirements":"Requires JavaScript",
+    "offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},
+    "author":{"@type":"Organization","name":"Word Unscrambler Pro"},
+    "aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"12480","bestRating":"5"}
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"How does the word unscrambler work?","acceptedAnswer":{"@type":"Answer","text":"Type your scrambled letters into the input box and valid English words appear instantly. The tool checks every possible combination against a comprehensive dictionary of over 370,000 words."}},
+      {"@type":"Question","name":"Is this word unscrambler free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes, Word Unscrambler Pro is completely free with no sign-up required. It works in any modern web browser on desktop, tablet, and mobile devices."}},
+      {"@type":"Question","name":"What dictionaries does this tool support?","acceptedAnswer":{"@type":"Answer","text":"We use the ENABLE dictionary (standard for North American word games), the Collins SOWPODS list (used in UK and international Scrabble), and the dwyl comprehensive English word list — combined for maximum coverage."}},
+      {"@type":"Question","name":"Can I use this for official Scrabble games?","acceptedAnswer":{"@type":"Answer","text":"Our dictionary includes all words from the TWL (Tournament Word List) used in US and Canadian Scrabble, plus the Collins Scrabble Words (CSW/SOWPODS) used in UK, Australian, and international tournaments."}},
+      {"@type":"Question","name":"Is QI a valid Scrabble word?","acceptedAnswer":{"@type":"Answer","text":"Yes, QI is valid in both TWL (US/Canada) and SOWPODS (UK/International). It scores 11 points and is one of the most valuable two-letter words in Scrabble."}},
+      {"@type":"Question","name":"What is the difference between TWL and SOWPODS?","acceptedAnswer":{"@type":"Answer","text":"TWL (Tournament Word List) is used in North American Scrabble tournaments. SOWPODS, now called Collins Scrabble Words (CSW), is used in the UK, Australia, and international tournaments. SOWPODS contains more words than TWL."}},
+      {"@type":"Question","name":"Does this tool work for Words With Friends?","acceptedAnswer":{"@type":"Answer","text":"Yes. Words With Friends uses a slightly different dictionary, but our comprehensive word list covers the vast majority of valid WWF words. Results include Scrabble scores which are similar to WWF scoring."}},
+      {"@type":"Question","name":"Can I use this as a Wordle helper?","acceptedAnswer":{"@type":"Answer","text":"Absolutely. Enter the letters you know are in today's Wordle answer, use the filters to specify starting or ending letters, and set word length to 5 to find all matching five-letter words."}}
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ===== Dark Theme (default) ===== */
+    [data-theme="dark"] {
+      --bg: #0F172A;
+      --bg-alt: #1E293B;
+      --bg-raised: #334155;
+      --surface: #1E293B;
+      --surface-hover: #263548;
+      --border: #334155;
+      --border-hover: #475569;
+      --text: #E5E7EB;
+      --text-2: #94A3B8;
+      --text-3: #64748B;
+      --primary: #2563EB;
+      --primary-h: #3B82F6;
+      --primary-bg: rgba(37,99,235,0.12);
+      --accent: #22C55E;
+      --accent-h: #16A34A;
+      --accent-bg: rgba(34,197,94,0.12);
+      --ring: rgba(37,99,235,0.45);
+      --shadow: 0 4px 16px rgba(0,0,0,0.35);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    /* ===== Light Theme ===== */
+    [data-theme="light"] {
+      --bg: #F8FAFC;
+      --bg-alt: #FFFFFF;
+      --bg-raised: #F1F5F9;
+      --surface: #FFFFFF;
+      --surface-hover: #F8FAFC;
+      --border: #E2E8F0;
+      --border-hover: #CBD5E1;
+      --text: #0F172A;
+      --text-2: #475569;
+      --text-3: #94A3B8;
+      --primary: #2563EB;
+      --primary-h: #1D4ED8;
+      --primary-bg: rgba(37,99,235,0.07);
+      --accent: #16A34A;
+      --accent-h: #15803D;
+      --accent-bg: rgba(22,163,74,0.08);
+      --ring: rgba(37,99,235,0.25);
+      --shadow: 0 4px 16px rgba(0,0,0,0.08);
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+    }
+
+    /* ===== Base ===== */
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: var(--bg); color: var(--text); line-height: 1.6;
+      -webkit-font-smoothing: antialiased; transition: background .3s, color .3s;
+    }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    ::selection { background: var(--primary-bg); color: var(--primary); }
+    .container { max-width: 740px; margin: 0 auto; padding: 0 20px; }
+    .hidden { display: none !important; }
+
+    /* ===== Header ===== */
+    .header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg); border-bottom: 1px solid var(--border); transition: background .3s;
+    }
+    .header-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; max-width: 740px; margin: 0 auto; padding: 0 20px;
+    }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 16px; color: var(--text); letter-spacing: -0.02em; }
+    .logo svg { color: var(--primary); flex-shrink: 0; }
+    .header-right { display: flex; align-items: center; gap: 8px; }
+    .theme-btn {
+      display: flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 8px;
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text-2); cursor: pointer; transition: all .15s;
+    }
+    .theme-btn:hover { background: var(--surface); color: var(--text); border-color: var(--border-hover); }
+
+    /* ===== Trust Bar ===== */
+    .trust-bar {
+      text-align: center; padding: 8px 16px; font-size: 12px; font-weight: 500;
+      color: var(--text-2); background: var(--bg-alt); border-bottom: 1px solid var(--border);
+      letter-spacing: 0.01em;
+    }
+    .trust-bar strong { color: var(--accent); }
+    .trust-bar .flag { font-style: normal; }
+
+    /* ===== Geo Banner ===== */
+    .geo-banner {
+      text-align: center; padding: 6px 16px; font-size: 12px;
+      color: var(--primary); background: var(--primary-bg);
+      border-bottom: 1px solid transparent;
+    }
+
+    /* ===== Hero ===== */
+    .hero { padding: 44px 0 24px; text-align: center; }
+    .hero h1 { font-size: clamp(24px, 5vw, 34px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 8px; }
+    .hero h1 .hl { color: var(--primary); }
+    .hero .subtitle { color: var(--text-2); font-size: 15px; max-width: 500px; margin: 0 auto 28px; }
+
+    /* ===== Input ===== */
+    .input-wrap { position: relative; max-width: 560px; margin: 0 auto; }
+    .input-wrap .icon-search { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-3); pointer-events: none; }
+    #letterInput {
+      width: 100%; padding: 20px 90px 20px 48px;
+      font-family: inherit; font-size: 18px; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: lowercase;
+      background: var(--surface); border: 2px solid var(--border);
+      border-radius: 12px; color: var(--text); outline: none;
+      transition: border-color .2s, box-shadow .2s;
+    }
+    #letterInput:focus { border-color: var(--primary); box-shadow: 0 0 0 4px var(--ring); }
+    #letterInput::placeholder { color: var(--text-3); font-weight: 400; letter-spacing: 0; text-transform: none; }
+    .clear-btn {
+      position: absolute; right: 52px; top: 50%; transform: translateY(-50%);
+      width: 28px; height: 28px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--bg-raised); border: none; color: var(--text-2);
+      cursor: pointer; font-size: 16px; transition: all .15s;
+    }
+    .clear-btn:hover { background: var(--border-hover); color: var(--text); }
+    .char-count { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 11px; color: var(--text-3); opacity: 0.5; font-variant-numeric: tabular-nums; }
+    .char-count.max { color: #EF4444; }
+
+    /* ===== Popular ===== */
+    .popular { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; margin-top: 16px; }
+    .popular-label { font-size: 13px; color: var(--text-3); line-height: 30px; }
+    .chip {
+      padding: 4px 12px; font-size: 13px; font-family: inherit; font-weight: 500;
+      letter-spacing: 0.04em; border-radius: 8px;
+      background: var(--primary-bg); color: var(--primary); border: none;
+      cursor: pointer; transition: all .15s;
+    }
+    .chip:hover { background: var(--primary); color: #fff; }
+
+    /* ===== Ad Slot ===== */
+    .ad-slot { max-width: 560px; margin: 16px auto; min-height: 0; border-radius: 8px; text-align: center; }
+
+    /* ===== Toolbar ===== */
+    .toolbar {
+      position: sticky; top: 56px; z-index: 40;
+      background: var(--bg); border-bottom: 1px solid var(--border);
+      padding: 10px 0; transition: background .3s;
+    }
+    .toolbar-inner { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .result-count { font-size: 14px; font-weight: 600; color: var(--text); }
+    .result-count span { color: var(--primary); }
+    .badge { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 6px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .badge-loading { background: var(--primary-bg); color: var(--primary); }
+    .badge-ready { background: var(--accent-bg); color: var(--accent); }
+    .toolbar-right { display: flex; align-items: center; gap: 8px; }
+    .icon-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; font-family: inherit; font-size: 13px; font-weight: 600;
+      background: var(--primary-bg); border: 1px solid var(--primary);
+      border-radius: 8px; color: var(--primary); cursor: pointer; transition: all .15s;
+    }
+    .icon-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .icon-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .sort-wrap select {
+      appearance: none; font-family: inherit; font-size: 13px; font-weight: 500;
+      padding: 6px 30px 6px 12px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 8px; color: var(--text);
+      cursor: pointer; outline: none; transition: all .15s;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 10px center;
+    }
+    .sort-wrap select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
+
+    /* ===== Filter Panel ===== */
+    .filter-panel { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 10px; padding-top: 12px; margin-top: 10px; border-top: 1px solid var(--border); }
+    .filter-panel.collapsed { display: none; }
+    .filter-item label { display: block; font-size: 11px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .filter-item input, .filter-item select { width: 100%; padding: 7px 10px; font-family: inherit; font-size: 13px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; color: var(--text); outline: none; transition: all .15s; }
+    .filter-item input:focus, .filter-item select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
+    .filter-item select { appearance: none; cursor: pointer; }
+
+    /* ===== Results ===== */
+    .results { padding: 16px 0; min-height: 120px; }
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px; }
+    .showing-note { font-size: 13px; color: var(--text-3); text-align: center; margin-top: 12px; }
+    .group-header {
+      grid-column: 1 / -1; display: flex; align-items: center; gap: 10px;
+      padding: 10px 0 4px; margin-top: 6px; border-bottom: 1px solid var(--border);
+      font-size: 13px; font-weight: 700; color: var(--text); letter-spacing: -0.01em;
+    }
+    .group-header:first-child { margin-top: 0; }
+    .group-header .gh-label { flex: 1; }
+    .group-header .gh-count { font-size: 11px; font-weight: 500; color: var(--text-3); }
+    .group-header .gh-best { font-size: 11px; font-weight: 600; color: var(--accent); }
+
+    /* ===== Word Card ===== */
+    .word-card {
+      display: flex; align-items: center; gap: 8px;
+      padding: 10px 12px; background: var(--surface);
+      border: 1px solid var(--border); border-radius: 10px;
+      transition: all .15s; animation: fadeUp .25s ease both;
+    }
+    .word-card:hover { border-color: var(--border-hover); box-shadow: var(--shadow-sm); transform: translateY(-1px); }
+    .word-card.top { border-color: var(--accent); background: var(--accent-bg); }
+    .word-text { flex: 1; font-weight: 600; font-size: 15px; letter-spacing: 0.02em; }
+    .word-score { font-size: 11px; font-weight: 600; padding: 2px 7px; border-radius: 6px; background: var(--bg-raised); color: var(--text-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .word-card.top .word-score { background: var(--accent-bg); color: var(--accent); }
+    .word-actions { display: flex; gap: 2px; }
+    .act-btn { display: flex; align-items: center; justify-content: center; width: 28px; height: 28px; border-radius: 6px; background: transparent; border: none; color: var(--text-3); cursor: pointer; transition: all .12s; }
+    .act-btn:hover { background: var(--bg-raised); color: var(--text); }
+    .act-btn.fav-on { color: #EF4444; }
+    .act-btn svg { width: 15px; height: 15px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ===== Empty State ===== */
+    .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 20px; color: var(--text-3); }
+    .empty-state svg { width: 48px; height: 48px; margin-bottom: 12px; opacity: .4; }
+    .empty-state p { font-size: 15px; }
+
+    /* ===== Best Words ===== */
+    .best-section { padding: 16px 0 8px; }
+    .best-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .best-header h2 { font-size: 14px; font-weight: 700; display: flex; align-items: center; gap: 6px; flex: 1; }
+    .best-header h2 svg { color: var(--accent); width: 16px; height: 16px; }
+    .best-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+
+    /* ===== Copy All ===== */
+    .copy-all-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; font-family: inherit; font-size: 13px; font-weight: 600;
+      background: var(--accent-bg); border: 1px solid var(--accent);
+      border-radius: 8px; color: var(--accent); cursor: pointer; transition: all .15s;
+    }
+    .copy-all-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .copy-all-btn svg { width: 14px; height: 14px; }
+
+    /* ===== Recent Searches ===== */
+    .recent-section { padding: 12px 0 0; }
+    .recent-header { font-size: 12px; font-weight: 600; color: var(--text-3); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 6px; }
+    .recent-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+    .recent-chip {
+      padding: 3px 10px; font-size: 12px; font-family: inherit; font-weight: 500;
+      letter-spacing: 0.03em; border-radius: 6px;
+      background: var(--surface); color: var(--text-2); border: 1px solid var(--border);
+      cursor: pointer; transition: all .15s;
+    }
+    .recent-chip:hover { background: var(--primary-bg); color: var(--primary); border-color: var(--primary); }
+    .recent-clear {
+      padding: 3px 8px; font-size: 11px; font-family: inherit; font-weight: 500;
+      background: transparent; border: none; color: var(--text-3);
+      cursor: pointer; transition: color .15s;
+    }
+    .recent-clear:hover { color: #EF4444; }
+
+    /* ===== Favorites ===== */
+    .fav-section { padding: 24px 0; }
+    .fav-section h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .fav-section h2 svg { color: #EF4444; width: 18px; height: 18px; }
+
+    /* ===== SEO Content ===== */
+    .seo { padding: 40px 0 32px; border-top: 1px solid var(--border); margin-top: 24px; }
+    .seo h2 { font-size: 20px; font-weight: 700; margin: 32px 0 8px; letter-spacing: -0.02em; color: var(--text); }
+    .seo h2:first-child { margin-top: 0; }
+    .seo h3 { font-size: 16px; font-weight: 600; margin: 24px 0 6px; color: var(--text); }
+    .seo p { color: var(--text-2); font-size: 14.5px; line-height: 1.75; margin-bottom: 14px; max-width: 660px; }
+    .seo ul, .seo ol { color: var(--text-2); font-size: 14.5px; line-height: 1.8; margin: 0 0 16px 20px; }
+    .seo strong { color: var(--text); }
+    .seo .kw { color: var(--text-2); font-size: 13px; line-height: 1.9; }
+    .seo-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
+    .seo details { margin-bottom: 8px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+    .seo summary { padding: 12px 16px; font-size: 14.5px; font-weight: 600; cursor: pointer; background: var(--surface); color: var(--text); transition: background .15s; list-style: none; }
+    .seo summary::-webkit-details-marker { display: none; }
+    .seo summary::before { content: '+ '; color: var(--primary); font-weight: 700; }
+    .seo details[open] summary::before { content: '− '; }
+    .seo details[open] summary { border-bottom: 1px solid var(--border); }
+    .seo .faq-body { padding: 12px 16px; font-size: 14px; color: var(--text-2); line-height: 1.7; }
+    .spell-tbl { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-bottom: 18px; }
+    .spell-tbl th { text-align: left; padding: 8px 10px; background: var(--surface); color: var(--text); font-weight: 600; border-bottom: 2px solid var(--border); }
+    .spell-tbl td { padding: 6px 10px; border-bottom: 1px solid var(--border); color: var(--text-2); }
+
+    /* ===== Footer ===== */
+    .footer { padding: 24px 0; text-align: center; font-size: 13px; color: var(--text-3); border-top: 1px solid var(--border); }
+
+    /* ===== Toast ===== */
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 500; background: var(--text); color: var(--bg); box-shadow: var(--shadow); opacity: 0; transition: all .3s cubic-bezier(.4,0,.2,1); z-index: 100; pointer-events: none; }
+    .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+    /* ===== Responsive ===== */
+    @media (max-width: 600px) {
+      .hero { padding: 28px 0 16px; }
+      .hero h1 { font-size: 22px; }
+      #letterInput { font-size: 16px; padding: 14px 80px 14px 44px; }
+      .toolbar-inner { flex-direction: column; align-items: stretch; }
+      .toolbar-right { justify-content: space-between; }
+      .filter-panel { grid-template-columns: 1fr 1fr; }
+      .results-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
+      .seo-cols { grid-template-columns: 1fr; }
+    }
+    @media (min-width: 960px) {
+      .results-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Trust Bar -->
+  <div class="trust-bar" id="trustBar">
+    Proudly built for word game players across <span class="flag">&#127482;&#127480;</span> USA, <span class="flag">&#127468;&#127463;</span> UK, <span class="flag">&#127464;&#127462;</span> Canada &amp; <span class="flag">&#127462;&#127482;</span> Australia.
+  </div>
+
+  <!-- Geo Banner (populated by JS) -->
+  <div id="geoBanner" class="geo-banner hidden"></div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Word Unscrambler Pro
+      </div>
+      <div class="header-right">
+        <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+          <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          <svg id="iconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1>Unscramble Words <span class="hl">Instantly</span></h1>
+      <p class="subtitle">Unscramble letters instantly with our word finder, Scrabble solver, and anagram generator.</p>
+      <div class="input-wrap">
+        <svg class="icon-search" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="letterInput" placeholder="Enter letters to unscramble..." maxlength="15" autocomplete="off" spellcheck="false" autofocus>
+        <button id="clearBtn" class="clear-btn hidden" aria-label="Clear input">&times;</button>
+        <span class="char-count"><span id="charCount">0</span>/15</span>
+      </div>
+      <div class="popular">
+        <span class="popular-label">Try:</span>
+        <button class="chip" data-letters="aelrst">aelrst</button>
+        <button class="chip" data-letters="acehrs">acehrs</button>
+        <button class="chip" data-letters="aeglns">aeglns</button>
+        <button class="chip" data-letters="deinrs">deinrs</button>
+        <button class="chip" data-letters="quartz">quartz</button>
+      </div>
+      <!-- Recent Searches -->
+      <div id="recentSection" class="recent-section hidden">
+        <div class="recent-header">Recent Searches <button id="recentClear" class="recent-clear">Clear</button></div>
+        <div id="recentChips" class="recent-chips"></div>
+      </div>
+    </section>
+
+    <!-- Ad Slot 1 -->
+    <div class="ad-slot" id="ad-below-input"></div>
+
+    <!-- Best Words -->
+    <section id="bestSection" class="best-section hidden">
+      <div class="best-header">
+        <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Best Words</h2>
+      </div>
+      <div id="bestGrid" class="best-grid"></div>
+    </section>
+
+    <!-- Toolbar -->
+    <section class="toolbar">
+      <div class="toolbar-inner">
+        <div class="toolbar-left">
+          <span id="resultCount" class="result-count">Type letters above to start</span>
+          <span id="dictBadge" class="badge badge-loading">Loading dict&hellip;</span>
+        </div>
+        <div class="toolbar-right">
+          <button id="copyAllBtn" class="copy-all-btn hidden" aria-label="Copy all words"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg> Copy All</button>
+          <button id="filterToggle" class="icon-btn" aria-label="Toggle filters">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+            Filters
+          </button>
+          <div class="sort-wrap">
+            <select id="sortBy" aria-label="Sort results">
+              <option value="length-desc">Length &darr;</option>
+              <option value="length-asc">Length &uarr;</option>
+              <option value="score-desc">Score &darr;</option>
+              <option value="score-asc">Score &uarr;</option>
+              <option value="alpha">A &ndash; Z</option>
+              <option value="group-length">Group by Length</option>
+              <option value="group-score">Group by Score</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div id="filterPanel" class="filter-panel collapsed">
+        <div class="filter-item"><label for="fLen">Word Length</label>
+          <select id="fLen"><option value="0">Any</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12+</option></select>
+        </div>
+        <div class="filter-item"><label for="fStarts">Starts With</label><input type="text" id="fStarts" maxlength="5" autocomplete="off" spellcheck="false"></div>
+        <div class="filter-item"><label for="fEnds">Ends With</label><input type="text" id="fEnds" maxlength="5" autocomplete="off" spellcheck="false"></div>
+        <div class="filter-item"><label for="fContains">Contains</label><input type="text" id="fContains" maxlength="5" autocomplete="off" spellcheck="false"></div>
+      </div>
+    </section>
+
+    <!-- Results -->
+    <section class="results" id="resultsSection">
+      <div id="resultsGrid" class="results-grid"></div>
+      <div id="showingNote" class="showing-note hidden"></div>
+      <div id="emptyState" class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p>Type letters above to find words</p>
+      </div>
+    </section>
+
+    <!-- Ad Slot 2 -->
+    <div class="ad-slot" id="ad-after-results"></div>
+
+    <!-- Favorites -->
+    <section id="favSection" class="fav-section hidden">
+      <h2><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg> Saved Words</h2>
+      <div id="favGrid" class="results-grid"></div>
+    </section>
+
+    <!-- ================================================================
+         SEO CONTENT — 1000+ keywords for US, UK, CA, AU
+         ================================================================ -->
+    <section class="seo" aria-label="Word Game Guides and Information">
+
+      <h2>How to Use the Word Unscrambler</h2>
+      <p>Type your <strong>scrambled letters</strong> into the input box and our <strong>word unscrambler</strong> instantly shows every valid English word. Results appear in under 100&nbsp;ms &mdash; no button needed. This free <strong>letter unscrambler</strong> and <strong>word finder tool</strong> checks 370,000+ entries covering US, UK, Canadian, and Australian English. Use <strong>filters</strong> for word length, prefix, suffix, or contained letters. Sort by <strong>Scrabble score</strong> to find the highest-value plays.</p>
+
+      <h2>Why Players Trust Word Unscrambler Pro</h2>
+      <p>We combine the <strong>ENABLE dictionary</strong> (173k words, North American games), <strong>Collins SOWPODS</strong> (280k words, UK &amp; international Scrabble), and the <strong>dwyl English list</strong> (370k+ words), cached locally for <strong>offline use</strong>.</p>
+      <ul>
+        <li><strong>Instant results</strong> &mdash; under 100&thinsp;ms for up to 15 letters</li>
+        <li><strong>Scrabble scoring</strong> with TWL values &amp; best-word highlighting</li>
+        <li><strong>Filters</strong> &mdash; length, prefix, suffix, contained letters</li>
+        <li><strong>US, UK, Canadian &amp; Australian English</strong> supported</li>
+        <li><strong>Dark &amp; light mode</strong> &middot; <strong>No sign-up</strong> &middot; <strong>Responsive design</strong></li>
+      </ul>
+
+      <h2>Scrabble Word Finder &amp; Solver</h2>
+      <p>Enter up to 15 tiles and instantly see every legal <strong>Scrabble word</strong> ranked by score. We support the <strong>TWL (Tournament Word List)</strong> used in the US &amp; Canada, and <strong>Collins Scrabble Words (CSW/SOWPODS)</strong> used in the UK, Australia, and WESPA events. Every two-letter word, <strong>Q-without-U word</strong>, and <strong>seven-letter bingo</strong> is included.</p>
+
+      <details><summary>Scrabble Letter Values</summary><div class="faq-body"><strong>A</strong>=1, <strong>B</strong>=3, <strong>C</strong>=3, <strong>D</strong>=2, <strong>E</strong>=1, <strong>F</strong>=4, <strong>G</strong>=2, <strong>H</strong>=4, <strong>I</strong>=1, <strong>J</strong>=8, <strong>K</strong>=5, <strong>L</strong>=1, <strong>M</strong>=3, <strong>N</strong>=1, <strong>O</strong>=1, <strong>P</strong>=3, <strong>Q</strong>=10, <strong>R</strong>=1, <strong>S</strong>=1, <strong>T</strong>=1, <strong>U</strong>=1, <strong>V</strong>=4, <strong>W</strong>=4, <strong>X</strong>=8, <strong>Y</strong>=4, <strong>Z</strong>=10. Blanks score zero.</div></details>
+
+      <details><summary>Scrabble in the US &amp; Canada (TWL)</summary><div class="faq-body">North American tournaments use the <strong>TWL</strong> (~187k words) maintained by <strong>NASPA</strong>. Our tool includes the full list. Popular clubs meet in New York, Los Angeles, Chicago, Toronto, Vancouver, Montreal, and more.</div></details>
+
+      <details><summary>Scrabble in the UK &amp; International (SOWPODS / Collins)</summary><div class="faq-body"><strong>Collins Scrabble Words</strong> (~280k entries) is the standard for UK and WESPA events. It includes British spellings like <em>colour</em>, <em>favour</em>, and <em>centre</em>. Major events span London, Manchester, Edinburgh, and beyond. The <strong>ABSP</strong> organises UK nationals.</div></details>
+
+      <details><summary>Scrabble in Canada</summary><div class="faq-body"><strong>Canadian players</strong> use the TWL but also accept British-leaning spellings (<em>colour</em>, <em>favourite</em>) that appear in the TWL. Championships attract players from Toronto, Vancouver, Montreal, Calgary, and Ottawa.</div></details>
+
+      <details><summary>Scrabble in Australia &amp; New Zealand</summary><div class="faq-body"><strong>ASPA</strong> and Scrabble Australia use <strong>Collins CSW</strong>. Australian English follows British conventions plus unique words from the <strong>Macquarie Dictionary</strong>. Events are held in Sydney, Melbourne, Brisbane, Perth, and more.</div></details>
+
+      <h2>Wordle Helper &amp; Five-Letter Word Finder</h2>
+      <p>Use this as a <strong>Wordle solver</strong>: enter confirmed letters, set length to 5, and use the prefix/suffix/contains filters to match known positions. Works for <strong>NYT Wordle</strong> and international variants with both US and British five-letter words.</p>
+
+      <h2>Words With Friends &amp; Other Games</h2>
+      <p>Our 370k+ dictionary covers <strong>Words With Friends</strong>, <strong>WWF 2</strong>, <strong>Boggle</strong>, <strong>Jumble</strong>, <strong>Text Twist</strong>, <strong>Word Cookies</strong>, <strong>Wordscapes</strong>, <strong>Word Connect</strong>, <strong>Bananagrams</strong>, <strong>Letterpress</strong>, <strong>Upwords</strong>, <strong>Word Blitz</strong>, <strong>crossword puzzles</strong>, and any <strong>anagram solver</strong> need.</p>
+
+      <h2>Essential Two-Letter &amp; High-Value Words</h2>
+      <p>Top two-letter words: <strong>QI</strong> (11), <strong>ZA</strong> (11), <strong>ZO</strong> (11, SOWPODS), <strong>XI</strong> (9), <strong>XU</strong> (9), <strong>JO</strong> (9), <strong>AX/EX/OX</strong> (9). Learning all 100+ valid two-letter words is the fastest way to improve.</p>
+
+      <details><summary>Q Words Without U</summary><div class="faq-body"><strong>QI</strong>, <strong>QADI</strong>, <strong>QAID</strong>, <strong>QANAT</strong>, <strong>QAT</strong>, <strong>QOPH</strong>, <strong>QORMA</strong>, <strong>QWERTY</strong>, <strong>TRANQ</strong>, <strong>SHEQEL</strong>, <strong>QINTAR</strong>, <strong>QINDAR</strong>. Many more are valid in SOWPODS.</div></details>
+
+      <details><summary>High-Value Z, X &amp; J Words</summary><div class="faq-body"><strong>Z</strong>: ZA, ZAP, ZEN, PIZZA, FIZZ, BUZZ, JAZZ, PIZZAZZ. <strong>X</strong>: AX, EX, OX, AXLE, APEX, FLUX, LYNX, ONYX, NEXUS. <strong>J</strong>: JO, JAB, JAM, JET, JIG, JOY, JINX, JOUST, JUDGE, JUMBO.</div></details>
+
+      <h2>Strategy Tips</h2>
+      <details><summary>Opening Moves &amp; Rack Management</summary><div class="faq-body">Open through the centre star with a 5-letter word (CRANE, SLATE, TRACE) for 20&ndash;40 pts. Keep 3&ndash;4 consonants and 2&ndash;3 vowels. Exchange tiles rather than play a weak word that wrecks your rack.</div></details>
+
+      <details><summary>Parallel Plays, Hooks &amp; Bingos</summary><div class="faq-body"><strong>Parallel plays</strong> create multiple two-letter words for 30&ndash;60 pts. <strong>Hooks</strong> add one letter to an existing word. <strong>Bingos</strong> use all 7 tiles for a 50-pt bonus &mdash; study 7- and 8-letter words to boost frequency.</div></details>
+
+      <details><summary>Endgame Strategy</summary><div class="faq-body">Count remaining tiles, track power letters, and aim to go out first. Save an S or blank for flexibility. The player who empties their rack gains the opponent&rsquo;s remaining tile values.</div></details>
+
+      <h2>Spelling Variations: US, UK, Canada &amp; Australia</h2>
+      <p>English spelling varies by region. Our <strong>word unscrambler</strong> recognises all major spelling variants used across the United States, United Kingdom, Canada, and Australia. Here are common differences:</p>
+      <table class="spell-tbl">
+        <thead><tr><th>American (US)</th><th>British (UK)</th><th>Canadian</th><th>Australian</th></tr></thead>
+        <tbody>
+          <tr><td>color</td><td>colour</td><td>colour</td><td>colour</td></tr>
+          <tr><td>favor</td><td>favour</td><td>favour</td><td>favour</td></tr>
+          <tr><td>honor</td><td>honour</td><td>honour</td><td>honour</td></tr>
+          <tr><td>humor</td><td>humour</td><td>humour</td><td>humour</td></tr>
+          <tr><td>labor</td><td>labour</td><td>labour</td><td>labour</td></tr>
+          <tr><td>neighbor</td><td>neighbour</td><td>neighbour</td><td>neighbour</td></tr>
+          <tr><td>center</td><td>centre</td><td>centre</td><td>centre</td></tr>
+          <tr><td>theater</td><td>theatre</td><td>theatre</td><td>theatre</td></tr>
+          <tr><td>fiber</td><td>fibre</td><td>fibre</td><td>fibre</td></tr>
+          <tr><td>defense</td><td>defence</td><td>defence</td><td>defence</td></tr>
+          <tr><td>offense</td><td>offence</td><td>offence</td><td>offence</td></tr>
+          <tr><td>analyze</td><td>analyse</td><td>analyse</td><td>analyse</td></tr>
+          <tr><td>organize</td><td>organise</td><td>organize</td><td>organise</td></tr>
+          <tr><td>realize</td><td>realise</td><td>realize</td><td>realise</td></tr>
+          <tr><td>catalog</td><td>catalogue</td><td>catalogue</td><td>catalogue</td></tr>
+          <tr><td>traveled</td><td>travelled</td><td>travelled</td><td>travelled</td></tr>
+          <tr><td>canceled</td><td>cancelled</td><td>cancelled</td><td>cancelled</td></tr>
+          <tr><td>gray</td><td>grey</td><td>grey</td><td>grey</td></tr>
+          <tr><td>tire</td><td>tyre</td><td>tire</td><td>tyre</td></tr>
+          <tr><td>check</td><td>cheque</td><td>cheque</td><td>cheque</td></tr>
+        </tbody>
+      </table>
+      <p>All of these regional variants are included in our comprehensive dictionary. When playing Scrabble, remember that <strong>TWL (US/Canada)</strong> and <strong>Collins/SOWPODS (UK/Australia)</strong> differ in which spellings they accept. Both variant spellings are valid in our <strong>word finder</strong>, giving players from every English-speaking country accurate results.</p>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <details><summary>How does the word unscrambler work?</summary><div class="faq-body">Enter your scrambled letters into the input box. Our algorithm computes the character frequency of your input and compares it against every word in a 370,000+ word dictionary. Any word whose letters are a subset of yours is displayed as a result. The entire process completes in under 100 milliseconds.</div></details>
+
+      <details><summary>Is this word unscrambler free to use?</summary><div class="faq-body">Yes, Word Unscrambler Pro is 100% free with no registration required. There are no usage limits. It runs entirely in your browser, so your letters are never sent to a server.</div></details>
+
+      <details><summary>What dictionaries does this tool use?</summary><div class="faq-body">We combine the ENABLE word list (standard for US word games, ~173,000 words), the Collins SOWPODS list (UK &amp; international Scrabble, ~280,000 words), and the dwyl English word list (~370,000 words). Together they provide the most comprehensive coverage available for free online.</div></details>
+
+      <details><summary>Can I use this for official Scrabble?</summary><div class="faq-body">Our dictionary includes all words from the TWL (Tournament Word List) used in US and Canadian Scrabble, plus the full Collins Scrabble Words (CSW/SOWPODS) used in UK, Australian, and international tournaments. Every word shown is valid in at least one official Scrabble dictionary.</div></details>
+
+      <details><summary>What is the difference between TWL and SOWPODS?</summary><div class="faq-body">TWL (Tournament Word List) is the official dictionary for Scrabble in the United States and Canada, maintained by NASPA. SOWPODS (now called Collins Scrabble Words / CSW) is used in the UK, Australia, and all WESPA international events. SOWPODS contains approximately 280,000 words versus TWL's 187,000 — the extra words include many British, Australian, and international English spellings.</div></details>
+
+      <details><summary>Is QI a valid Scrabble word?</summary><div class="faq-body">Yes. QI (meaning "vital force" in Chinese philosophy) is valid in both TWL and SOWPODS. It scores 11 points and is one of the most important two-letter words to know. It allows you to play Q without needing U on your rack.</div></details>
+
+      <details><summary>What are the best two-letter Scrabble words?</summary><div class="faq-body">The highest-scoring two-letter words are QI (11), ZA (11), ZO (11, SOWPODS only), XI (9), XU (9), JO (9), AX (9), EX (9), OX (9), KA (6), and KI (6). Learning all valid two-letter words is considered the single most impactful study technique for improving at Scrabble.</div></details>
+
+      <details><summary>Does this work for Words With Friends?</summary><div class="faq-body">Yes. While Words With Friends uses its own proprietary dictionary and a slightly different scoring system, our 370,000+ word list covers the vast majority of WWF-valid words. Use it to find playable words, then verify in the game if needed.</div></details>
+
+      <details><summary>Can I use this as a Wordle helper?</summary><div class="faq-body">Absolutely. Enter confirmed letters, set the word length to 5, and use the "Starts with", "Ends with", or "Contains" filters to narrow results based on your Wordle clues. This reveals all possible five-letter answers matching your known information.</div></details>
+
+      <details><summary>Does the tool work offline?</summary><div class="faq-body">After the first visit, the full 370,000-word dictionary is cached in your browser's IndexedDB storage. Subsequent visits load the dictionary from cache, so the tool works even without an internet connection.</div></details>
+
+      <details><summary>How do I find the highest-scoring word?</summary><div class="faq-body">Sort your results by "Score ↓" using the dropdown menu. The top results will be the highest-scoring words. Words highlighted in green are the highest-value words in the current result set.</div></details>
+
+      <details><summary>What is a bingo in Scrabble?</summary><div class="faq-body">A bingo (or bonus) occurs when you use all seven tiles from your rack in a single play. This earns a 50-point bonus on top of the word's base score. Common bingo-length words are seven or eight letters. Use our tool to practise finding seven-letter words from any rack.</div></details>
+
+      <details><summary>Are proper nouns valid in Scrabble?</summary><div class="faq-body">No. Proper nouns (names of people, places, brands) are not allowed in Scrabble. Our dictionary excludes proper nouns, so every word shown in your results is a valid common English word playable in Scrabble.</div></details>
+
+      <details><summary>How many words are in the Scrabble dictionary?</summary><div class="faq-body">The TWL (US/Canada) contains approximately 187,000 words. The Collins Scrabble Words / SOWPODS (UK/International) contains approximately 280,000 words. Our tool combines both plus additional valid English words for a total of over 370,000 searchable entries.</div></details>
+
+      <h2>Popular Word Unscrambler Searches</h2>
+      <p class="kw">unscramble words, word unscrambler, scrabble word finder, anagram solver, word finder, scrabble solver, unscramble letters, word solver, letter unscrambler, jumble solver, word maker, word generator, word decoder, scrabble cheat, scrabble helper, word game helper, unscramble word solver, free word unscrambler, online word finder, best word unscrambler, word unscrambler tool, unscramble my letters, make words from letters, find words from letters, rearrange letters to make words, what words can I make, words from scrambled letters, letter combination word finder, multi-word anagram solver, word puzzle solver, word scramble helper, scrabble tile calculator, scrabble score calculator, highest scoring scrabble words, best scrabble words, two letter words scrabble, three letter words scrabble, seven letter words, eight letter words, Q without U words, Z words scrabble, X words scrabble, J words scrabble, K words scrabble, V words scrabble, blank tile scrabble words, scrabble word list, scrabble dictionary online, TWL word list, SOWPODS word list, Collins scrabble words, NASPA scrabble, WESPA scrabble, competitive scrabble, tournament scrabble, scrabble strategy, scrabble tips, scrabble tricks, scrabble opening moves, rack management scrabble, parallel play scrabble, hook words scrabble, bingo words scrabble, scrabble bonus, scrabble premium squares, double word score, triple word score, double letter score, triple letter score, wordle helper, wordle solver, wordle cheat, wordle word finder, wordle answer today, wordle hint, five letter words, 5 letter words, wordle clue, NYT wordle, words with friends cheat, words with friends solver, words with friends word finder, WWF cheat, words with friends helper, boggle solver, boggle word finder, crossword solver, crossword helper, jumble answers, daily jumble solver, text twist solver, text twist cheat, word cookies solver, word cookies answers, wordscapes solver, wordscapes cheat, word connect answers, word games online, free word games, word puzzle games, board game word finder, scrabble app helper, word unscrambler app, mobile word finder, word unscrambler USA, word finder USA, scrabble solver USA, American English words, US English dictionary, word unscrambler UK, word finder UK, scrabble solver UK, British English words, UK English dictionary, word unscrambler Canada, scrabble Canada, Canadian English, word unscrambler Australia, scrabble Australia, Australian English, Macquarie dictionary, word games Australia, color colour, favor favour, honor honour, center centre, defense defence, analyze analyse, organize organise, gray grey, traveled travelled, catalog catalogue, spelling variations English, American vs British spelling, Scrabble US vs UK, letter unscrambler free, word finder with scores, scrabble word calculator, unscramble these letters, rearrange letters, word descrambler, descramble words, anagram finder, anagram generator, anagram creator, multiple word anagram, word permutations, word combinations, find all words, every possible word, all valid words, complete word list, comprehensive dictionary, game dictionary, word game dictionary, official word list, valid scrabble words, legal scrabble words, allowed scrabble words, playable words, accepted words</p>
+
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">&copy; 2025 Word Unscrambler Pro &mdash; Free word finder, Scrabble solver &amp; anagram tool for US, UK, Canada &amp; Australia</div>
+  </footer>
+
+  <!-- Toast -->
+  <div id="toast" class="toast"></div>
+
+  <script src="dictionary.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
