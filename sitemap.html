@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Site Index — Unscramble Words Pro</title>
+  <meta name="description" content="Complete site index for Unscramble Words Pro. Browse all pages including word finder tools, letter combination guides, and policy pages.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://unscramblewordspro.com/sitemap.html">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    [data-theme="dark"] {
+      --bg: #0F172A; --bg-alt: #1E293B; --border: #334155; --border-hover: #475569;
+      --text: #E5E7EB; --text-2: #94A3B8; --text-3: #64748B; --primary: #2563EB;
+      --surface: #1E293B; --bg-raised: #334155;
+    }
+    [data-theme="light"] {
+      --bg: #F8FAFC; --bg-alt: #FFFFFF; --border: #E2E8F0; --border-hover: #CBD5E1;
+      --text: #0F172A; --text-2: #475569; --text-3: #94A3B8; --primary: #2563EB;
+      --surface: #FFFFFF; --bg-raised: #F1F5F9;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; min-height: 100vh; }
+    .container { max-width: 740px; margin: 0 auto; padding: 0 20px; }
+    .header { background: var(--bg-alt); border-bottom: 1px solid var(--border); padding: 14px 20px; }
+    .header-inner { max-width: 740px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .logo { font-weight: 800; font-size: 18px; display: flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; letter-spacing: -0.02em; }
+    .logo svg { color: var(--primary); flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(37,99,235,0.4)); }
+    .logo .logo-pro { color: var(--primary); }
+    .theme-btn { background: var(--bg-raised); border: 1px solid var(--border); border-radius: 8px; padding: 6px; cursor: pointer; color: var(--text-2); display: flex; }
+    .page-body { padding: 40px 0 60px; }
+    .page-body h1 { font-size: 28px; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .page-body .subtitle { font-size: 15px; color: var(--text-2); margin-bottom: 32px; }
+    .page-body h2 { font-size: 18px; font-weight: 700; margin: 28px 0 12px; }
+    .page-body p { font-size: 15px; color: var(--text-2); margin-bottom: 14px; }
+    .page-body a { color: var(--primary); text-decoration: none; }
+    .page-body a:hover { text-decoration: underline; }
+    .link-list { list-style: none; padding: 0; margin-bottom: 20px; }
+    .link-list li { padding: 6px 0; border-bottom: 1px solid var(--border); }
+    .link-list li:last-child { border-bottom: none; }
+    .link-list a { font-size: 15px; }
+    .word-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 4px 16px; margin-bottom: 20px; }
+    .word-grid a { font-size: 14px; padding: 5px 0; display: block; }
+    .footer { padding: 24px 0; text-align: center; font-size: 13px; color: var(--text-3); border-top: 1px solid var(--border); }
+    .footer a { color: var(--primary); text-decoration: none; }
+    .footer a:hover { text-decoration: underline; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin-bottom: 10px; }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <a href="/" class="logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Unscramble Words <span class="logo-pro">Pro</span>
+      </a>
+      <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main class="container page-body">
+    <h1>Site Index</h1>
+    <p class="subtitle">A complete directory of every page on Unscramble Words Pro.</p>
+
+    <h2>Main Pages</h2>
+    <ul class="link-list">
+      <li><a href="/">Home — Word Unscrambler Tool</a></li>
+      <li><a href="about.html">About Unscramble Words Pro</a></li>
+      <li><a href="privacy.html">Privacy Policy</a></li>
+      <li><a href="terms.html">Terms of Service</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+
+    <h2>Word Finder Pages (117 Letter Combinations)</h2>
+    <div class="word-grid">
+      <a href="pages/words-from-abet.html">Words from ABET</a>
+      <a href="pages/words-from-acer.html">Words from ACER</a>
+      <a href="pages/words-from-adore.html">Words from ADORE</a>
+      <a href="pages/words-from-angel.html">Words from ANGEL</a>
+      <a href="pages/words-from-ape.html">Words from APE</a>
+      <a href="pages/words-from-arena.html">Words from ARENA</a>
+      <a href="pages/words-from-art.html">Words from ART</a>
+      <a href="pages/words-from-arts.html">Words from ARTS</a>
+      <a href="pages/words-from-ate.html">Words from ATE</a>
+      <a href="pages/words-from-bale.html">Words from BALE</a>
+      <a href="pages/words-from-baster.html">Words from BASTER</a>
+      <a href="pages/words-from-beast.html">Words from BEAST</a>
+      <a href="pages/words-from-bleat.html">Words from BLEAT</a>
+      <a href="pages/words-from-brace.html">Words from BRACE</a>
+      <a href="pages/words-from-care.html">Words from CARE</a>
+      <a href="pages/words-from-castle.html">Words from CASTLE</a>
+      <a href="pages/words-from-cheap.html">Words from CHEAP</a>
+      <a href="pages/words-from-claimed.html">Words from CLAIMED</a>
+      <a href="pages/words-from-coaster.html">Words from COASTER</a>
+      <a href="pages/words-from-cradle.html">Words from CRADLE</a>
+      <a href="pages/words-from-crane.html">Words from CRANE</a>
+      <a href="pages/words-from-crate.html">Words from CRATE</a>
+      <a href="pages/words-from-dare.html">Words from DARE</a>
+      <a href="pages/words-from-dealt.html">Words from DEALT</a>
+      <a href="pages/words-from-detail.html">Words from DETAIL</a>
+      <a href="pages/words-from-dream.html">Words from DREAM</a>
+      <a href="pages/words-from-ear.html">Words from EAR</a>
+      <a href="pages/words-from-earn.html">Words from EARN</a>
+      <a href="pages/words-from-earth.html">Words from EARTH</a>
+      <a href="pages/words-from-eastern.html">Words from EASTERN</a>
+      <a href="pages/words-from-eat.html">Words from EAT</a>
+      <a href="pages/words-from-eating.html">Words from EATING</a>
+      <a href="pages/words-from-era.html">Words from ERA</a>
+      <a href="pages/words-from-famine.html">Words from FAMINE</a>
+      <a href="pages/words-from-fate.html">Words from FATE</a>
+      <a href="pages/words-from-feast.html">Words from FEAST</a>
+      <a href="pages/words-from-gale.html">Words from GALE</a>
+      <a href="pages/words-from-garden.html">Words from GARDEN</a>
+      <a href="pages/words-from-gears.html">Words from GEARS</a>
+      <a href="pages/words-from-glare.html">Words from GLARE</a>
+      <a href="pages/words-from-grain.html">Words from GRAIN</a>
+      <a href="pages/words-from-halter.html">Words from HALTER</a>
+      <a href="pages/words-from-hare.html">Words from HARE</a>
+      <a href="pages/words-from-haste.html">Words from HASTE</a>
+      <a href="pages/words-from-heart.html">Words from HEART</a>
+      <a href="pages/words-from-insert.html">Words from INSERT</a>
+      <a href="pages/words-from-irate.html">Words from IRATE</a>
+      <a href="pages/words-from-isle.html">Words from ISLE</a>
+      <a href="pages/words-from-lace.html">Words from LACE</a>
+      <a href="pages/words-from-lance.html">Words from LANCE</a>
+      <a href="pages/words-from-leading.html">Words from LEADING</a>
+      <a href="pages/words-from-leapt.html">Words from LEAPT</a>
+      <a href="pages/words-from-lemon.html">Words from LEMON</a>
+      <a href="pages/words-from-listen.html">Words from LISTEN</a>
+      <a href="pages/words-from-loaner.html">Words from LOANER</a>
+      <a href="pages/words-from-mane.html">Words from MANE</a>
+      <a href="pages/words-from-mango.html">Words from MANGO</a>
+      <a href="pages/words-from-master.html">Words from MASTER</a>
+      <a href="pages/words-from-meats.html">Words from MEATS</a>
+      <a href="pages/words-from-nape.html">Words from NAPE</a>
+      <a href="pages/words-from-nastier.html">Words from NASTIER</a>
+      <a href="pages/words-from-nestle.html">Words from NESTLE</a>
+      <a href="pages/words-from-net.html">Words from NET</a>
+      <a href="pages/words-from-notes.html">Words from NOTES</a>
+      <a href="pages/words-from-ocean.html">Words from OCEAN</a>
+      <a href="pages/words-from-onset.html">Words from ONSET</a>
+      <a href="pages/words-from-orange.html">Words from ORANGE</a>
+      <a href="pages/words-from-ore.html">Words from ORE</a>
+      <a href="pages/words-from-painter.html">Words from PAINTER</a>
+      <a href="pages/words-from-pale.html">Words from PALE</a>
+      <a href="pages/words-from-palest.html">Words from PALEST</a>
+      <a href="pages/words-from-parse.html">Words from PARSE</a>
+      <a href="pages/words-from-pearl.html">Words from PEARL</a>
+      <a href="pages/words-from-plaster.html">Words from PLASTER</a>
+      <a href="pages/words-from-poster.html">Words from POSTER</a>
+      <a href="pages/words-from-race.html">Words from RACE</a>
+      <a href="pages/words-from-racing.html">Words from RACING</a>
+      <a href="pages/words-from-raise.html">Words from RAISE</a>
+      <a href="pages/words-from-realign.html">Words from REALIGN</a>
+      <a href="pages/words-from-reason.html">Words from REASON</a>
+      <a href="pages/words-from-reign.html">Words from REIGN</a>
+      <a href="pages/words-from-reliant.html">Words from RELIANT</a>
+      <a href="pages/words-from-remain.html">Words from REMAIN</a>
+      <a href="pages/words-from-rinse.html">Words from RINSE</a>
+      <a href="pages/words-from-roast.html">Words from ROAST</a>
+      <a href="pages/words-from-roasted.html">Words from ROASTED</a>
+      <a href="pages/words-from-sadnet.html">Words from SADNET</a>
+      <a href="pages/words-from-sale.html">Words from SALE</a>
+      <a href="pages/words-from-saltine.html">Words from SALTINE</a>
+      <a href="pages/words-from-sauce.html">Words from SAUCE</a>
+      <a href="pages/words-from-share.html">Words from SHARE</a>
+      <a href="pages/words-from-silent.html">Words from SILENT</a>
+      <a href="pages/words-from-slate.html">Words from SLATE</a>
+      <a href="pages/words-from-snare.html">Words from SNARE</a>
+      <a href="pages/words-from-stare.html">Words from STARE</a>
+      <a href="pages/words-from-steam.html">Words from STEAM</a>
+      <a href="pages/words-from-stone.html">Words from STONE</a>
+      <a href="pages/words-from-storing.html">Words from STORING</a>
+      <a href="pages/words-from-strange.html">Words from STRANGE</a>
+      <a href="pages/words-from-stream.html">Words from STREAM</a>
+      <a href="pages/words-from-tale.html">Words from TALE</a>
+      <a href="pages/words-from-tapers.html">Words from TAPERS</a>
+      <a href="pages/words-from-tea.html">Words from TEA</a>
+      <a href="pages/words-from-tears.html">Words from TEARS</a>
+      <a href="pages/words-from-tease.html">Words from TEASE</a>
+      <a href="pages/words-from-thread.html">Words from THREAD</a>
+      <a href="pages/words-from-threads.html">Words from THREADS</a>
+      <a href="pages/words-from-tin.html">Words from TIN</a>
+      <a href="pages/words-from-trace.html">Words from TRACE</a>
+      <a href="pages/words-from-trading.html">Words from TRADING</a>
+      <a href="pages/words-from-travel.html">Words from TRAVEL</a>
+      <a href="pages/words-from-unite.html">Words from UNITE</a>
+      <a href="pages/words-from-vane.html">Words from VANE</a>
+      <a href="pages/words-from-walnut.html">Words from WALNUT</a>
+      <a href="pages/words-from-wane.html">Words from WANE</a>
+      <a href="pages/words-from-waste.html">Words from WASTE</a>
+      <a href="pages/words-from-winter.html">Words from WINTER</a>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-links">
+        <a href="/">Home</a>
+        <a href="about.html">About</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+        <a href="sitemap.html">Site Index</a>
+      </div>
+      <p>&copy; 2025 <a href="/">Unscramble Words Pro</a> &mdash; Free word finder, Scrabble solver &amp; anagram tool for US, UK, Canada &amp; Australia</p>
+    </div>
+  </footer>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6261071610831190" crossorigin="anonymous"></script>
+  <script>
+    (function(){
+      try { var t = localStorage.getItem('wup_theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch(e) {}
+      document.getElementById('themeToggle').addEventListener('click', function() {
+        var cur = document.documentElement.getAttribute('data-theme');
+        var next = cur === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        try { localStorage.setItem('wup_theme', next); } catch(e) {}
+      });
+    })();
+  </script>
+</body>
+</html>

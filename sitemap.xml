@@ -5,6 +5,26 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://unscramblewordspro.com/about.html</loc>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://unscramblewordspro.com/privacy.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://unscramblewordspro.com/terms.html</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://unscramblewordspro.com/contact.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://unscramblewordspro.com/sitemap.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://unscramblewordspro.com/pages/words-from-abet.html</loc>
     <priority>0.8</priority>
   </url>
