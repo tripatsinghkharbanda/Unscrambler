@@ -429,6 +429,8 @@
     try { localStorage.setItem("wup_favs", JSON.stringify(Array.from(favorites))); } catch (e) {}
   }
   function toggleFavorite(word) {
+    word = String(word).replace(/[^a-z]/gi, "").toLowerCase();
+    if (!word || word.length < 2 || word.length > 15) return;
     if (favorites.has(word)) favorites.delete(word); else favorites.add(word);
     saveFavorites();
     pipeline();
@@ -499,7 +501,9 @@
     try { localStorage.setItem("wup_recent", JSON.stringify(recentSearches)); } catch (e) {}
   }
   function addRecent(letters) {
-    if (!letters || letters.length < 2) return;
+    if (!letters) return;
+    letters = String(letters).replace(/[^a-z]/gi, "").toLowerCase().slice(0, 15);
+    if (letters.length < 2) return;
     var idx = recentSearches.indexOf(letters);
     if (idx !== -1) recentSearches.splice(idx, 1);
     recentSearches.unshift(letters);
@@ -533,8 +537,8 @@
     var safe = (t === "light") ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", safe);
     localStorage.setItem("wup_theme", safe);
-    dom.iconSun.classList.toggle("hidden", t === "dark");
-    dom.iconMoon.classList.toggle("hidden", t === "light");
+    dom.iconSun.classList.toggle("hidden", safe === "dark");
+    dom.iconMoon.classList.toggle("hidden", safe === "light");
   }
 
   /* ================================================================
