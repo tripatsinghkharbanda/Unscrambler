@@ -213,6 +213,7 @@ function buildPage(letters, words, allCombos, index) {
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.googletagservices.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleapis.com https://*.adtrafficquality.google https://*.googleadservices.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleusercontent.com; frame-src https://*.doubleclick.net https://*.googlesyndication.com https://*.google.com; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="google-adsense-account" content="ca-pub-6261071610831190">
   <title>${escapeHtml(title.slice(0, 60))}</title>
   <meta name="description" content="${escapeHtml(desc.slice(0, 160))}">
   <meta name="keywords" content="unscramble ${L}, words with letters ${L}, anagram of ${L}, ${L} scrabble words, ${L} word finder, words from ${L}, ${L} anagram solver, ${L} wordle">
