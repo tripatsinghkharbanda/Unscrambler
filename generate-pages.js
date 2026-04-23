@@ -149,7 +149,7 @@ function buildPage(letters, words, allCombos, index) {
 
   const best5 = words.slice().sort((a,b) => scoreWord(b) - scoreWord(a)).slice(0, 10);
   const groups = groupByLength(words);
-  const related = pickRelated(L, allCombos, 5);
+  const related = pickRelated(L, allCombos, 8);
   const intro = INTROS[index % INTROS.length](L, n);
   const howSection = HOW_SECTIONS[index % HOW_SECTIONS.length](L);
 
@@ -225,6 +225,16 @@ function buildPage(letters, words, allCombos, index) {
   <meta property="og:url" content="${url}">
   <meta property="og:site_name" content="Unscramble Words Pro">
   <script type="application/ld+json">${faqSchema}</script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Home","item":"${DOMAIN}/"},
+      {"@type":"ListItem","position":2,"name":"Unscramble ${U}","item":"${url}"}
+    ]
+  }
+  </script>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -387,7 +397,7 @@ ${howSection}
       <div class="related">
 ${relatedHTML}
       </div>
-      <p style="margin-top: 16px;"><a href="${DOMAIN}/" style="color:var(--primary); font-weight: 600;">&#8592; Back to Word Unscrambler Pro</a></p>
+      <p style="margin-top: 16px;"><a href="${DOMAIN}/" style="color:var(--primary); font-weight: 600;">&#8592; Back to Word Unscrambler Pro</a> &nbsp;|&nbsp; <a href="${DOMAIN}/sitemap.html" style="color:var(--primary);">Browse All 117 Combos</a> &nbsp;|&nbsp; <a href="${DOMAIN}/about.html" style="color:var(--primary);">About Our Dictionaries</a></p>
     </section>
   </main>
 
