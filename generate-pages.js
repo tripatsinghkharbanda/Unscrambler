@@ -11,28 +11,44 @@ const fs = require("fs");
 const path = require("path");
 const https = require("https");
 
-/* ── 100 curated letter combos (3-7 letters, high search value) ── */
+/* ── 217 curated letter combos (3-7 letters, high search value) ── */
 const COMBOS = [
   // 3-letter
   "ate","ape","art","ear","eat","era","net","ore","tea","tin",
   // 4-letter
   "acer","abet","arts","bale","care","dare","earn","fate","gale","hare",
   "isle","lace","mane","nape","pale","race","sale","tale","vane","wane",
-  // 5-letter
+  // 5-letter (original)
   "angel","brace","crane","dealt","earth","feast","grain","heart","irate",
   "leapt","mango","ocean","parse","raise","sauce","tease","unite","waste",
   "adore","bleat","crate","dream","glare","haste","lemon","meats","reign",
   "slate","trace","arena","beast","cheap","gears","lance","onset","pearl",
   "roast","snare","steam","stare","tears","notes","rinse","share","stone",
-  // 6-letter
+  // 5-letter (new — 40)
+  "anger","bland","brave","burst","chant","charm","chart","chase","chord",
+  "clean","clear","clone","cloud","cover","craft","dance","dense","drive",
+  "eagle","elbow","ember","evade","extra","flame","flair","float","floor",
+  "found","frame","fresh","frost","giant","glide","globe","grace","grade",
+  "graze","guard","guide","horse",
+  // 6-letter (original)
   "racing","baster","castle","detail","eating","famine","garden","halter",
   "insert","listen","master","nestle","orange","palest","reason","sadnet",
   "tapers","travel","walnut","cradle","loaner","poster","remain","silent",
   "stream","thread","winter",
-  // 7-letter
+  // 6-letter (new — 40)
+  "action","across","artist","battle","candle","canter","center","change",
+  "charge","closer","combat","crafty","dancer","deadly","define","deluge",
+  "desert","duster","errand","falter","gamble","glance","hamlet","honest",
+  "hunter","insane","jangle","jungle","lancer","lather","latent","linger",
+  "luster","mangle","mantle","marble","marvel","muster","nectar","noting",
+  // 7-letter (original)
   "eastern","roasted","saltine","nastier","realign","strange","plaster",
   "storing","leading","claimed","painter","coaster","trading","reliant",
-  "threads"
+  "threads",
+  // 7-letter (new — 20)
+  "algebra","blanket","blunder","breaker","cabinet","captain","capture",
+  "cartoon","chapter","cluster","compete","concern","content","counter",
+  "courage","curtain","darling","dashing","floated","frosted"
 ];
 
 const DOMAIN = "https://unscramblewordspro.com";
@@ -153,8 +169,10 @@ function buildPage(letters, words, allCombos, index) {
   const intro = INTROS[index % INTROS.length](L, n);
   const howSection = HOW_SECTIONS[index % HOW_SECTIONS.length](L);
 
-  const title = `Unscramble ${U} | ${n} Words Found — Scrabble Solver`;
-  const desc = `Unscramble ${U} to find ${n} valid words. See all words from letters ${U} with Scrabble scores. Free word finder for Scrabble, Wordle & word games.`;
+  const bestScore = best5[0] ? scoreWord(best5[0]) : 0;
+  const bestWord  = best5[0] ? best5[0].toUpperCase() : U;
+  const title = `Unscramble ${U} — ${n} Words, Best ${bestScore} pts | Scrabble & Wordle Solver`;
+  const desc  = `Unscramble ${U}: find all ${n} valid words instantly. Top word scores ${bestScore} pts. Free Scrabble solver & Wordle helper - US TWL & UK SOWPODS dictionaries included.`;
 
   // Build words table for each length group
   let allWordsHTML = "";
@@ -191,7 +209,7 @@ function buildPage(letters, words, allCombos, index) {
         "name": `What words can you make from ${U}?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `You can make ${n} words from the letters ${U}. The highest scoring word is "${best5[0] || L}" worth ${best5[0] ? scoreWord(best5[0]) : 0} Scrabble points.`
+          "text": `You can make ${n} words from the letters ${U}. The highest scoring word is "${bestWord}" worth ${bestScore} Scrabble points. Results cover word lengths from 2 to ${L.length} letters.`
         }
       },
       {
@@ -199,7 +217,23 @@ function buildPage(letters, words, allCombos, index) {
         "name": `How many words can be formed from the letters ${U}?`,
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": `There are ${n} valid English words that can be formed using some or all of the letters ${U}. This includes ${groups.length} different word lengths.`
+          "text": `There are ${n} valid English words that can be formed using some or all of the letters ${U}. This includes ${groups.length} different word lengths, verified against the ENABLE, TWL, and Collins SOWPODS dictionaries.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `What is the highest-scoring Scrabble word from ${U}?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `The highest-scoring Scrabble word you can make from ${U} is "${bestWord}", which scores ${bestScore} points using standard TWL tile values. Use it on a double or triple word score square to maximise your points.`
+        }
+      },
+      {
+        "@type": "Question",
+        "name": `Can I use ${U} letters for Wordle or Words With Friends?`,
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": `Yes. All ${n} words found from ${U} are valid for Wordle (filter by 5-letter results), Words With Friends, Boggle, Jumble, and crossword puzzles. The free tool at unscramblewordspro.com lets you filter by length, starting letter, ending letter, and contained letters.`
         }
       }
     ]

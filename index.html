@@ -175,6 +175,8 @@
     .hero h1 { font-size: clamp(24px, 5vw, 34px); font-weight: 800; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 8px; }
     .hero h1 .hl { color: var(--primary); }
     .hero .subtitle { color: var(--text-2); font-size: 15px; max-width: 500px; margin: 0 auto 28px; }
+    .input-example { color: var(--text-3); font-size: 13px; margin: 10px auto 0; max-width: 520px; text-align: center; }
+    .input-example strong { color: var(--text-2); }
 
     /* ===== Input ===== */
     .input-wrap { position: relative; max-width: 560px; margin: 0 auto; }
@@ -344,6 +346,10 @@
     .combo-grid a { display: block; padding: 8px 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; font-size: 13.5px; font-weight: 600; color: var(--text); text-decoration: none; text-align: center; transition: border-color .15s, background .15s; }
     .combo-grid a:hover { border-color: var(--primary); background: var(--bg-raised); color: var(--primary); }
     .combo-grid a span { color: var(--text-3); font-weight: 400; font-size: 12px; display: block; }
+    .popular-searches { margin: 12px 0 20px 16px; color: var(--text-2); font-size: 14px; line-height: 2; }
+    .popular-searches a { color: var(--primary); font-weight: 600; text-decoration: none; }
+    .popular-searches a:hover { text-decoration: underline; }
+    .popular-searches span { color: var(--text-3); font-size: 13px; }
     .seo-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 16px; }
     .seo details { margin-bottom: 8px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
     .seo summary { padding: 12px 16px; font-size: 14.5px; font-weight: 600; cursor: pointer; background: var(--surface); color: var(--text); transition: background .15s; list-style: none; }
@@ -411,14 +417,15 @@
   <main class="container">
     <!-- Hero -->
     <section class="hero">
-      <h1>Unscramble Words <span class="hl">Instantly</span></h1>
-      <p class="subtitle">Unscramble letters instantly with our word finder, Scrabble solver, and anagram generator.</p>
+      <h1>Find <span class="hl">Highest-Scoring</span> Scrabble &amp; Wordle Words</h1>
+      <p class="subtitle">Enter up to 15 letters — instantly see every valid word ranked by Scrabble score. Free word unscrambler &amp; anagram solver for US, UK, Canada &amp; Australia.</p>
       <div class="input-wrap">
         <svg class="icon-search" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="letterInput" placeholder="Enter letters to unscramble..." maxlength="15" autocomplete="off" spellcheck="false" autofocus>
         <button id="clearBtn" class="clear-btn hidden" aria-label="Clear input">&times;</button>
         <span class="char-count"><span id="charCount">0</span>/15</span>
       </div>
+      <p class="input-example">e.g. type <strong>CRANE</strong> &rarr; care (6 pts), race (6 pts), cane (6 pts), earn (4 pts), crane (7 pts)</p>
       <div class="popular">
         <span class="popular-label">Try:</span>
         <button class="chip" data-letters="aelrst">aelrst</button>
@@ -571,7 +578,27 @@
         <a href="pages/words-from-saltine.html">SALTINE <span>Unscramble</span></a>
         <a href="pages/words-from-claimed.html">CLAIMED <span>Unscramble</span></a>
       </div>
-      <p>See all 117 letter combinations on our <a href="sitemap.html" style="color:var(--primary); font-weight:600;">Site Index</a>.</p>
+      <p>See all letter combinations on our <a href="sitemap.html" style="color:var(--primary); font-weight:600;">Site Index</a>.</p>
+
+      <h2>Popular Searches</h2>
+      <p>Top unscramble searches by word game players across US, UK, Canada &amp; Australia:</p>
+      <ul class="popular-searches">
+        <li><a href="pages/words-from-anger.html">Unscramble ANGER</a> &mdash; <span>anger, near, rang, earn, gear &amp; more</span></li>
+        <li><a href="pages/words-from-dance.html">Unscramble DANCE</a> &mdash; <span>cane, dean, aced, dace &amp; more</span></li>
+        <li><a href="pages/words-from-charm.html">Unscramble CHARM</a> &mdash; <span>arch, cram, marc, char, march &amp; more</span></li>
+        <li><a href="pages/words-from-brave.html">Unscramble BRAVE</a> &mdash; <span>bare, bear, rave, verb, brae &amp; more</span></li>
+        <li><a href="pages/words-from-frost.html">Unscramble FROST</a> &mdash; <span>fort, sort, rots, tors &amp; more</span></li>
+        <li><a href="pages/words-from-giant.html">Unscramble GIANT</a> &mdash; <span>anti, gain, gait, naïf, tang &amp; more</span></li>
+        <li><a href="pages/words-from-globe.html">Unscramble GLOBE</a> &mdash; <span>gob, gel, leg, lobe, blog &amp; more</span></li>
+        <li><a href="pages/words-from-grace.html">Unscramble GRACE</a> &mdash; <span>acre, care, race, cage, gear &amp; more</span></li>
+        <li><a href="pages/words-from-change.html">Unscramble CHANGE</a> &mdash; <span>ache, cage, each, hang, nag &amp; more</span></li>
+        <li><a href="pages/words-from-castle.html">Unscramble CASTLE</a> &mdash; <span>tales, laces, slate, least &amp; more</span></li>
+        <li><a href="pages/words-from-battle.html">Unscramble BATTLE</a> &mdash; <span>bleat, table, belt, late &amp; more</span></li>
+        <li><a href="pages/words-from-marble.html">Unscramble MARBLE</a> &mdash; <span>blame, realm, male, meal, bare &amp; more</span></li>
+        <li><a href="pages/words-from-blanket.html">Unscramble BLANKET</a> &mdash; <span>blanket, tankle, ankle, blank &amp; more</span></li>
+        <li><a href="pages/words-from-captain.html">Unscramble CAPTAIN</a> &mdash; <span>antic, paint, pica, tain &amp; more</span></li>
+        <li><a href="pages/words-from-chapter.html">Unscramble CHAPTER</a> &mdash; <span>etcher, preach, patch, each &amp; more</span></li>
+      </ul>
 
       <h2>Essential Two-Letter &amp; High-Value Words</h2>
       <p>Top two-letter words: <strong>QI</strong> (11), <strong>ZA</strong> (11), <strong>ZO</strong> (11, SOWPODS), <strong>XI</strong> (9), <strong>XU</strong> (9), <strong>JO</strong> (9), <strong>AX/EX/OX</strong> (9). Learning all 100+ valid two-letter words is the fastest way to improve.</p>
@@ -581,7 +608,7 @@
       <details><summary>High-Value Z, X &amp; J Words</summary><div class="faq-body"><strong>Z</strong>: ZA, ZAP, ZEN, PIZZA, FIZZ, BUZZ, JAZZ, PIZZAZZ. <strong>X</strong>: AX, EX, OX, AXLE, APEX, FLUX, LYNX, ONYX, NEXUS. <strong>J</strong>: JO, JAB, JAM, JET, JIG, JOY, JINX, JOUST, JUDGE, JUMBO.</div></details>
 
       <h2>Strategy Tips</h2>
-      <details><summary>Opening Moves &amp; Rack Management</summary><div class="faq-body">Open through the centre star with a 5-letter word (<a href="pages/words-from-crane.html" style="color:var(--primary)"></a>CRANE</a>, <a href="pages/words-from-slate.html" style="color:var(--primary)">SLATE</a>, <a href="pages/words-from-trace.html" style="color:var(--primary)">TRACE</a>) for 20&ndash;40 pts. Keep 3&ndash;4 consonants and 2&ndash;3 vowels. Exchange tiles rather than play a weak word that wrecks your rack.</div></details>
+      <details><summary>Opening Moves &amp; Rack Management</summary><div class="faq-body">Open through the centre star with a 5-letter word (<a href="pages/words-from-crane.html" style="color:var(--primary)">CRANE</a>, <a href="pages/words-from-slate.html" style="color:var(--primary)">SLATE</a>, <a href="pages/words-from-trace.html" style="color:var(--primary)">TRACE</a>) for 20&ndash;40 pts. Keep 3&ndash;4 consonants and 2&ndash;3 vowels. Exchange tiles rather than play a weak word that wrecks your rack.</div></details>
 
       <details><summary>Parallel Plays, Hooks &amp; Bingos</summary><div class="faq-body"><strong>Parallel plays</strong> create multiple two-letter words for 30&ndash;60 pts. <strong>Hooks</strong> add one letter to an existing word. <strong>Bingos</strong> use all 7 tiles for a 50-pt bonus &mdash; study 7- and 8-letter words like <a href="pages/words-from-strange.html" style="color:var(--primary)">STRANGE</a> and <a href="pages/words-from-eastern.html" style="color:var(--primary)">EASTERN</a> to boost frequency.</div></details>
 
