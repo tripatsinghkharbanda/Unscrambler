@@ -12,6 +12,11 @@ const TODAY  = new Date().toISOString().slice(0, 10);
 const rootPages = [
   { loc: "/",              priority: "1.0", changefreq: "weekly"  },
   { loc: "/about.html",   priority: "0.9", changefreq: "monthly" },
+  { loc: "/guides/",                                        priority: "0.9", changefreq: "monthly" },
+  { loc: "/guides/scrabble-strategy-guide.html",            priority: "0.9", changefreq: "monthly" },
+  { loc: "/guides/best-wordle-starting-words.html",         priority: "0.9", changefreq: "monthly" },
+  { loc: "/guides/two-letter-scrabble-words.html",          priority: "0.9", changefreq: "monthly" },
+  { loc: "/guides/scrabble-dictionary-guide.html",          priority: "0.9", changefreq: "monthly" },
   { loc: "/sitemap.html", priority: "0.7", changefreq: "monthly" },
   { loc: "/contact.html", priority: "0.6", changefreq: "monthly" },
   { loc: "/privacy.html", priority: "0.5", changefreq: "yearly"  },
