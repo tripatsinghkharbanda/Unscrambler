@@ -369,6 +369,27 @@
     .guide-card-sm strong { font-size: 14px; font-weight: 700; color: var(--text); }
     .guide-card-sm span { font-size: 13px; color: var(--text-2); line-height: 1.5; }
     .guide-card-sm em { font-size: 12px; font-style: normal; color: var(--primary); font-weight: 600; margin-top: auto; padding-top: 4px; }
+    /* ===== New homepage content blocks ===== */
+    .intro-what { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 24px 28px; margin-bottom: 32px; }
+    .intro-what h2 { font-size: 20px; font-weight: 800; margin-bottom: 10px; margin-top: 0; }
+    .intro-what p { font-size: 15px; color: var(--text-2); line-height: 1.8; margin-bottom: 0; }
+    .audience-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 14px 0 28px; }
+    .audience-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .audience-card .aud-icon { font-size: 28px; margin-bottom: 8px; }
+    .audience-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+    .audience-card p { font-size: 13.5px; color: var(--text-2); line-height: 1.65; margin: 0; }
+    .benefits-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 14px 0 28px; }
+    .benefit-item { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+    .benefit-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--primary-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .benefit-icon svg { width: 18px; height: 18px; color: var(--primary); }
+    .benefit-text h3 { font-size: 14px; font-weight: 700; margin-bottom: 3px; color: var(--text); }
+    .benefit-text p { font-size: 13px; color: var(--text-2); margin: 0; line-height: 1.55; }
+    .article-links { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin: 14px 0 28px; }
+    .article-link-card { display: flex; align-items: flex-start; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px; text-decoration: none; transition: border-color .15s; }
+    .article-link-card:hover { border-color: var(--primary); }
+    .article-link-card .al-icon { width: 34px; height: 34px; border-radius: 8px; background: var(--accent-bg); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+    .article-link-card .al-text strong { font-size: 13.5px; font-weight: 700; color: var(--text); display: block; margin-bottom: 2px; }
+    .article-link-card .al-text span { font-size: 12px; color: var(--text-3); line-height: 1.5; }
     .popular-searches { margin: 12px 0 20px 16px; color: var(--text-2); font-size: 14px; line-height: 2; }
     .popular-searches a { color: var(--primary); font-weight: 600; text-decoration: none; }
     .popular-searches a:hover { text-decoration: underline; }
@@ -534,6 +555,95 @@
          SEO CONTENT — 1000+ keywords for US, UK, CA, AU
          ================================================================ -->
     <section class="seo" aria-label="Word Game Guides and Information">
+
+      <!-- What is this tool -->
+      <div class="intro-what">
+        <h2>What Is a Word Unscrambler?</h2>
+        <p>A word unscrambler is a free tool that takes any set of letters you type and instantly finds every valid English word that can be formed from those letters. Our engine searches a 370,000-word dictionary in under 100&nbsp;ms and returns results grouped by word length, each scored in standard Scrabble tile values. There is no sign-up, no download, and no cost — just type your letters and every possible word appears immediately.</p>
+      </div>
+
+      <!-- Who it's for -->
+      <h2>Who Is It For?</h2>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="aud-icon">&#127481;</div>
+          <h3>Scrabble &amp; Word Game Players</h3>
+          <p>Find every playable word from your tiles, see Scrabble scores instantly, and discover high-value plays you might have missed — works for TWL (US/Canada) and SOWPODS (UK/Australia).</p>
+        </div>
+        <div class="audience-card">
+          <div class="aud-icon">&#127381;</div>
+          <h3>Wordle &amp; Puzzle Solvers</h3>
+          <p>Filter results by length (5 letters), starting letter, or contained letters to generate valid Wordle candidates from your confirmed tiles. Works for Jumble, Boggle, and crosswords too.</p>
+        </div>
+        <div class="audience-card">
+          <div class="aud-icon">&#127891;</div>
+          <h3>Students (Grades 5&ndash;8)</h3>
+          <p>Improve spelling, vocabulary, and pattern recognition through active word discovery. Each session is like a guided vocabulary lesson in game form — far more effective than a word list.</p>
+        </div>
+        <div class="audience-card">
+          <div class="aud-icon">&#128218;</div>
+          <h3>Teachers &amp; Parents</h3>
+          <p>Use as a classroom vocabulary activity, homework aid, or family game-night tool. Enter any theme word and explore all the hidden words together — no preparation required.</p>
+        </div>
+      </div>
+
+      <!-- Benefits -->
+      <h2>Benefits of Regular Word Practice</h2>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+          <div class="benefit-text"><h3>Vocabulary Growth</h3><p>Discover real dictionary words from familiar letters — far more memorable than a passive word list.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+          <div class="benefit-text"><h3>Spelling Accuracy</h3><p>Rearranging letters trains your brain to notice correct letter order instinctively.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <div class="benefit-text"><h3>Pattern Recognition</h3><p>Common prefixes and suffixes become second nature with regular unscrambling practice.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="benefit-text"><h3>Cognitive Agility</h3><p>Word puzzles improve working memory and mental flexibility — benefits that extend beyond language.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+          <div class="benefit-text"><h3>Typing Speed</h3><p>Familiarity with word patterns builds muscle memory that carries over into faster, more accurate typing.</p></div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <div class="benefit-text"><h3>Competitive Edge</h3><p>Players who practise with a word finder consistently score 40&ndash;80 points more per Scrabble game.</p></div>
+        </div>
+      </div>
+
+      <!-- Top article links -->
+      <h2>Learn More: Free Word &amp; Vocabulary Guides</h2>
+      <div class="article-links">
+        <a href="how-to-unscramble-words.html" class="article-link-card">
+          <div class="al-icon">&#128161;</div>
+          <div class="al-text"><strong>How to Unscramble Words</strong><span>6-step method, vowel tricks, suffix spotting &amp; when to use a word finder.</span></div>
+        </a>
+        <a href="guides/scrabble-strategy-guide.html" class="article-link-card">
+          <div class="al-icon">&#127481;</div>
+          <div class="al-text"><strong>Scrabble Strategy Guide</strong><span>Rack management, bingos, premium squares, parallel plays &amp; endgame technique.</span></div>
+        </a>
+        <a href="improve-vocabulary-for-students.html" class="article-link-card">
+          <div class="al-icon">&#127891;</div>
+          <div class="al-text"><strong>Improve Vocabulary for Students</strong><span>10 proven methods for Grades 5&ndash;8 — root words, spaced repetition &amp; games.</span></div>
+        </a>
+        <a href="word-games-for-kids.html" class="article-link-card">
+          <div class="al-icon">&#127880;</div>
+          <div class="al-text"><strong>Word Games for Kids</strong><span>Best board &amp; online word games by age group, with learning benefits explained.</span></div>
+        </a>
+        <a href="how-to-win-wordle.html" class="article-link-card">
+          <div class="al-icon">&#127919;</div>
+          <div class="al-text"><strong>How to Win Wordle</strong><span>Best starting words, elimination logic &amp; Hard Mode strategy to win every day.</span></div>
+        </a>
+        <a href="guides/scrabble-strategy-guide.html" class="article-link-card">
+          <div class="al-icon">&#128203;</div>
+          <div class="al-text"><strong>Advanced Scrabble Guide</strong><span>Deep-dive into endgame technique, Q-without-U words &amp; bingo strategy.</span></div>
+        </a>
+      </div>
 
       <h2>How to Use the Word Unscrambler</h2>
       <p>Type your <strong>scrambled letters</strong> into the input box and our <strong>word unscrambler</strong> instantly shows every valid English word. Results appear in under 100&nbsp;ms &mdash; no button needed. This free <strong>letter unscrambler</strong> and <strong>word finder tool</strong> checks 370,000+ entries covering US, UK, Canadian, and Australian English. Use <strong>filters</strong> for word length, prefix, suffix, or contained letters. Sort by <strong>Scrabble score</strong> to find the highest-value plays.</p>
