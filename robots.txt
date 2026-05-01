@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Thin pages carry <meta name="robots" content="noindex"> in their HTML.
+# We do NOT block them here so Googlebot can read that signal.
+
+Sitemap: https://unscramblewordspro.com/sitemap.xml
