@@ -168,31 +168,31 @@ const STUDENT_SECTIONS = [
         <li><strong>Cognitive agility:</strong> Regular word puzzles improve working memory and mental flexibility.</li>
       </ul>`,
 
-  () => `<p>Memory research shows that <em>active retrieval</em> &mdash; generating a word yourself rather than reading it &mdash; produces memory traces up to three times stronger than passive study. Unscrambling letters forces exactly that kind of active recall, making it one of the most efficient vocabulary activities available to students at any level.</p>
-      <p>Regular sessions with word puzzles also strengthen working memory, the mental workspace we use for reading comprehension, maths problem-solving, and writing. Students who practise word games for 10&ndash;15 minutes daily show measurable improvements in reading fluency within four to six weeks.</p>
+  () => `<p>Research shows that finding a word yourself is far more powerful than reading it on a list. When you work out a word from scrambled letters, your brain stores it much more firmly. This is called active recall, and it produces stronger memory than passive review every time.</p>
+      <p>Regular word puzzle practice also builds the mental focus needed for reading and maths. Students who play word games for 10&ndash;15 minutes a day tend to read faster and spell better within a few weeks.</p>
       <ul>
-        <li><strong>Active recall:</strong> Generating words yourself encodes them far more deeply than reading a word list.</li>
-        <li><strong>Working memory:</strong> Juggling letter combinations exercises the same mental systems used in reading and maths.</li>
-        <li><strong>Reading fluency:</strong> Pattern exposure from word puzzles builds the automatic word recognition that fast readers rely on.</li>
-        <li><strong>Transfer skills:</strong> Vocabulary gains from word puzzles transfer directly to classroom exams and standardised tests.</li>
+        <li><strong>Active recall:</strong> Finding words yourself builds memory far faster than reading a list.</li>
+        <li><strong>Focus and attention:</strong> Sorting letters trains the same mental skills used in reading and maths.</li>
+        <li><strong>Reading speed:</strong> Spotting word patterns from puzzles carries over into faster, more fluent reading.</li>
+        <li><strong>Test skills:</strong> Vocabulary gains from word games show up directly in school exams and tests.</li>
       </ul>`,
 
-  () => `<p>English is a morphologically rich language &mdash; most words are built from smaller units: roots, prefixes, and suffixes. Unscrambling activities naturally expose students to these building blocks in context, teaching them how words are constructed rather than asking them to memorise isolated entries.</p>
-      <p>Students who understand morphology decode unfamiliar words instantly by breaking them into recognisable parts. This is precisely the skill tested in the vocabulary sections of the SAT, ACT, GCSE, and A-Level exams. A student who can recognise the root <em>port</em> (carry) instantly understands import, export, transport, portable, and deportation without memorising each separately.</p>
+  () => `<p>Most English words are built from smaller parts: roots, prefixes, and suffixes. Unscrambling letters helps students notice these building blocks in real words. This is far more useful than memorising a list of definitions.</p>
+      <p>A student who knows the root <em>port</em> (carry) will instantly recognise import, export, transport, portable, and deportation. That one root unlocks five words at once. Root knowledge is tested in the vocabulary sections of the SAT, ACT, GCSE, and A-Level exams.</p>
       <ul>
-        <li><strong>Morphological awareness:</strong> Recognising roots, prefixes, and suffixes unlocks hundreds of words from a single learned pattern.</li>
-        <li><strong>Etymology intuition:</strong> Spotting Latin and Greek roots becomes automatic with repeated exposure to real word sets.</li>
-        <li><strong>Word family fluency:</strong> Understanding that CREATE yields CREATIVE, CREATION, CREATOR, and RECREATE multiplies vocabulary gains.</li>
-        <li><strong>Exam readiness:</strong> Morphology questions appear in every major English standardised test and entrance exam.</li>
+        <li><strong>Root word skills:</strong> Learning one root unlocks dozens of related words at the same time.</li>
+        <li><strong>Prefix and suffix patterns:</strong> Spotting -ING, -ED, UN-, and RE- helps you decode new words on the spot.</li>
+        <li><strong>Word families:</strong> CREATE, CREATIVE, CREATION, and CREATOR all share one root &mdash; learn one, gain four.</li>
+        <li><strong>Exam readiness:</strong> Root and word-structure questions appear in every major English test and entrance exam.</li>
       </ul>`,
 
-  () => `<p>Game-based learning consistently outperforms traditional vocabulary instruction in engagement, retention, and long-term recall. When students find a word by unscrambling letters, the discovery moment creates a positive emotional response that strengthens the memory of that word &mdash; a process neuroscientists call <em>dopamine-mediated memory consolidation</em>.</p>
-      <p>Unlike flashcard drills, word puzzles reward curiosity and experimentation. A student who tries five wrong arrangements before finding the correct word has engaged far more deeply with that word&rsquo;s letter structure than one who simply read a definition. That engagement is precisely why words discovered through play tend to stay learned.</p>
+  () => `<p>Games work better than drills. When a student finds a word by solving a puzzle, the moment of discovery creates a positive feeling that makes the word stick. Research shows that words learned through play are recalled far more easily than words from a list.</p>
+      <p>A student who tries five wrong guesses before finding the right word has thought far more deeply about that word than one who simply read a definition. That is why words discovered through play tend to stay in long-term memory.</p>
       <ul>
-        <li><strong>Intrinsic motivation:</strong> The puzzle format creates genuine curiosity, not just compliance with a task.</li>
-        <li><strong>Error-driven learning:</strong> Wrong guesses before a correct answer deepen understanding of letter structure.</li>
-        <li><strong>Self-correction:</strong> Students naturally check and challenge their own answers, building independent learning habits.</li>
-        <li><strong>Social application:</strong> Words discovered through games enter daily conversation more naturally than those from a textbook.</li>
+        <li><strong>Genuine curiosity:</strong> Puzzles create real motivation to find answers &mdash; not just pressure to complete a task.</li>
+        <li><strong>Learning from mistakes:</strong> Wrong guesses before the right answer build a stronger understanding of letter patterns.</li>
+        <li><strong>Self-checking:</strong> Students test and correct their own answers, which builds confidence and independence.</li>
+        <li><strong>Real-world use:</strong> Words found through games appear in daily conversation more often than words from a textbook.</li>
       </ul>`,
 ];
 
@@ -393,9 +393,17 @@ function buildPage(letters, words, allCombos, index) {
   return `<!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCJTBHHQPX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-ZCJTBHHQPX');
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://*.googlesyndication.com https://*.googletagservices.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleapis.com https://*.adtrafficquality.google https://*.googleadservices.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleusercontent.com; frame-src https://*.doubleclick.net https://*.googlesyndication.com https://*.google.com; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googlesyndication.com https://*.googletagservices.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleapis.com https://*.adtrafficquality.google https://*.googleadservices.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleusercontent.com; frame-src https://*.doubleclick.net https://*.googlesyndication.com https://*.google.com; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="google-adsense-account" content="ca-pub-6261071610831190">
@@ -576,7 +584,7 @@ function buildPage(letters, words, allCombos, index) {
       <p>${intro}</p>
       <h3>Letter Analysis</h3>
       ${letterAnalysis}
-      <p>For a deeper dive into word game strategy, read our <a href="${DOMAIN}/guides/scrabble-strategy-guide.html" style="color:var(--primary)">Scrabble Strategy Guide</a>, the <a href="${DOMAIN}/guides/best-wordle-starting-words.html" style="color:var(--primary)">Best Wordle Starting Words guide</a>, or the <a href="${DOMAIN}/guides/two-letter-scrabble-words.html" style="color:var(--primary)">complete two-letter Scrabble words list</a>.</p>
+      <p>For more on word game strategy, read our <a href="${DOMAIN}/guides/scrabble-strategy-guide.html" style="color:var(--primary)">Scrabble Strategy Guide</a>, the <a href="${DOMAIN}/guides/best-wordle-starting-words.html" style="color:var(--primary)">Best Wordle Starting Words guide</a>, or the <a href="${DOMAIN}/guides/two-letter-scrabble-words.html" style="color:var(--primary)">complete two-letter Scrabble words list</a>.</p>
     </section>
 
     <section class="section">
@@ -639,7 +647,7 @@ ${relatedHTML}
         <a href="${DOMAIN}/contact.html">Contact</a>
         <a href="${DOMAIN}/sitemap.html">Site Index</a>
       </div>
-      <p>&copy; 2025 <a href="${DOMAIN}/">Unscramble Words Pro</a> &mdash; Free word finder, Scrabble solver &amp; anagram tool for US, UK, Canada &amp; Australia</p>
+      <p>&copy; 2026 <a href="${DOMAIN}/">Unscramble Words Pro</a> &mdash; Free word finder, Scrabble solver &amp; anagram tool for US, UK, Canada &amp; Australia</p>
     </div>
   </footer>
 
