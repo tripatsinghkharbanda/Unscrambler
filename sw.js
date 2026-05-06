@@ -1,12 +1,11 @@
-/* Unscramble Words Pro — Service Worker v1
+/* Unscramble Words Pro — Service Worker v2
    Strategy:
    - App-shell assets: cache-first (instant repeat visits)
    - HTML pages:       network-first with cache fallback (fresh content preferred)
    - CDN resources:    stale-while-revalidate
 */
-const CACHE_NAME = 'wup-shell-v1';
+const CACHE_NAME = 'wup-shell-v2';
 const PRECACHE = [
-  '/',
   '/app.js',
   '/dictionary.js',
   '/favicon.svg',
