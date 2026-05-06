@@ -22,6 +22,7 @@
     fStarts:      $("fStarts"),
     fEnds:        $("fEnds"),
     fContains:    $("fContains"),
+    fMode:        $("fMode"),
     resultsGrid:  $("resultsGrid"),
     showingNote:  $("showingNote"),
     emptyState:   $("emptyState"),
@@ -91,6 +92,7 @@
   var lastRaw   = "";          // last input text
   var cached    = [];          // unscrambled (before filters/sort)
   var lastRendered = [];       // words currently shown (for Copy All)
+  var _gameMode = "all";        // active game mode
   var debounceTimer = null;
   var recentSearches = loadRecent();
 
@@ -235,7 +237,8 @@
       len:      parseInt(dom.fLen.value) || 0,
       starts:   dom.fStarts.value.toLowerCase().replace(/[^a-z]/g, ""),
       ends:     dom.fEnds.value.toLowerCase().replace(/[^a-z]/g, ""),
-      contains: dom.fContains.value.toLowerCase().replace(/[^a-z]/g, "")
+      contains: dom.fContains.value.toLowerCase().replace(/[^a-z]/g, ""),
+      mode:     dom.fMode ? dom.fMode.value : "all"
     };
   }
 
@@ -251,6 +254,9 @@
           if (w.indexOf(f.contains[i]) === -1) return false;
         }
       }
+      if (f.mode === "wordle" && w.length !== 5) return false;
+      if (f.mode === "bingo"  && w.length < 7)   return false;
+      if (f.mode === "casual" && (w.length < 3 || w.length > 6)) return false;
       return true;
     });
   }
@@ -379,11 +385,13 @@
     var score = scoreWord(w);
     var isTop = score === topScore && topScore > 4;
     var isFav = favorites.has(w);
+    var isBingo = w.length === 7 && (_gameMode === "bingo" || _gameMode === "scrabble");
     var card = document.createElement("div");
     card.className = "word-card" + (isTop ? " top" : "");
     var safe = escapeHtml(w);
+    var bingoBadge = isBingo ? '<span class="badge-bingo">BINGO</span>' : "";
     card.innerHTML =
-      '<span class="word-text">' + safe + "</span>" +
+      '<span class="word-text">' + safe + bingoBadge + "</span>" +
       '<span class="word-score">' + score + " pts</span>" +
       '<div class="word-actions">' +
         '<button class="act-btn fav-btn' + (isFav ? " fav-on" : "") + '" data-w="' + safe + '" aria-label="Save">' + (isFav ? SVG_HEART_IN : SVG_HEART_OUT) + "</button>" +
@@ -395,8 +403,10 @@
   /* ---------- Re-run pipeline from cached ---------- */
   function pipeline() {
     var f = getFilters();
+    _gameMode = f.mode;
     var filtered = applyFilters(cached, f);
-    var sorted   = sortWords(filtered, dom.sortBy.value);
+    var autoSort = (f.mode === "scrabble" && dom.sortBy.value === "length-desc") ? "score-desc" : dom.sortBy.value;
+    var sorted   = sortWords(filtered, autoSort);
     lastRendered = sorted;
     render(sorted, cached.length);
     renderBest(cached);
@@ -603,7 +613,8 @@
   });
 
   /* --- Filter / sort change --- */
-  [dom.fLen, dom.fStarts, dom.fEnds, dom.fContains, dom.sortBy].forEach(function (el) {
+  [dom.fLen, dom.fStarts, dom.fEnds, dom.fContains, dom.fMode, dom.sortBy].forEach(function (el) {
+    if (!el) return;
     el.addEventListener("input", pipeline);
     el.addEventListener("change", pipeline);
   });
@@ -616,7 +627,7 @@
   });
 
   /* --- Popular chips --- */
-  document.querySelectorAll(".chip[data-letters]").forEach(function (btn) {
+  document.querySelectorAll("[data-letters]").forEach(function (btn) {
     btn.addEventListener("click", function () {
       dom.input.value = btn.dataset.letters;
       dom.input.dispatchEvent(new Event("input"));

@@ -438,6 +438,17 @@
     @media (min-width: 960px) {
       .results-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
     }
+    /* ===== Game Mode ===== */
+    .badge-bingo{display:inline-block;background:#7C3AED;color:#fff;font-size:9px;font-weight:700;border-radius:3px;padding:1px 4px;margin-left:3px;vertical-align:middle;letter-spacing:.06em}
+    /* ===== Disclaimer ===== */
+    .disclaimer{font-size:12px;color:var(--text-3);margin-top:6px;text-align:center}
+    /* ===== Popular Searches ===== */
+    .pop-searches{padding:20px 0 4px}
+    .pop-searches h3{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
+    .ps-wrap{display:flex;flex-wrap:wrap;gap:8px}
+    .ps-chip{display:inline-flex;align-items:center;gap:5px;background:var(--bg-alt);border:1px solid var(--border);border-radius:20px;padding:5px 12px;font-size:13px;font-weight:600;color:var(--text);cursor:pointer;transition:all .15s;font-family:inherit}
+    .ps-chip:hover{border-color:var(--primary);color:var(--primary)}
+    .ps-chip em{color:var(--text-3);font-size:11px;font-weight:400;font-style:normal}
   </style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"WordPro Editorial Team","url":"https://unscramblewordspro.com/author/wordpro-editorial-team.html","worksFor":{"@type":"Organization","name":"UnscrambleWordsPro","url":"https://unscramblewordspro.com"},"jobTitle":"Experts in Word Games, Scrabble Strategy & Linguistics","description":"Experts in word games, Scrabble strategy, and linguistic tools with 15+ years combined experience.","knowsAbout":["Scrabble","Crossword puzzles","Word games","Anagram solving","English vocabulary","TWL dictionary","SOWPODS dictionary"],"email":"unscramblewordspro@gmail.com"}</script>
@@ -475,6 +486,7 @@
     <section class="hero">
       <h1>Find <span class="hl">Highest-Scoring</span> Scrabble &amp; Wordle Words</h1>
       <p class="subtitle">Enter up to 15 letters — instantly see every valid word ranked by Scrabble score. Free word unscrambler &amp; anagram solver for US, UK, Canada &amp; Australia.</p>
+      <p class="disclaimer">Not affiliated with or endorsed by Scrabble GO, Words With Friends, Lexulous, ISC, or any game publisher.</p>
       <div class="input-wrap">
         <svg class="icon-search" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
         <input type="text" id="letterInput" placeholder="Enter letters to unscramble..." maxlength="15" autocomplete="off" spellcheck="false" autofocus>
@@ -541,6 +553,7 @@
         <div class="filter-item"><label for="fStarts">Starts With</label><input type="text" id="fStarts" maxlength="5" autocomplete="off" spellcheck="false"></div>
         <div class="filter-item"><label for="fEnds">Ends With</label><input type="text" id="fEnds" maxlength="5" autocomplete="off" spellcheck="false"></div>
         <div class="filter-item"><label for="fContains">Contains</label><input type="text" id="fContains" maxlength="5" autocomplete="off" spellcheck="false"></div>
+        <div class="filter-item"><label for="fMode">Game Mode</label><select id="fMode"><option value="all">All Words</option><option value="scrabble">Scrabble-style</option><option value="wordle">Wordle (5-letter)</option><option value="bingo">Bingo Hunter (7+)</option><option value="casual">Casual (3–6 letters)</option></select></div>
       </div>
     </section>
 
@@ -556,6 +569,23 @@
 
     <!-- Ad Slot 2 -->
     <div class="ad-slot" id="ad-after-results"></div>
+
+    <!-- Popular Searches -->
+    <section class="pop-searches">
+      <h3>&#128293; Popular Searches</h3>
+      <div class="ps-wrap">
+        <button class="ps-chip" data-letters="crane">CRANE <em>5 letters</em></button>
+        <button class="ps-chip" data-letters="stare">STARE <em>5 letters</em></button>
+        <button class="ps-chip" data-letters="master">MASTER <em>6 letters</em></button>
+        <button class="ps-chip" data-letters="strange">STRANGE <em>7 letters</em></button>
+        <button class="ps-chip" data-letters="eastern">EASTERN <em>7 letters</em></button>
+        <button class="ps-chip" data-letters="plates">PLATES <em>6 letters</em></button>
+        <button class="ps-chip" data-letters="stream">STREAM <em>6 letters</em></button>
+        <button class="ps-chip" data-letters="listen">LISTEN <em>6 letters</em></button>
+        <button class="ps-chip" data-letters="reason">REASON <em>6 letters</em></button>
+        <button class="ps-chip" data-letters="captain">CAPTAIN <em>7 letters</em></button>
+      </div>
+    </section>
 
     <!-- Favorites -->
     <section id="favSection" class="fav-section hidden">
@@ -910,5 +940,6 @@
      crossorigin="anonymous"></script>
   <script src="dictionary.js"></script>
   <script src="app.js"></script>
+  <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
 </body>
 </html>
