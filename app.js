@@ -304,6 +304,29 @@
     return div;
   }
 
+  /* ---------- Contextual Nav Tip — Navboost retention signal ---------- */
+  function showNavTip(words, f) {
+    var el = document.getElementById("navTip");
+    if (!el) return;
+    if (!words || words.length === 0) { el.classList.remove("visible"); el.innerHTML = ""; return; }
+    var has7plus = words.some(function(w){ return w.length >= 7; });
+    var all5     = words.length > 0 && words.every(function(w){ return w.length === 5; });
+    var topScore = 0;
+    for (var i = 0; i < Math.min(words.length, 20); i++) { var s = scoreWord(words[i]); if (s > topScore) topScore = s; }
+    var msg;
+    if (f.mode === "wordle" || all5) {
+      msg = '&#129001; Using for Wordle? <a href="guides/best-wordle-starting-words.html">See the Best Starting Words &rarr;</a>';
+    } else if (f.mode === "bingo" || has7plus) {
+      msg = '&#127942; Found bingo-length words! <a href="guides/scrabble-strategy-guide.html">Learn Bingo &amp; Rack Strategy &rarr;</a>';
+    } else if (topScore >= 20) {
+      msg = '&#11088; High-scoring rack! <a href="guides/scrabble-strategy-guide.html">Maximise your score &rarr;</a>';
+    } else {
+      msg = '&#128218; <a href="guides/scrabble-strategy-guide.html">Word game strategy guides &rarr;</a>';
+    }
+    el.innerHTML = '<span style="font-size:15px">&#128161;</span>&nbsp;' + msg;
+    el.classList.add("visible");
+  }
+
   function render(words, totalBeforeFilter) {
     var grid = dom.resultsGrid;
     var total = words.length;
@@ -409,6 +432,7 @@
     var sorted   = sortWords(filtered, autoSort);
     lastRendered = sorted;
     render(sorted, cached.length);
+    showNavTip(sorted, f);
     renderBest(cached);
     dom.copyAllBtn.classList.toggle("hidden", sorted.length === 0);
   }
