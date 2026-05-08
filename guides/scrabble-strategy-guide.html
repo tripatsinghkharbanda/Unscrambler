@@ -9,9 +9,10 @@
   gtag('js', new Date());
   gtag('config', 'G-ZCJTBHHQPX');
 </script>
+<!-- Facebook Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '856534823442516'); fbq('track', 'PageView');</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=856534823442516&ev=PageView&noscript=1"/></noscript><!-- End Facebook Pixel Code -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googlesyndication.com https://*.googletagservices.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleadservices.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleapis.com https://*.adtrafficquality.google https://*.googleadservices.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleusercontent.com; frame-src https://*.doubleclick.net https://*.googlesyndication.com https://*.google.com; base-uri 'self'; form-action 'self';">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googlesyndication.com https://*.googletagservices.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleadservices.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleapis.com https://*.adtrafficquality.google https://*.googleadservices.com https://connect.facebook.net https://www.facebook.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleusercontent.com https://www.facebook.com; frame-src https://*.doubleclick.net https://*.googlesyndication.com https://*.google.com; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="google-adsense-account" content="ca-pub-6261071610831190">
@@ -127,6 +128,17 @@
     .footer-links a:hover { color: var(--primary); }
     .footer-copy { text-align: center; font-size: 12px; color: var(--text-3); }
     a { color: var(--primary); }
+    /* ===== Letter Frequency Chart ===== */
+    .freq-chart{margin:18px 0 8px}
+    .freq-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+    .freq-label{font-size:12px;font-weight:700;color:var(--text);width:18px;text-align:right;flex-shrink:0;letter-spacing:.05em}
+    .freq-bar-wrap{flex:1;background:var(--bg-raised,#334155);border-radius:3px;height:16px;overflow:hidden;max-width:440px}
+    .freq-bar{height:100%;border-radius:3px}
+    .freq-bar-lo{background:#2563EB;opacity:.85}
+    .freq-bar-med{background:#D97706;opacity:.85}
+    .freq-bar-hi{background:#7C3AED;opacity:.85}
+    .freq-val{font-size:11px;color:var(--text-3);white-space:nowrap;min-width:94px}
+    .chart-caption{font-size:12px;color:var(--text-3);margin-top:6px;font-style:italic;line-height:1.5;margin-bottom:24px}
   </style>
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Unscramble Words Pro Editorial Team","url":"https://unscramblewordspro.com/author/wordpro-editorial-team.html","worksFor":{"@type":"Organization","name":"Unscramble Words Pro","url":"https://unscramblewordspro.com"},"jobTitle":"Experts in Word Games, Scrabble Strategy & Linguistics","description":"Experts in word games, Scrabble strategy, and linguistic tools with 15+ years combined experience.","knowsAbout":["Scrabble","Crossword puzzles","Word games","Anagram solving","English vocabulary","TWL dictionary","SOWPODS dictionary"],"email":"unscramblewordspro@gmail.com"}</script>
@@ -155,7 +167,7 @@
     <header class="article-header">
       <h1>Scrabble Strategy Guide: How to Find the Highest-Scoring Words Every Turn</h1>
       <div class="article-meta">
-        <span>&#128203; 1,200 words</span>
+        <span>&#128203; 1,550 words</span>
         <span>&#9200; 6 min read</span>
         <span>&#127381; Scrabble &bull; Words With Friends &bull; Word Games</span>
       </div>
@@ -181,6 +193,40 @@
           <tr><td>Blank</td><td>0 pts</td><td>2</td><td>Any letter — invaluable for bingos</td></tr>
         </tbody>
       </table>
+
+
+      <h2 id="tile-distribution">Scrabble Tile Distribution: All 100 Tiles at a Glance</h2>
+      <p>The standard Scrabble bag holds 100 letter tiles (plus 2 blanks). Understanding how many of each tile exists is fundamental to rack strategy — you are <strong>12&times; more likely to draw an E than a Q or Z</strong>. The chart below shows every letter's tile count and point value. Blue bars are common low-value tiles that form most words; amber bars are medium-value tiles; purple bars are the rare, high-scoring tiles that define individual plays.</p>
+      <div class="freq-chart" role="img" aria-label="Scrabble tile frequency chart showing count and point value for all 26 letters">
+        <div class="freq-row"><span class="freq-label">E</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:100%"></div></div><span class="freq-val">&times;12 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">A</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:75%"></div></div><span class="freq-val">&times;9 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">I</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:75%"></div></div><span class="freq-val">&times;9 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">O</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:67%"></div></div><span class="freq-val">&times;8 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">N</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:50%"></div></div><span class="freq-val">&times;6 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">R</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:50%"></div></div><span class="freq-val">&times;6 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">T</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:50%"></div></div><span class="freq-val">&times;6 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">D</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:33%"></div></div><span class="freq-val">&times;4 &bull; 2 pt</span></div>
+        <div class="freq-row"><span class="freq-label">L</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:33%"></div></div><span class="freq-val">&times;4 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">S</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:33%"></div></div><span class="freq-val">&times;4 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">U</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:33%"></div></div><span class="freq-val">&times;4 &bull; 1 pt</span></div>
+        <div class="freq-row"><span class="freq-label">G</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-lo" style="width:25%"></div></div><span class="freq-val">&times;3 &bull; 2 pt</span></div>
+        <div class="freq-row"><span class="freq-label">B</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 3 pt</span></div>
+        <div class="freq-row"><span class="freq-label">C</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 3 pt</span></div>
+        <div class="freq-row"><span class="freq-label">F</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 4 pt</span></div>
+        <div class="freq-row"><span class="freq-label">H</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 4 pt</span></div>
+        <div class="freq-row"><span class="freq-label">M</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 3 pt</span></div>
+        <div class="freq-row"><span class="freq-label">P</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 3 pt</span></div>
+        <div class="freq-row"><span class="freq-label">V</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 4 pt</span></div>
+        <div class="freq-row"><span class="freq-label">W</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 4 pt</span></div>
+        <div class="freq-row"><span class="freq-label">Y</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-med" style="width:17%"></div></div><span class="freq-val">&times;2 &bull; 4 pt</span></div>
+        <div class="freq-row"><span class="freq-label">J</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-hi" style="width:8%"></div></div><span class="freq-val">&times;1 &bull; 8 pt</span></div>
+        <div class="freq-row"><span class="freq-label">K</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-hi" style="width:8%"></div></div><span class="freq-val">&times;1 &bull; 5 pt</span></div>
+        <div class="freq-row"><span class="freq-label">Q</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-hi" style="width:8%"></div></div><span class="freq-val">&times;1 &bull; 10 pt</span></div>
+        <div class="freq-row"><span class="freq-label">X</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-hi" style="width:8%"></div></div><span class="freq-val">&times;1 &bull; 8 pt</span></div>
+        <div class="freq-row"><span class="freq-label">Z</span><div class="freq-bar-wrap"><div class="freq-bar freq-bar-hi" style="width:8%"></div></div><span class="freq-val">&times;1 &bull; 10 pt</span></div>
+      </div>
+      <p class="chart-caption">Standard English Scrabble tile distribution (100 tiles, excluding 2 blanks &bull; 0 pts). Blue = 1&ndash;2 pts; Amber = 3&ndash;4 pts; Purple = 5&ndash;10 pts. Source: Official Scrabble rules (TWL / Collins).</p>
+      <p>The chart reveals three strategic principles. First, vowels dominate the bag &mdash; E, A, I, O, and U together account for <strong>42 of 100 tiles</strong>, which is why holding four or more vowels on your rack is a statistically unusual and problematic position. Second, the &ldquo;power tiles&rdquo; &mdash; S, R, N, T, L &mdash; each appear four to six times, making a rack rich in these letters statistically likely and strategically desirable for bingo hunting. Third, J, K, Q, X, and Z each appear just once, meaning the odds of drawing any single high-value tile in a given turn are less than 2%.</p>
 
       <div class="tip-box">
         <div class="tip-label">Pro Tip</div>
