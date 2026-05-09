@@ -1,0 +1,27 @@
+[build]
+  publish = "."
+
+# Redirect the Netlify default subdomain to the canonical domain.
+# Netlify automatically adds X-Robots-Tag: noindex to *.netlify.app when
+# a custom domain is active. This 301 ensures Google never indexes those URLs.
+[[redirects]]
+  from   = "https://unscramblewordspro.netlify.app/*"
+  to     = "https://unscramblewordspro.com/:splat"
+  status = 301
+  force  = true
+
+# Serve clean URLs without .html extension (optional, improves UX)
+[[redirects]]
+  from   = "/guides"
+  to     = "/guides/"
+  status = 301
+
+[[redirects]]
+  from   = "/blog"
+  to     = "/blog/"
+  status = 301
+
+[[redirects]]
+  from   = "/word-lists"
+  to     = "/word-lists/"
+  status = 301
