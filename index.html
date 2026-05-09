@@ -449,6 +449,22 @@
     .badge-bingo{display:inline-block;background:#7C3AED;color:#fff;font-size:9px;font-weight:700;border-radius:3px;padding:1px 4px;margin-left:3px;vertical-align:middle;letter-spacing:.06em}
     /* ===== Disclaimer ===== */
     .disclaimer{font-size:12px;color:var(--text-3);margin-top:6px;text-align:center}
+    /* ===== Site Nav ===== */
+    .nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:flex-end;margin-right:8px}
+    .nav-links a{padding:6px 10px;font-size:13px;font-weight:600;color:var(--text-2);border-radius:7px;transition:all .15s;white-space:nowrap;text-decoration:none}
+    .nav-links a:hover{color:var(--primary);background:var(--primary-bg);text-decoration:none}
+    .hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:36px;height:36px;border:1px solid var(--border);border-radius:8px;background:transparent;cursor:pointer;flex-shrink:0;padding:0}
+    .hamburger span{display:block;width:16px;height:2px;background:var(--text-2);border-radius:2px;transition:transform .2s,opacity .2s}
+    .hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    .hamburger.open span:nth-child(2){opacity:0;transform:scaleX(0)}
+    .hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+    @media(max-width:640px){
+      .nav-links{display:none;position:absolute;top:56px;left:0;right:0;z-index:49;flex-direction:column;gap:0;background:var(--bg);border-bottom:2px solid var(--border);padding:4px 0;box-shadow:var(--shadow)}
+      .nav-links.open{display:flex}
+      .nav-links a{padding:12px 20px;border-radius:0;font-size:14px;border-bottom:1px solid var(--border)}
+      .nav-links a:last-child{border-bottom:none}
+      .hamburger{display:flex}
+    }
     /* ===== Hub Nav ===== */
     .hub-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:4px 0 12px}
     .hub-link{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;transition:all .15s;white-space:nowrap}
@@ -500,11 +516,18 @@
   <!-- Header -->
   <header class="header">
     <div class="header-inner">
-      <div class="logo">
+      <a href="/" class="logo">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
         Unscramble Words <span class="logo-pro">Pro</span>
-      </div>
+      </a>
+      <nav class="nav-links" id="siteNav" aria-label="Main navigation">
+        <a href="guides/">Guides</a>
+        <a href="word-lists/">Word Lists</a>
+        <a href="blog/">Blog</a>
+        <a href="about.html">About</a>
+      </nav>
       <div class="header-right">
+        <button id="hamburger" class="hamburger" aria-label="Toggle navigation" aria-expanded="false" aria-controls="siteNav"><span></span><span></span><span></span></button>
         <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
           <svg id="iconSun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
           <svg id="iconMoon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -1059,5 +1082,6 @@
   <script src="dictionary.js"></script>
   <script src="app.js"></script>
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
+  <script>(function(){var btn=document.getElementById('hamburger'),nav=document.getElementById('siteNav');if(!btn)return;btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.classList.toggle('open',o);btn.setAttribute('aria-expanded',o);});document.addEventListener('click',function(e){if(!btn.contains(e.target)&&!nav.contains(e.target)){nav.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');}});})();</script>
 </body>
 </html>
