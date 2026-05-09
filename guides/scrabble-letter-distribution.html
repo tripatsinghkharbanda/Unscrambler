@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCJTBHHQPX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZCJTBHHQPX');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-6261071610831190">
+<title>Scrabble Letter Distribution: Every Tile Value and Count Explained</title>
+<meta name="description" content="Complete Scrabble letter distribution — all 100 tiles, their point values, counts, and frequency strategy. Covers blank tiles, tracking, and endgame tile counting.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://unscramblewordspro.com/guides/scrabble-letter-distribution.html">
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+[{"@context":"https://schema.org","@type":"Article","headline":"Scrabble Letter Distribution: Every Tile Value and Count Explained","description":"Complete guide to Scrabble's 100-tile distribution — point values, tile counts, frequency strategy, blank tile rules, and how to track tiles in the endgame.","url":"https://unscramblewordspro.com/guides/scrabble-letter-distribution.html","datePublished":"2026-05-09","dateModified":"2026-05-09","author":{"@type":"Organization","name":"Unscramble Words Pro","url":"https://unscramblewordspro.com"},"publisher":{"@type":"Organization","name":"Unscramble Words Pro","url":"https://unscramblewordspro.com"}},
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"How many tiles are in Scrabble?","acceptedAnswer":{"@type":"Answer","text":"A standard Scrabble set contains 100 tiles: 98 letter tiles and 2 blank tiles. The distribution is weighted toward common letters — E has 12 tiles and A has 9, while Q and Z have just 1 each. All tiles have a face value from 0 (blank) to 10 (Q and Z)."}},
+{"@type":"Question","name":"What are blank tiles worth in Scrabble?","acceptedAnswer":{"@type":"Answer","text":"Blank tiles are worth 0 points but are the most strategically valuable tiles in the game. When played, a blank represents any letter the player chooses. It cannot be changed once placed. Blank tiles enable bingos (7-letter plays) that would otherwise be impossible, making them worth approximately 25–30 points in expected future scoring value."}},
+{"@type":"Question","name":"How do you track tiles in Scrabble?","acceptedAnswer":{"@type":"Answer","text":"Competitive players track tiles by memorising the full distribution and mentally noting which high-value tiles have been played. Focus on tracking: the 2 blanks, 4 S tiles, Q, Z, J, and X. In the endgame (last 14 tiles), a complete tile count lets you calculate your opponent's rack and plan your final plays for maximum score or to block their highest plays."}}
+]}]
+</script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f172a;--s:#1e293b;--b:#334155;--t:#e2e8f0;--t2:#cbd5e1;--t3:#94a3b8;--p:#3b82f6;--pb:#1e3a5f}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--t);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--p);text-decoration:none}a:hover{text-decoration:underline}
+.w{max-width:740px;margin:0 auto;padding:0 20px}
+header{background:var(--bg);border-bottom:1px solid var(--b);position:sticky;top:0;z-index:50}
+.hi{display:flex;align-items:center;height:56px;max-width:740px;margin:0 auto;padding:0 20px;gap:16px}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:18px;color:var(--t);text-decoration:none}
+.logo:hover{color:var(--t);text-decoration:none}.lp{color:var(--p)}
+nav{display:flex;gap:4px;margin-left:auto}
+nav a{font-size:13px;font-weight:600;color:var(--t3);padding:6px 10px;border-radius:7px}
+nav a:hover{color:var(--p);background:var(--pb);text-decoration:none}
+main{padding:48px 0 64px}
+.bc{font-size:13px;color:var(--t3);margin-bottom:22px}.bc a{color:var(--t3)}
+h1{font-size:30px;font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:14px;color:#f1f5f9}
+.meta{font-size:13px;color:var(--t3);margin-bottom:28px}
+.lead{font-size:16px;color:var(--t2);margin-bottom:28px;line-height:1.8}
+h2{font-size:21px;font-weight:700;color:#f1f5f9;margin:36px 0 12px;padding-bottom:8px;border-bottom:1px solid var(--b)}
+h3{font-size:16px;font-weight:700;color:var(--t);margin:20px 0 8px}
+p{color:var(--t2);margin-bottom:14px;font-size:15px}
+ul,ol{color:var(--t2);padding-left:22px;margin-bottom:14px}
+li{margin-bottom:7px;font-size:15px;line-height:1.7}
+.tip{background:var(--pb);border-left:4px solid var(--p);border-radius:8px;padding:14px 18px;margin:18px 0}
+.tip strong{color:var(--p)}
+table{width:100%;border-collapse:collapse;margin:14px 0 20px;font-size:14px}
+th{background:var(--s);color:var(--t3);font-weight:600;padding:9px 12px;text-align:left;border-bottom:2px solid var(--b)}
+td{padding:8px 12px;border-bottom:1px solid var(--b);color:var(--t2)}
+tr:last-child td{border-bottom:none}
+code{font-family:monospace;font-size:14px;font-weight:700;color:var(--t);background:var(--bg);padding:2px 6px;border-radius:4px}
+.tile-row{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 18px}
+.tile{display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:44px;height:48px;background:var(--s);border:1px solid var(--b);border-radius:8px;font-size:16px;font-weight:800;color:var(--t);position:relative}
+.tile sub{font-size:9px;position:absolute;bottom:4px;right:6px;color:var(--t3);font-weight:600}
+.faq{margin-top:40px;border-top:1px solid var(--b);padding-top:28px}
+.faq h3{margin-bottom:6px}
+.cta{background:var(--s);border:1px solid var(--b);border-radius:12px;padding:22px;text-align:center;margin:36px 0}
+.cta a{display:inline-block;background:var(--p);color:#fff;padding:11px 24px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;margin-top:10px}
+.cta a:hover{background:#2563eb;text-decoration:none}
+.rel{margin-top:32px;padding:20px;background:var(--s);border-radius:10px;border:1px solid var(--b)}
+.rel h3{margin-top:0;margin-bottom:12px;font-size:15px}
+.rel ul{margin:0;padding-left:18px}
+footer{border-top:1px solid var(--b);padding:28px 0;text-align:center;font-size:13px;color:var(--t3)}
+footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
+</style>
+</head>
+<body>
+<header><div class="hi">
+<a href="../index.html" class="logo"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Unscramble Words <span class="lp">Pro</span></a>
+<nav><a href="index.html">Guides</a><a href="../blog/">Blog</a><a href="../about.html">About</a></nav>
+</div></header>
+<main><div class="w">
+<p class="bc"><a href="../index.html">Home</a> › <a href="index.html">Guides</a> › Scrabble Letter Distribution</p>
+<h1>Scrabble Letter Distribution: Every Tile Value and Count</h1>
+<p class="meta">📅 May 2026 · ⏱ 7 min read · 🎯 All Levels</p>
+<p class="lead">Scrabble contains exactly 100 tiles. Knowing how many of each letter exist — and what each is worth — is the foundation of rack management, tile tracking, and endgame strategy. This guide covers the complete distribution, why the values were set as they are, and how to use this knowledge during play.</p>
+
+<h2>Complete Tile Distribution Table</h2>
+<table>
+<thead><tr><th>Letter</th><th>Points</th><th>Tiles in Set</th><th>Notes</th></tr></thead>
+<tbody>
+<tr><td><code>A</code></td><td>1</td><td>9</td><td>Second most common; pairs well with any consonant</td></tr>
+<tr><td><code>B</code></td><td>3</td><td>2</td><td>Limited — avoid holding when no B-initial word fits</td></tr>
+<tr><td><code>C</code></td><td>3</td><td>2</td><td>Useful in CH- words and -CK endings</td></tr>
+<tr><td><code>D</code></td><td>2</td><td>4</td><td>Excellent for -ED endings and D- starters</td></tr>
+<tr><td><code>E</code></td><td>1</td><td>12</td><td>Most common tile; easiest to form words with</td></tr>
+<tr><td><code>F</code></td><td>4</td><td>2</td><td>Harder to use; -FT, -FF, and FI- words are key</td></tr>
+<tr><td><code>G</code></td><td>2</td><td>3</td><td>Good in -ING, -AGE endings</td></tr>
+<tr><td><code>H</code></td><td>4</td><td>2</td><td>Excellent in TH-, SH-, CH- combinations</td></tr>
+<tr><td><code>I</code></td><td>1</td><td>9</td><td>High count; vowel overload risk with multiple Is</td></tr>
+<tr><td><code>J</code></td><td>8</td><td>1</td><td>One tile only — play early, few short J-words exist</td></tr>
+<tr><td><code>K</code></td><td>5</td><td>1</td><td>One tile; -NK, SK- combinations work best</td></tr>
+<tr><td><code>L</code></td><td>1</td><td>4</td><td>Very flexible; appears in -LL, -LY, -LT, -LD</td></tr>
+<tr><td><code>M</code></td><td>3</td><td>2</td><td>Good in -AM, -EM, -IM, -OM patterns</td></tr>
+<tr><td><code>N</code></td><td>1</td><td>6</td><td>High-frequency; part of -ING, -AN, -EN, -IN</td></tr>
+<tr><td><code>O</code></td><td>1</td><td>8</td><td>Third most common vowel; versatile</td></tr>
+<tr><td><code>P</code></td><td>3</td><td>2</td><td>Strong in PR-, PL-, -MP endings</td></tr>
+<tr><td><code>Q</code></td><td>10</td><td>1</td><td>Highest value; must manage carefully (see Q guide)</td></tr>
+<tr><td><code>R</code></td><td>1</td><td>6</td><td>Extremely flexible; part of every bingo stem family</td></tr>
+<tr><td><code>S</code></td><td>1</td><td>4</td><td>Most strategically valuable 1-point tile; enables hooks</td></tr>
+<tr><td><code>T</code></td><td>1</td><td>6</td><td>High frequency; part of -EST, -TION, -INT endings</td></tr>
+<tr><td><code>U</code></td><td>1</td><td>4</td><td>Only 4 tiles — use carefully to avoid overload</td></tr>
+<tr><td><code>V</code></td><td>4</td><td>2</td><td>Difficult; -VE endings and VAV/HAVE are key plays</td></tr>
+<tr><td><code>W</code></td><td>4</td><td>2</td><td>Best in WH- words and -OW endings; awkward alone</td></tr>
+<tr><td><code>X</code></td><td>8</td><td>1</td><td>One tile; XI, AX, OX, EX are critical 2-letter saves</td></tr>
+<tr><td><code>Y</code></td><td>4</td><td>2</td><td>Excellent -LY hook; also YO, YEP, YEW shorter plays</td></tr>
+<tr><td><code>Z</code></td><td>10</td><td>1</td><td>Highest value with Q; ZA (pizza) is a vital 2-letter play</td></tr>
+<tr><td><code>Blank</code></td><td>0</td><td>2</td><td>Wildcard — most valuable tiles despite 0 face value</td></tr>
+</tbody>
+</table>
+<p><strong>Total: 100 tiles.</strong> Total points in the bag: approximately 187 points.</p>
+
+<div class="tip"><strong>Tracking priority in competitive play:</strong> You don't need to track all 100 tiles. Focus on the high-impact tiles: the 2 blanks, 4 S tiles, J (×1), Q (×1), X (×1), and Z (×1). Knowing which of these 10 tiles have been played tells you 80% of what matters for rack management and endgame planning.</div>
+
+<h2>Why These Point Values?</h2>
+<p>Alfred Mosher Butts, Scrabble's inventor, calculated tile values by counting letter frequency in the front page of the New York Times, Wall Street Journal, and Saturday Evening Post. Letters that appear often got low values (E=1, A=1, T=1); rare letters got high values (Q=10, Z=10). The system has been largely unchanged since 1948, though Collins Scrabble Words (used internationally) uses slightly different values for some letters.</p>
+<p>One interesting anomaly: S has only 1 point but 4 tiles and is arguably the most strategically valuable tile in the set because of its hook-forming power. Its value is deliberately suppressed to prevent the game from becoming a pluralisation exercise.</p>
+
+<h2>The High-Value Tile Pocket</h2>
+<p>The 10 tiles worth 4+ points each (J, Q, K, X, Z, F, H, V, W, Y) collectively represent 53 face-value points — about 28% of total bag value concentrated in 10% of tiles. Managing these well is a major skill gap between intermediate and advanced players.</p>
+<table>
+<thead><tr><th>Tile</th><th>Value</th><th>Best Short Play</th><th>Common Mistake</th></tr></thead>
+<tbody>
+<tr><td><code>Q (10)</code></td><td>10</td><td>QI, QAT, QOPH</td><td>Holding Q waiting for U while rack degrades</td></tr>
+<tr><td><code>Z (10)</code></td><td>10</td><td>ZA, ZAG, ZAP</td><td>Not using ZA on a double/triple early in game</td></tr>
+<tr><td><code>J (8)</code></td><td>8</td><td>JO, JAB, JEE</td><td>Holding J too long hoping for premium square</td></tr>
+<tr><td><code>X (8)</code></td><td>8</td><td>XI, AX, OX</td><td>Ignoring 2-letter X plays, waiting for longer words</td></tr>
+<tr><td><code>K (5)</code></td><td>5</td><td>KA, KI, OAK</td><td>Holding K with no vowels to pair with it</td></tr>
+</tbody>
+</table>
+
+<h2>Endgame Tile Counting</h2>
+<p>In the endgame (when the bag has 14 or fewer tiles left — roughly 2 draws remaining), tile counting becomes critical. With practice, you can deduce your opponent's exact rack, allowing you to:</p>
+<ul>
+<li>Block plays your opponent needs based on their known high-value tiles</li>
+<li>Calculate whether you can go out in one play and leave them holding tiles</li>
+<li>Choose plays that maximise points while blocking premium squares your opponent would use</li>
+</ul>
+<p>Start by tracking the 10 high-value tiles mentioned above. Once you know whether the J, Q, X, Z, and blanks have been played, you know a lot about what your opponent can and cannot do. Advanced players track all 100 tiles mentally, but the high-value 10 give you 80% of the strategic benefit.</p>
+
+<div class="cta">
+<strong>Check What's Playable With Your Tiles</strong>
+<p style="margin:6px 0 0;color:var(--t2)">Enter your rack to see all valid words and their Scrabble scores in under a second.</p>
+<a href="../index.html">Open Free Unscrambler →</a>
+</div>
+
+<div class="faq">
+<h2>Frequently Asked Questions</h2>
+<h3>How many tiles are in Scrabble?</h3>
+<p>A standard Scrabble set contains 100 tiles: 98 letter tiles and 2 blank tiles. E has the most (12) and Q, Z, J, K, X each have just 1.</p>
+<h3>What are blank tiles worth in Scrabble?</h3>
+<p>Blank tiles are worth 0 points face value but are the most strategically valuable tiles in the game, worth approximately 25–30 points in expected future scoring because they enable bingos.</p>
+<h3>How do you track tiles in Scrabble?</h3>
+<p>Focus on the 10 high-value tiles first: both blanks, all 4 S tiles, J, Q, X, and Z. Knowing which of these have been played gives you 80% of the strategic benefit of full tile tracking with a fraction of the mental effort.</p>
+</div>
+
+<div class="rel"><h3>Related Guides</h3><ul>
+<li><a href="scrabble-tile-management.html">Scrabble Tile Management: When to Hold, Exchange, and Sacrifice</a></li>
+<li><a href="q-words-scrabble.html">Q Words for Scrabble: Complete List Including Q Without U</a></li>
+<li><a href="scrabble-strategy-guide.html">Scrabble Strategy Guide: Rack Management &amp; Board Tactics</a></li>
+<li><a href="scrabble-bingo-words.html">Scrabble Bingo Words: Play All 7 Tiles for 50 Points</a></li>
+<li><a href="beginner-word-strategy.html">Beginner's Complete Word Game Strategy Guide</a></li>
+</ul></div>
+</div></main>
+<footer><div class="w">
+<div><a href="../index.html">Home</a><a href="index.html">Guides</a><a href="../blog/">Blog</a><a href="../about.html">About</a><a href="../privacy.html">Privacy</a><a href="../contact.html">Contact</a></div>
+<p style="margin-top:10px">© 2026 Unscramble Words Pro · <a href="../editorial-standards.html">Editorial Standards</a></p>
+</div></footer>
+</body></html>

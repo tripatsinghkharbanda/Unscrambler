@@ -174,7 +174,8 @@
       display: flex; align-items: center; justify-content: space-between;
       height: 56px; max-width: 740px; margin: 0 auto; padding: 0 20px;
     }
-    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--text); letter-spacing: -0.02em; }
+    .logo { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 18px; color: var(--text); letter-spacing: -0.02em; text-decoration: none; }
+    .logo:hover { text-decoration: none; color: var(--text); }
     .logo svg { color: var(--primary); flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(37,99,235,0.4)); }
     .logo .logo-pro { color: var(--primary); }
     .header-right { display: flex; align-items: center; gap: 8px; }
@@ -391,6 +392,30 @@
     .training-hub{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:24px 28px;margin-bottom:32px}
     .training-hub h2{font-size:20px;font-weight:800;margin-bottom:6px;margin-top:0;letter-spacing:-0.02em}
     .training-hub p{font-size:14px;color:var(--text-2);margin-bottom:14px;line-height:1.7}
+    .training-hub .article-links{grid-template-columns:repeat(auto-fill,minmax(min(240px,100%),1fr))}
+    /* ===== Daily Challenge ===== */
+    .daily-challenge{background:linear-gradient(135deg,#1e3a5f 0%,#1e293b 100%);border:1px solid #2563eb55;border-radius:14px;padding:20px 24px;margin-bottom:20px}
+    .dc-top{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+    .dc-badge{background:#2563eb;color:#fff;font-size:11px;font-weight:800;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.06em}
+    .dc-date{font-size:12px;color:#64748b}
+    .dc-prompt{font-size:14px;color:#94a3b8;margin-bottom:14px}
+    .dc-tiles{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+    .dc-tile{width:38px;height:42px;background:#0f172a;border:2px solid #334155;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#e2e8f0;letter-spacing:0}
+    .dc-controls{display:flex;gap:8px;flex-wrap:wrap}
+    .dc-input{background:#0f172a;border:1px solid #334155;border-radius:8px;padding:9px 14px;font-size:15px;color:#e2e8f0;font-family:inherit;flex:1;min-width:120px;max-width:200px}
+    .dc-input:focus{outline:none;border-color:#3b82f6}
+    .dc-btn{background:#2563eb;color:#fff;border:none;border-radius:8px;padding:9px 16px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+    .dc-btn:hover{background:#1d4ed8}
+    .dc-btn.sec{background:#334155;color:#e2e8f0}
+    .dc-btn.sec:hover{background:#475569}
+    .dc-feedback{margin-top:10px;font-size:14px;font-weight:600;min-height:20px}
+    .dc-feedback.win{color:#34d399}.dc-feedback.lose{color:#f87171}.dc-feedback.hint{color:#fbbf24}
+    /* ===== Players Also Searched ===== */
+    .also-searched{margin-bottom:32px}
+    .also-searched h2{font-size:18px;font-weight:700;margin-bottom:14px;color:#f1f5f9}
+    .search-chips{display:flex;flex-wrap:wrap;gap:8px}
+    .search-chip{display:inline-flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:7px 14px;font-size:13px;font-weight:500;color:var(--text-2);text-decoration:none;transition:border-color .15s,color .15s}
+    .search-chip:hover{border-color:var(--primary);color:var(--primary);text-decoration:none}
     .audience-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin: 14px 0 28px; }
     .audience-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
     .audience-card .aud-icon { font-size: 28px; margin-bottom: 8px; }
@@ -444,6 +469,8 @@
       .filter-panel { grid-template-columns: 1fr 1fr; }
       .results-grid { grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); }
       .seo-cols { grid-template-columns: 1fr; }
+      .training-hub { padding: 16px; }
+      .intro-what { padding: 16px; }
     }
     @media (min-width: 960px) {
       .results-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
@@ -577,6 +604,22 @@
       <a href="guides/" class="hub-link">&#128161; All Guides</a>
     </nav>
 
+    <!-- Daily Word Challenge -->
+    <div class="daily-challenge" id="dailyChallenge" aria-label="Daily Word Challenge">
+      <div class="dc-top">
+        <span class="dc-badge">&#127881; Daily Challenge</span>
+        <span class="dc-date" id="dcDate"></span>
+      </div>
+      <p class="dc-prompt">Unscramble today's word — a new puzzle every day.</p>
+      <div class="dc-tiles" id="dcTiles"></div>
+      <div class="dc-controls">
+        <input class="dc-input" id="dcInput" type="text" placeholder="Your answer..." maxlength="15" autocomplete="off" autocapitalize="off">
+        <button class="dc-btn" onclick="checkDC()">Check</button>
+        <button class="dc-btn sec" onclick="revealDC()" id="dcRevealBtn">Reveal</button>
+      </div>
+      <div class="dc-feedback" id="dcFeedback"></div>
+    </div>
+
     <!-- Ad Slot 1 -->
     <div class="ad-slot" id="ad-below-input"></div>
 
@@ -684,13 +727,9 @@
             <div class="al-icon">&#128221;</div>
             <div class="al-text"><strong>Two-Letter Scrabble Words</strong><span>Complete TWL &amp; SOWPODS reference with definitions.</span></div>
           </a>
-          <a href="word-lists/" class="article-link-card">
-            <div class="al-icon">&#128196;</div>
-            <div class="al-text"><strong>Word Lists A&ndash;Z</strong><span>Browse by length, starting letter, pattern &amp; Scrabble value.</span></div>
-          </a>
-          <a href="blog/" class="article-link-card">
-            <div class="al-icon">&#128218;</div>
-            <div class="al-text"><strong>Word Game Blog</strong><span>Strategy guides and vocabulary tips from our editorial team.</span></div>
+          <a href="word-solver-for-word-games.html" class="article-link-card">
+            <div class="al-icon">&#127918;</div>
+            <div class="al-text"><strong>Word Solver for Word Games</strong><span>Switch between Scrabble-style, Wordle, Bingo Hunter &amp; Casual modes.</span></div>
           </a>
           <a href="guides/scrabble-dictionary-guide.html" class="article-link-card">
             <div class="al-icon">&#128214;</div>
@@ -1061,6 +1100,31 @@
       <h2>Popular Search Terms on Unscramble Words Pro</h2>
       <div class="kw">unscramble words, word unscrambler, scrabble word finder, anagram solver, word finder, scrabble solver, unscramble letters, word solver, letter unscrambler, jumble solver, word maker, word generator, word decoder, scrabble helper, scrabble training tool, word game helper, unscramble word solver, free word unscrambler, online word finder, best word unscrambler, word unscrambler tool, unscramble my letters, make words from letters, find words from letters, rearrange letters to make words, what words can I make, words from scrambled letters, letter combination word finder, multi-word anagram solver, word puzzle solver, word scramble helper, scrabble tile calculator, scrabble score calculator, highest scoring scrabble words, best scrabble words, two letter words scrabble, three letter words scrabble, seven letter words, eight letter words, Q without U words, Z words scrabble, X words scrabble, J words scrabble, K words scrabble, V words scrabble, blank tile scrabble words, scrabble word list, scrabble dictionary online, TWL word list, SOWPODS word list, Collins scrabble words, NASPA scrabble, WESPA scrabble, competitive scrabble, tournament scrabble, scrabble strategy, scrabble tips, scrabble tricks, scrabble opening moves, rack management scrabble, parallel play scrabble, hook words scrabble, bingo words scrabble, scrabble bonus, scrabble premium squares, double word score, triple word score, double letter score, triple letter score, wordle helper, wordle solver, wordle cheat, wordle word finder, wordle answer today, wordle hint, five letter words, 5 letter words, wordle clue, NYT wordle, words with friends cheat, words with friends solver, words with friends word finder, WWF cheat, words with friends helper, boggle solver, boggle word finder, crossword solver, crossword helper, jumble answers, daily jumble solver, text twist solver, text twist cheat, word cookies solver, word cookies answers, wordscapes solver, wordscapes cheat, word connect answers, word games online, free word games, word puzzle games, board game word finder, scrabble app helper, word unscrambler app, mobile word finder, word unscrambler USA, word finder USA, scrabble solver USA, American English words, US English dictionary, word unscrambler UK, word finder UK, scrabble solver UK, British English words, UK English dictionary, word unscrambler Canada, scrabble Canada, Canadian English, word unscrambler Australia, scrabble Australia, Australian English, Macquarie dictionary, word games Australia, color colour, favor favour, honor honour, center centre, defense defence, analyze analyse, organize organise, gray grey, traveled travelled, catalog catalogue, spelling variations English, American vs British spelling, Scrabble US vs UK, letter unscrambler free, word finder with scores, scrabble word calculator, unscramble these letters, rearrange letters, word descrambler, descramble words, anagram finder, anagram generator, anagram creator, multiple word anagram, word permutations, word combinations, find all words, every possible word, all valid words, complete word list, comprehensive dictionary, game dictionary, word game dictionary, official word list, valid scrabble words, legal scrabble words, allowed scrabble words, playable words, accepted words</div>
 
+      <!-- Players Also Searched For -->
+      <div class="also-searched">
+        <h2>Players Also Searched For</h2>
+        <div class="search-chips">
+          <a href="pages/words-from-crane.html" class="search-chip">&#128269; Unscramble CRANE</a>
+          <a href="pages/words-from-slate.html" class="search-chip">&#128269; Unscramble SLATE</a>
+          <a href="pages/words-from-stare.html" class="search-chip">&#128269; Unscramble STARE</a>
+          <a href="pages/words-from-heart.html" class="search-chip">&#128269; Unscramble HEART</a>
+          <a href="pages/words-from-master.html" class="search-chip">&#128269; Unscramble MASTER</a>
+          <a href="pages/words-from-listen.html" class="search-chip">&#128269; Unscramble LISTEN</a>
+          <a href="pages/words-from-dream.html" class="search-chip">&#128269; Unscramble DREAM</a>
+          <a href="pages/words-from-angel.html" class="search-chip">&#128269; Unscramble ANGEL</a>
+          <a href="pages/words-from-nastier.html" class="search-chip">&#128269; Unscramble NASTIER</a>
+          <a href="pages/words-from-ocean.html" class="search-chip">&#128269; Unscramble OCEAN</a>
+          <a href="guides/two-letter-scrabble-words.html" class="search-chip">&#128221; 2-Letter Scrabble Words</a>
+          <a href="guides/q-words-scrabble.html" class="search-chip">&#128214; Q Without U Words</a>
+          <a href="guides/best-wordle-starting-words.html" class="search-chip">&#129001; Best Wordle Starters</a>
+          <a href="guides/scrabble-bingo-words.html" class="search-chip">&#9822; Scrabble Bingos</a>
+          <a href="guides/beginner-word-strategy.html" class="search-chip">&#127891; Beginner Strategy</a>
+          <a href="guides/best-5-letter-words.html" class="search-chip">&#127919; Best 5-Letter Words</a>
+          <a href="blog/daily-word-practice.html" class="search-chip">&#128336; Daily Practice Routine</a>
+          <a href="blog/word-game-psychology.html" class="search-chip">&#129504; Word Game Psychology</a>
+        </div>
+      </div>
+
       <h2>About &amp; Policies</h2>
       <p>Unscramble Words Pro is a free, ad-supported word-game tool. Non-intrusive display ads from Google AdSense help fund ongoing dictionary maintenance, server costs, and the editorial work behind every guide and word list. There are no pop-ups, auto-play videos, or interstitials &mdash; ads are static and clearly labelled.</p>
       <ul>
@@ -1068,6 +1132,7 @@
         <li><a href="privacy.html">Privacy Policy</a> &mdash; how we handle data and ad personalisation</li>
         <li><a href="terms.html">Terms of Service</a> &mdash; acceptable use and disclaimer</li>
         <li><a href="contact.html">Contact</a> &mdash; questions, feedback, or word-list requests</li>
+        <li><a href="editorial-standards.html">Editorial Standards</a> &mdash; how content is created, reviewed, and maintained</li>
       </ul>
 
     </section>
@@ -1115,5 +1180,661 @@
   <script src="app.js"></script>
   <script>if('serviceWorker' in navigator){navigator.serviceWorker.register('/sw.js').catch(()=>{});}</script>
   <script>(function(){var btn=document.getElementById('hamburger'),nav=document.getElementById('siteNav');if(!btn)return;btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.classList.toggle('open',o);btn.setAttribute('aria-expanded',o);});document.addEventListener('click',function(e){if(!btn.contains(e.target)&&!nav.contains(e.target)){nav.classList.remove('open');btn.classList.remove('open');btn.setAttribute('aria-expanded','false');}});})();</script>
+  <script>
+  /* ===== Daily Word Challenge ===== */
+  (function(){
+    var DC_WORDS = [
+      {w:'CRANE',h:'A large long-necked bird, or a lifting machine.'},
+      {w:'SLATE',h:'A type of grey rock used for roofing tiles.'},
+      {w:'HEART',h:'The organ that pumps blood through the body.'},
+      {w:'DREAM',h:'A series of thoughts and images during sleep.'},
+      {w:'ANGEL',h:'A spiritual being in religious traditions.'},
+      {w:'OCEAN',h:'A vast body of salt water covering much of Earth.'},
+      {w:'STONE',h:'A hard, solid, non-metallic mineral matter.'},
+      {w:'BLAME',h:'To assign responsibility for a fault.'},
+      {w:'BRAND',h:'A type of product made by a company.'},
+      {w:'BRAVE',h:'Ready to face danger without fear.'},
+      {w:'BREAD',h:'A food made from flour, water, and yeast.'},
+      {w:'BREAK',h:'To separate into pieces by force.'},
+      {w:'BRING',h:'To carry or take something somewhere.'},
+      {w:'BROWN',h:'A colour like wood or earth.'},
+      {w:'BUILT',h:'Past tense of build.'},
+      {w:'BURST',h:'To break apart suddenly with force.'},
+      {w:'CABIN',h:'A small simple dwelling, often made of wood.'},
+      {w:'CANDY',h:'A sweet confection made with sugar.'},
+      {w:'CARRY',h:'To hold and bring with you.'},
+      {w:'CATCH',h:'To intercept and hold something moving.'},
+      {w:'CAUSE',h:'The reason something happens.'},
+      {w:'CHAIN',h:'A series of linked metal rings.'},
+      {w:'CHAIR',h:'A separate seat for one person.'},
+      {w:'CHARM',h:'The power to delight or attract.'},
+      {w:'CHART',h:'A sheet with information arranged in a table.'},
+      {w:'CHASE',h:'To pursue in order to catch.'},
+      {w:'CHEAP',h:'Low in price or value.'},
+      {w:'CHECK',h:'To examine the accuracy of something.'},
+      {w:'CHEST',h:'A large sturdy box, or the upper front of the body.'},
+      {w:'CHILD',h:'A young human being.'},
+      {w:'CHOIR',h:'An organised group of singers.'},
+      {w:'CHORD',h:'A group of musical notes played together.'},
+      {w:'CIVIC',h:'Relating to the duties of citizens.'},
+      {w:'CLAIM',h:'To state that something is true.'},
+      {w:'CLASS',h:'A set of things grouped together.'},
+      {w:'CLEAN',h:'Free from dirt or pollution.'},
+      {w:'CLEAR',h:'Easy to understand or see through.'},
+      {w:'CLICK',h:'A short sharp sound, or selecting with a mouse.'},
+      {w:'CLIMB',h:'To go up using hands and feet.'},
+      {w:'CLOCK',h:'A device that shows the time.'},
+      {w:'CLOSE',h:'Near in space or time; to shut.'},
+      {w:'CLOTH',h:'Woven or felted fabric.'},
+      {w:'CLOUD',h:'A visible mass of water droplets in the sky.'},
+      {w:'COACH',h:'A trainer or a large horse-drawn carriage.'},
+      {w:'COAST',h:'Land near the sea.'},
+      {w:'COBRA',h:'A venomous snake that spreads its neck.'},
+      {w:'CORAL',h:'Hard skeleton of marine polyps; a pink-orange colour.'},
+      {w:'CORAL',h:'Hard skeleton of marine polyps; a pink-orange colour.'},
+      {w:'COUNT',h:'To find the total number of something.'},
+      {w:'COURT',h:'An area for playing sports, or a royal household.'},
+      {w:'COVER',h:'To place something over to protect or conceal.'},
+      {w:'CRAFT',h:'An activity involving skill in making things by hand.'},
+      {w:'CRASH',h:'A violent collision or sudden loud noise.'},
+      {w:'CROSS',h:'A mark shaped like an X, or to go to the other side.'},
+      {w:'CROWD',h:'A large number of people gathered together.'},
+      {w:'CRUEL',h:'Wilfully causing pain or suffering.'},
+      {w:'CRUSH',h:'To compress with force so as to break.'},
+      {w:'CURVE',h:'A line that bends smoothly.'},
+      {w:'CYCLE',h:'A series of events repeated; or a bicycle.'},
+      {w:'DAILY',h:'Happening every day.'},
+      {w:'DANCE',h:'To move rhythmically to music.'},
+      {w:'DEALS',h:'Plural of deal — agreements or transactions.'},
+      {w:'DEBUT',h:'A person\'s first appearance in a role.'},
+      {w:'DEPTH',h:'The distance from the top to the bottom.'},
+      {w:'DERBY',h:'A competitive sporting event, or a type of hat.'},
+      {w:'DIGIT',h:'Any of the numerals 0 to 9, or a finger or toe.'},
+      {w:'DIMLY',h:'With little light; not brightly.'},
+      {w:'DITCH',h:'A narrow channel dug in the ground.'},
+      {w:'DIVER',h:'A person who dives into water.'},
+      {w:'DIZZY',h:'Having a sensation of spinning.'},
+      {w:'DODGE',h:'To avoid by moving quickly.'},
+      {w:'DRIVE',h:'To operate a vehicle; or a road leading to a house.'},
+      {w:'DRONE',h:'An unmanned aircraft, or a continuous low sound.'},
+      {w:'DROWN',h:'To die by submersion in liquid.'},
+      {w:'DURABLE',h:'Able to withstand wear and last a long time.'},
+      {w:'EARNS',h:'Third person singular of earn.'},
+      {w:'EARTH',h:'The planet we live on; also soil.'},
+      {w:'EATEN',h:'Past participle of eat.'},
+      {w:'ELBOW',h:'The joint between the upper and lower arm.'},
+      {w:'ELECT',h:'To choose someone by voting.'},
+      {w:'EMPTY',h:'Containing nothing; having no occupants.'},
+      {w:'ENEMY',h:'A person hostile to another.'},
+      {w:'ENTRY',h:'A way in; or an item in a competition.'},
+      {w:'EQUAL',h:'The same in quantity, value, or meaning.'},
+      {w:'ERROR',h:'A mistake or inaccuracy.'},
+      {w:'EVERY',h:'Each and all of a group.'},
+      {w:'EXACT',h:'Precise; not approximate.'},
+      {w:'EXILE',h:'The state of being barred from one\'s country.'},
+      {w:'FABLE',h:'A short story with a moral, often with animals.'},
+      {w:'FACET',h:'One side of something; a particular aspect.'},
+      {w:'FAINT',h:'Barely perceptible; or to lose consciousness briefly.'},
+      {w:'FAITH',h:'Complete trust or confidence.'},
+      {w:'FANCY',h:'Ornamental; or to feel a desire for.'},
+      {w:'FEAST',h:'A large meal with many dishes.'},
+      {w:'FENCE',h:'A barrier enclosing an outdoor space.'},
+      {w:'FEVER',h:'A high body temperature caused by illness.'},
+      {w:'FIELD',h:'An area of open land; or a subject of study.'},
+      {w:'FIFTH',h:'Constituting number five in a sequence.'},
+      {w:'FIGHT',h:'To take part in a violent struggle.'},
+      {w:'FINAL',h:'Coming last; or a deciding match or examination.'},
+      {w:'FIRST',h:'Coming before all others in time or order.'},
+      {w:'FIXED',h:'Fastened securely; or not changing.'},
+      {w:'FLAME',h:'A portion of burning gas from a fire.'},
+      {w:'FLANK',h:'The side of a person or animal.'},
+      {w:'FLASH',h:'A sudden bright burst of light.'},
+      {w:'FLESH',h:'The soft substance of the body.'},
+      {w:'FLOAT',h:'To rest on or near the surface of a liquid.'},
+      {w:'FLOUR',h:'Powder from grinding grain, used in baking.'},
+      {w:'FLUID',h:'A substance with no fixed shape that flows easily.'},
+      {w:'FLUTE',h:'A woodwind instrument played by blowing.'},
+      {w:'FOCUS',h:'The centre of interest or attention.'},
+      {w:'FOGGY',h:'Full of or resembling fog.'},
+      {w:'FORCE',h:'Strength or energy; or to compel.'},
+      {w:'FORGE',h:'A furnace for heating metal; or to make illegally.'},
+      {w:'FORTH',h:'Out and away from a starting point.'},
+      {w:'FORUM',h:'A place or meeting for open discussion.'},
+      {w:'FOUND',h:'Past tense of find; or to establish.'},
+      {w:'FRAME',h:'A rigid structure that surrounds something.'},
+      {w:'FRANK',h:'Open and honest; or a first name.'},
+      {w:'FRAUD',h:'Wrongful deception intended for gain.'},
+      {w:'FRESH',h:'Not previously known or used; recently made.'},
+      {w:'FRONT',h:'The side or part facing forward.'},
+      {w:'FROST',h:'Frozen water vapour forming ice crystals.'},
+      {w:'FRUIT',h:'The sweet produce of a plant containing seeds.'},
+      {w:'FULLY',h:'Completely; to the fullest extent.'},
+      {w:'FUNNY',h:'Causing laughter; or strange.'},
+      {w:'GHOST',h:'An apparition of a dead person.'},
+      {w:'GIANT',h:'An imaginary being of human form but huge.'},
+      {w:'GLAND',h:'An organ that secretes substances.'},
+      {w:'GLASS',h:'A hard brittle transparent material.'},
+      {w:'GLEAM',h:'A small beam of light or a brief appearance.'},
+      {w:'GLOBE',h:'A spherical object; especially the Earth.'},
+      {w:'GLOOM',h:'Partial or total darkness; sadness.'},
+      {w:'GLORY',h:'High renown won by great achievements.'},
+      {w:'GLOVE',h:'A covering for the hand.'},
+      {w:'GOING',h:'The act of moving or travelling.'},
+      {w:'GRACE',h:'Simple elegance or refinement of movement.'},
+      {w:'GRADE',h:'A level or rank; or to assess work.'},
+      {w:'GRAIN',h:'The seeds of a cereal plant; or texture.'},
+      {w:'GRANT',h:'To agree to give something requested.'},
+      {w:'GRAPH',h:'A diagram showing data relationships.'},
+      {w:'GRASP',h:'To seize and hold firmly.'},
+      {w:'GRASS',h:'Plants with jointed stems and blade-like leaves.'},
+      {w:'GRAVE',h:'A place of burial; or seriously bad.'},
+      {w:'GREAT',h:'Very large; or of an extent much above normal.'},
+      {w:'GREED',h:'Intense desire for wealth or possessions.'},
+      {w:'GREET',h:'To give a polite welcome or acknowledgement.'},
+      {w:'GRIEF',h:'Deep sorrow, especially at a death.'},
+      {w:'GRILL',h:'A device for cooking food with direct heat.'},
+      {w:'GRIND',h:'To reduce to small particles by crushing.'},
+      {w:'GROAN',h:'A deep sound of pain or despair.'},
+      {w:'GROUP',h:'A number of people together.'},
+      {w:'GROVE',h:'A small wood or group of trees.'},
+      {w:'GROWN',h:'Past participle of grow.'},
+      {w:'GUARD',h:'To watch over and protect.'},
+      {w:'GUESS',h:'To estimate without sufficient information.'},
+      {w:'GUIDE',h:'A person who shows others the way.'},
+      {w:'GUILT',h:'The fact of having committed an offence.'},
+      {w:'HABIT',h:'A settled tendency or practice.'},
+      {w:'HAPPY',h:'Feeling or showing pleasure or contentment.'},
+      {w:'HARSH',h:'Unpleasant, unkind, or unnecessarily cruel.'},
+      {w:'HASTE',h:'Excessive speed or urgency.'},
+      {w:'HAUNT',h:'To appear as a ghost; to visit frequently.'},
+      {w:'HAVEN',h:'A place of safety or refuge.'},
+      {w:'HEDGE',h:'A fence formed by closely growing bushes.'},
+      {w:'HELIX',h:'A three-dimensional spiral curve.'},
+      {w:'HENCE',h:'As a consequence; from this time.'},
+      {w:'HERBS',h:'Plants used for flavouring or medicine.'},
+      {w:'HINGE',h:'A movable joint on which a door or gate turns.'},
+      {w:'HINTS',h:'Plural of hint — indirect suggestions.'},
+      {w:'HOIST',h:'To raise or haul up by rope.'},
+      {w:'HONEY',h:'A sweet substance produced by bees.'},
+      {w:'HONOR',h:'High respect; or to regard with great respect.'},
+      {w:'HORSE',h:'A large four-legged domesticated mammal.'},
+      {w:'HOTEL',h:'An establishment providing lodging and meals.'},
+      {w:'HOUSE',h:'A building for human habitation.'},
+      {w:'HUMAN',h:'Of, relating to, or characteristic of people.'},
+      {w:'HUMID',h:'Marked by a relatively high level of moisture.'},
+      {w:'HUMOR',h:'The quality of being funny or comic.'},
+      {w:'HURRY',h:'Move or act quickly.'},
+      {w:'IMAGE',h:'A representation of something or someone.'},
+      {w:'IMPLY',h:'To suggest without directly stating.'},
+      {w:'INDEX',h:'An alphabetical list; or a sign or measure.'},
+      {w:'INNER',h:'Situated inside or further in.'},
+      {w:'INPUT',h:'What is put in or contributed.'},
+      {w:'IONIC',h:'Relating to ions or the Ionic order of architecture.'},
+      {w:'IRONY',h:'Expression where the meaning is opposite to the words used.'},
+      {w:'ISSUE',h:'An important topic; or to distribute officially.'},
+      {w:'IVORY',h:'A creamy-white colour; or the material of tusks.'},
+      {w:'JUDGE',h:'A person who decides cases in a law court.'},
+      {w:'JUICE',h:'The liquid extracted from fruit or vegetables.'},
+      {w:'JUMBO',h:'Very large of its type.'},
+      {w:'KNACK',h:'An acquired skill to do something easily.'},
+      {w:'KNEEL',h:'To fall or rest on the knee.'},
+      {w:'KNIFE',h:'A sharp-bladed cutting instrument.'},
+      {w:'KNOT',h:'A fastening made by tying rope.'},
+      {w:'LABEL',h:'A piece of paper or fabric attached to identify.'},
+      {w:'LANCE',h:'A long weapon for thrusting; or to cut open.'},
+      {w:'LARGE',h:'Of considerable size.'},
+      {w:'LASER',h:'A device that amplifies light into a narrow beam.'},
+      {w:'LATCH',h:'A bar to fasten a door or gate.'},
+      {w:'LATER',h:'At a time after the present.'},
+      {w:'LAUGH',h:'To make sounds expressing amusement.'},
+      {w:'LAYER',h:'A sheet, quantity, or thickness laid over another.'},
+      {w:'LEARN',h:'To acquire knowledge or a skill.'},
+      {w:'LEASE',h:'A contract granting use of property.'},
+      {w:'LEAVE',h:'To go away; or a period of absence.'},
+      {w:'LEGAL',h:'Permitted by law; relating to law.'},
+      {w:'LEMON',h:'A yellow citrus fruit with sour juice.'},
+      {w:'LEVEL',h:'A horizontal plane; or having a flat surface.'},
+      {w:'LIGHT',h:'Electromagnetic radiation visible to the eye.'},
+      {w:'LIMIT',h:'A point beyond which something does not extend.'},
+      {w:'LINEN',h:'Cloth woven from flax; or household items.'},
+      {w:'LIVER',h:'A large organ that processes nutrients.'},
+      {w:'LOCAL',h:'Relating to a particular area or neighbourhood.'},
+      {w:'LOGIC',h:'Reasoning based on sound principles.'},
+      {w:'LOOSE',h:'Not firmly or tightly fixed; not contained.'},
+      {w:'LOWER',h:'Less high; or to move something down.'},
+      {w:'LUCKY',h:'Having or bringing good fortune.'},
+      {w:'LUNAR',h:'Relating to the moon.'},
+      {w:'LUNCH',h:'A meal eaten in the middle of the day.'},
+      {w:'LYING',h:'Present participle of lie.'},
+      {w:'MAGIC',h:'The use of mysterious powers to achieve things.'},
+      {w:'MAJOR',h:'Important or serious; or a military rank.'},
+      {w:'MANOR',h:'A large country house with lands.'},
+      {w:'MAPLE',h:'A tree with lobed leaves and winged seeds.'},
+      {w:'MARCH',h:'To walk in a military manner; or the third month.'},
+      {w:'MATCH',h:'A contest; or a small stick for lighting fires.'},
+      {w:'MAYOR',h:'The elected head of a city or town.'},
+      {w:'MEDAL',h:'A metal disc given as an award.'},
+      {w:'MERCY',h:'Compassion shown towards an offender.'},
+      {w:'MERGE',h:'To combine or unite into one entity.'},
+      {w:'METAL',h:'A solid material that is typically hard and shiny.'},
+      {w:'MIGHT',h:'Great power or strength; or expressing possibility.'},
+      {w:'MINOR',h:'Less important or serious; or a musical key.'},
+      {w:'MINUS',h:'Less; or the subtraction sign.'},
+      {w:'MOIST',h:'Slightly wet; damp.'},
+      {w:'MONEY',h:'A current medium of exchange.'},
+      {w:'MONTH',h:'Each of the twelve periods in a year.'},
+      {w:'MORAL',h:'Concerned with right and wrong conduct.'},
+      {w:'MOUNT',h:'To climb; or a support for an object.'},
+      {w:'MOUSE',h:'A small rodent; or a computer pointing device.'},
+      {w:'MOUTH',h:'The opening in the face for eating and speaking.'},
+      {w:'MOVED',h:'Past tense of move.'},
+      {w:'MOVIE',h:'A film shown in a cinema or on screen.'},
+      {w:'MUDDY',h:'Covered in mud; not clear.'},
+      {w:'MUSIC',h:'Vocal or instrumental sounds combined pleasingly.'},
+      {w:'NAIVE',h:'Lacking experience or judgement.'},
+      {w:'NAMED',h:'Past tense of name; given a specific name.'},
+      {w:'NERVE',h:'A fibre in the body that transmits impulses.'},
+      {w:'NEVER',h:'At no time; not at all.'},
+      {w:'NIGHT',h:'The period from sunset to sunrise.'},
+      {w:'NOBLE',h:'Belonging to a high social class; or morally good.'},
+      {w:'NOISE',h:'A sound, especially a loud one.'},
+      {w:'NORTH',h:'The direction towards the North Pole.'},
+      {w:'NOTED',h:'Well known; past tense of note.'},
+      {w:'NOVEL',h:'A long fictional narrative; or new and original.'},
+      {w:'NURSE',h:'A person trained to care for the sick.'},
+      {w:'NYMPH',h:'A mythological spirit of nature.'},
+      {w:'OCCUR',h:'To happen; to be found somewhere.'},
+      {w:'OLIVE',h:'A small oval fruit; or a yellow-green colour.'},
+      {w:'ONSET',h:'The beginning of something.'},
+      {w:'OPERA',h:'A dramatic work set to music.'},
+      {w:'ORBIT',h:'The curved path of an object round a planet.'},
+      {w:'ORDER',h:'A request for something to be made or supplied.'},
+      {w:'OTHER',h:'Used to refer to a person distinct from one already mentioned.'},
+      {w:'OUGHT',h:'Used to indicate duty or obligation.'},
+      {w:'OUTER',h:'Outside; external.'},
+      {w:'OVEN',h:'An enclosed chamber used for cooking.'},
+      {w:'OWNED',h:'Past tense of own — to have as a possession.'},
+      {w:'OWNER',h:'A person who owns something.'},
+      {w:'OXIDE',h:'A compound of oxygen with another element.'},
+      {w:'OZONE',h:'A form of oxygen found in the upper atmosphere.'},
+      {w:'PAINT',h:'A substance applied to a surface for colour.'},
+      {w:'PANEL',h:'A flat section forming part of a surface.'},
+      {w:'PAPER',h:'A material made from wood pulp used for writing.'},
+      {w:'PAUSE',h:'To stop temporarily.'},
+      {w:'PEACE',h:'A state of freedom from disturbance.'},
+      {w:'PEACH',h:'A soft juicy fruit with a stone; or a pinkish colour.'},
+      {w:'PEARL',h:'A smooth lustrous gem formed within an oyster.'},
+      {w:'PEDAL',h:'A lever pressed by the foot.'},
+      {w:'PENNY',h:'A small coin; one cent.'},
+      {w:'PERCH',h:'A place where a bird rests; or a freshwater fish.'},
+      {w:'PHASE',h:'A distinct period or stage in development.'},
+      {w:'PHONE',h:'A device for voice communication.'},
+      {w:'PHOTO',h:'A picture produced by photography.'},
+      {w:'PIANO',h:'A large keyboard musical instrument.'},
+      {w:'PILOT',h:'A person who operates an aircraft.'},
+      {w:'PINCH',h:'A small amount; or to squeeze tightly.'},
+      {w:'PIXEL',h:'A minute area of illumination on a display screen.'},
+      {w:'PIZZA',h:'A flat base of dough with toppings, baked in an oven.'},
+      {w:'PLACE',h:'A particular position or location.'},
+      {w:'PLAIN',h:'Not decorated; or an area of flat land.'},
+      {w:'PLANE',h:'A flat surface; or an aircraft.'},
+      {w:'PLANT',h:'A living organism that grows in soil.'},
+      {w:'PLATE',h:'A flat dish for food; or a thin flat sheet of metal.'},
+      {w:'PLUCK',h:'To pull or pick; or courage.'},
+      {w:'PLUME',h:'A long cloud of smoke; or a feather.'},
+      {w:'PLUNGE',h:'To jump or dive quickly.'},
+      {w:'POINT',h:'A dot; or the sharp end of something.'},
+      {w:'POLAR',h:'Relating to the North or South Pole.'},
+      {w:'POUCH',h:'A small bag or pocket.'},
+      {w:'POWER',h:'The ability to do something or act in a way.'},
+      {w:'PRESS',h:'To push firmly; or a machine for printing.'},
+      {w:'PRICE',h:'The amount of money expected for something.'},
+      {w:'PRIDE',h:'A feeling of deep pleasure from achievement.'},
+      {w:'PRIME',h:'Most important; or a number divisible only by itself and 1.'},
+      {w:'PRINT',h:'To produce text by pressing ink on paper.'},
+      {w:'PRIZE',h:'A reward for winning or achieving something.'},
+      {w:'PROBE',h:'To explore or investigate.'},
+      {w:'PROOF',h:'Evidence establishing a fact.'},
+      {w:'PROSE',h:'Written language without metrical structure.'},
+      {w:'PROVE',h:'To demonstrate the truth of.'},
+      {w:'PROWL',h:'To move about stealthily.'},
+      {w:'PULSE',h:'A rhythmical throbbing of the arteries.'},
+      {w:'PUPIL',h:'A student; or the dark circular part of the eye.'},
+      {w:'PURSE',h:'A small bag for carrying money.'},
+      {w:'QUEEN',h:'The female ruler of a country.'},
+      {w:'QUERY',h:'A question; especially one asking for clarification.'},
+      {w:'QUEST',h:'A long search for something.'},
+      {w:'QUEUE',h:'A line of people waiting.'},
+      {w:'QUICK',h:'Moving fast; done in a short time.'},
+      {w:'QUIET',h:'Making little or no noise.'},
+      {w:'QUOTA',h:'A limited quantity that is allowed.'},
+      {w:'QUOTE',h:'To repeat words said by another.'},
+      {w:'RADAR',h:'A system for detecting distant objects.'},
+      {w:'RAISE',h:'To lift something to a higher position.'},
+      {w:'RALLY',h:'A mass meeting; or to come together for action.'},
+      {w:'RANCH',h:'A large farm for cattle or other animals.'},
+      {w:'RANGE',h:'The area covered by something; or a line of mountains.'},
+      {w:'RAPID',h:'Happening in a short time; fast.'},
+      {w:'RAVEN',h:'A large black bird; or a deep black colour.'},
+      {w:'REACH',h:'To stretch out towards; or the distance one can stretch.'},
+      {w:'REALM',h:'A kingdom; or a field or domain.'},
+      {w:'REBEL',h:'A person who resists authority.'},
+      {w:'RELAY',h:'To pass on; or a race in which teams take turns.'},
+      {w:'RELIC',h:'An object surviving from an earlier time.'},
+      {w:'REMIX',h:'A different version of a recorded song.'},
+      {w:'REPAY',h:'To pay back money owed.'},
+      {w:'REPLY',h:'A spoken or written response.'},
+      {w:'RIDER',h:'A person who rides a horse or bicycle.'},
+      {w:'RIGHT',h:'Morally correct; or the direction opposite to left.'},
+      {w:'RIGID',h:'Unable to bend; strictly fixed.'},
+      {w:'RISKY',h:'Full of the possibility of danger.'},
+      {w:'RIVAL',h:'A person competing with another.'},
+      {w:'RIVET',h:'A metal pin used to join plates; or to engross.'},
+      {w:'ROBIN',h:'A small red-breasted bird.'},
+      {w:'ROBOT',h:'A machine that can carry out complex tasks.'},
+      {w:'ROCKY',h:'Consisting of rock; full of difficulties.'},
+      {w:'ROMAN',h:'Of ancient Rome or its people.'},
+      {w:'ROUGE',h:'A red powder used as a cosmetic.'},
+      {w:'ROUGH',h:'Having an uneven or irregular surface.'},
+      {w:'ROUND',h:'Shaped like a circle or sphere.'},
+      {w:'ROUTE',h:'A way taken to get from one place to another.'},
+      {w:'ROYAL',h:'Having the status of a king or queen.'},
+      {w:'RUGBY',h:'A game played with an oval ball.'},
+      {w:'RULER',h:'A person who rules; or a straight measuring strip.'},
+      {w:'RURAL',h:'In, relating to, or characteristic of the country.'},
+      {w:'RUSTY',h:'Affected by rust; out of practice.'},
+      {w:'SADLY',h:'In a sorrowful manner.'},
+      {w:'SAINT',h:'A person acknowledged as holy.'},
+      {w:'SALAD',h:'A cold dish of raw vegetables.'},
+      {w:'SAUCE',h:'A liquid condiment served with food.'},
+      {w:'SCALE',h:'A range of levels; or thin plates on a fish.'},
+      {w:'SCARE',h:'To frighten; a sudden feeling of fright.'},
+      {w:'SCENE',h:'The place where an event occurs.'},
+      {w:'SCENT',h:'A distinctive smell; or a trail left by an animal.'},
+      {w:'SCORE',h:'The number of points in a game; or to gain points.'},
+      {w:'SCOUT',h:'A person sent ahead to gather information.'},
+      {w:'SEIZE',h:'To take hold of suddenly.'},
+      {w:'SERVE',h:'To perform duties; or to deliver food at a table.'},
+      {w:'SEVEN',h:'The number 7.'},
+      {w:'SHADE',h:'Comparative darkness caused by shelter from light.'},
+      {w:'SHAKE',h:'To move with rapid irregular motion.'},
+      {w:'SHALL',h:'Used to express future intention or command.'},
+      {w:'SHAME',h:'A painful feeling of humiliation.'},
+      {w:'SHAPE',h:'The external form or outline of something.'},
+      {w:'SHARE',h:'A part given to or owed by a person; or to divide.'},
+      {w:'SHARK',h:'A large predatory fish.'},
+      {w:'SHARP',h:'Having a fine edge suitable for cutting.'},
+      {w:'SHEEP',h:'A domesticated ruminant mammal.'},
+      {w:'SHEER',h:'Nothing other than; or a very steep drop.'},
+      {w:'SHELF',h:'A flat length of wood fixed to a wall for storage.'},
+      {w:'SHELL',h:'A hard protective outer case.'},
+      {w:'SHIFT',h:'A change in position; or a period of work.'},
+      {w:'SHINE',h:'To give out a bright light.'},
+      {w:'SHIRT',h:'A garment for the upper body.'},
+      {w:'SHOCK',h:'A sudden upsetting surprise.'},
+      {w:'SHORE',h:'The land along the edge of the sea.'},
+      {w:'SHORT',h:'Of little length; not long.'},
+      {w:'SHOUT',h:'To speak or call out loudly.'},
+      {w:'SIGHT',h:'The faculty of seeing.'},
+      {w:'SINCE',h:'From a time in the past until now.'},
+      {w:'SIXTH',h:'Constituting number six in a sequence.'},
+      {w:'SIZED',h:'Having a particular size.'},
+      {w:'SKILL',h:'The ability to do something well.'},
+      {w:'SKULL',h:'The bony framework of the head.'},
+      {w:'SLANT',h:'A sloping direction or angle.'},
+      {w:'SLAVE',h:'A person who is owned by another.'},
+      {w:'SLEEP',h:'A state of rest in which the eyes are closed.'},
+      {w:'SLEET',h:'Rain and snow falling together.'},
+      {w:'SLICE',h:'A thin flat piece cut from a larger object.'},
+      {w:'SLIDE',h:'To move smoothly on a surface.'},
+      {w:'SLOPE',h:'A surface inclined at an angle.'},
+      {w:'SMART',h:'Clean and tidy in appearance; or intelligent.'},
+      {w:'SMELL',h:'The faculty of perceiving odours.'},
+      {w:'SMILE',h:'A pleased expression with upturned lips.'},
+      {w:'SMOKE',h:'Visible vapour from burning material.'},
+      {w:'SMOOTH',h:'Having an even surface; not rough.'},
+      {w:'SNAKE',h:'A long limbless reptile.'},
+      {w:'SOLAR',h:'Relating to or determined by the sun.'},
+      {w:'SOLID',h:'Firm and stable in shape; not liquid or gas.'},
+      {w:'SOLVE',h:'To find an answer to a problem.'},
+      {w:'SORRY',h:'Feeling regret or penitence.'},
+      {w:'SOUTH',h:'The direction towards the south pole.'},
+      {w:'SPACE',h:'The dimensions of height, depth, and width.'},
+      {w:'SPARK',h:'A small fiery particle; or to inspire.'},
+      {w:'SPEAK',h:'To say words; to talk.'},
+      {w:'SPEND',h:'To pay out money; or to use up time.'},
+      {w:'SPICE',h:'An aromatic substance used to flavour food.'},
+      {w:'SPINE',h:'The column of vertebrae in the back; a thorn.'},
+      {w:'SPITE',h:'A desire to hurt or annoy someone.'},
+      {w:'SPLIT',h:'To divide or cause to divide.'},
+      {w:'SPOKE',h:'Past tense of speak; or a bar connecting wheel to hub.'},
+      {w:'SPOON',h:'An implement with a round bowl for eating.'},
+      {w:'SPORT',h:'An activity involving physical exertion.'},
+      {w:'SPRAY',h:'Liquid dispersed as fine droplets.'},
+      {w:'SPUR',h:'A device worn on a boot for a horse; or to urge on.'},
+      {w:'SQUAD',h:'A small group of people with a shared purpose.'},
+      {w:'STACK',h:'A pile of objects; or to arrange in a pile.'},
+      {w:'STAFF',h:'The employees of an organisation.'},
+      {w:'STAIN',h:'A mark difficult to remove.'},
+      {w:'STAKE',h:'A strong post driven into the ground.'},
+      {w:'STALK',h:'The stem of a plant; or to follow stealthily.'},
+      {w:'STAND',h:'To be on one\'s feet; or a structure for support.'},
+      {w:'STARK',h:'Severe or bare in appearance.'},
+      {w:'START',h:'To begin; the point at which something begins.'},
+      {w:'STAYS',h:'Remains in a place; third person of stay.'},
+      {w:'STEAM',h:'Water vapour; or to cook by steam.'},
+      {w:'STEEL',h:'A hard alloy of iron and carbon.'},
+      {w:'STEEP',h:'Rising or falling sharply; or to soak in liquid.'},
+      {w:'STEER',h:'To guide the direction of a vehicle; or a young bull.'},
+      {w:'STERN',h:'Strict; or the rear of a ship.'},
+      {w:'STICK',h:'A thin piece of wood; or to adhere.'},
+      {w:'STIFF',h:'Not easily bent; or formal in manner.'},
+      {w:'STILL',h:'Not moving; or even now.'},
+      {w:'STING',h:'To prick painfully; or a sharp pain.'},
+      {w:'STIR',h:'To move a spoon through a liquid; or to arouse.'},
+      {w:'STOCK',h:'Goods kept for sale; or the capital of a company.'},
+      {w:'STOMP',h:'To tread heavily.'},
+      {w:'STORE',h:'A place where goods are sold; or to put aside.'},
+      {w:'STORM',h:'A violent disturbance of the atmosphere.'},
+      {w:'STORY',h:'An account of events; or a floor of a building.'},
+      {w:'STOVE',h:'An apparatus for cooking or heating.'},
+      {w:'STRAP',h:'A strip of material for fastening.'},
+      {w:'STRAW',h:'Dried stalks of grain; or a hollow tube for drinking.'},
+      {w:'STRAY',h:'To move away from the correct path.'},
+      {w:'STRIP',h:'To remove covering; or a long narrow piece.'},
+      {w:'STUCK',h:'Fixed in a position and unable to move.'},
+      {w:'STUDY',h:'The devotion of time to learning.'},
+      {w:'STYLE',h:'A manner of doing something.'},
+      {w:'SUGAR',h:'A sweet crystalline substance from plants.'},
+      {w:'SUITE',h:'A set of rooms for use together.'},
+      {w:'SUPER',h:'Especially good; or relating to something above.'},
+      {w:'SURGE',h:'A sudden powerful forward movement.'},
+      {w:'SWAMP',h:'An area of wet muddy ground.'},
+      {w:'SWEEP',h:'To clean with a broom; or a long curving movement.'},
+      {w:'SWEET',h:'Having the pleasant taste of sugar.'},
+      {w:'SWIFT',h:'Moving quickly; or a small bird.'},
+      {w:'SWING',h:'To move back and forth.'},
+      {w:'SWORD',h:'A weapon with a long metal blade.'},
+      {w:'TABLE',h:'A flat surface supported on legs; or an arrangement of data.'},
+      {w:'TASTE',h:'The sensation of flavour; or to sample food.'},
+      {w:'TEACH',h:'To impart knowledge to.'},
+      {w:'TEARS',h:'Drops from weeping; or plural of a rip.'},
+      {w:'THEME',h:'The subject of a talk or piece of writing.'},
+      {w:'THERE',h:'In or at that place.'},
+      {w:'THICK',h:'With opposite sides far apart; not thin.'},
+      {w:'THINK',h:'To have a thought or idea.'},
+      {w:'THORN',h:'A sharp pointed projection on a plant.'},
+      {w:'THOSE',h:'Plural of that.'},
+      {w:'THREE',h:'The number 3.'},
+      {w:'THREW',h:'Past tense of throw.'},
+      {w:'TIGER',h:'A large carnivorous spotted cat.'},
+      {w:'TIMER',h:'A device that measures time.'},
+      {w:'TIRED',h:'In need of rest; lacking energy.'},
+      {w:'TITLE',h:'A name describing a person\'s position.'},
+      {w:'TOAST',h:'Sliced bread browned by heat; or a call to drink.'},
+      {w:'TODAY',h:'On this present day.'},
+      {w:'TOKEN',h:'A thing used to represent something.'},
+      {w:'TOOTH',h:'A hard bony structure in the jaws.'},
+      {w:'TOPIC',h:'A matter dealt with in speech or writing.'},
+      {w:'TOTAL',h:'The whole amount; or comprising the whole.'},
+      {w:'TOUCH',h:'To come into contact with.'},
+      {w:'TOUGH',h:'Strong enough to withstand difficult conditions.'},
+      {w:'TOWEL',h:'A piece of absorbent cloth for drying.'},
+      {w:'TOWER',h:'A tall narrow building or structure.'},
+      {w:'TOXIC',h:'Poisonous.'},
+      {w:'TRACE',h:'A mark left by something passing; or to follow.'},
+      {w:'TRACK',h:'A rough path; or to follow the course of.'},
+      {w:'TRADE',h:'The buying and selling of goods and services.'},
+      {w:'TRAIL',h:'A mark left by something; or to follow behind.'},
+      {w:'TRAIN',h:'A series of railway cars; or to teach a skill.'},
+      {w:'TRAIT',h:'A distinguishing quality or characteristic.'},
+      {w:'TRAMP',h:'To walk heavily; or a person without a home.'},
+      {w:'TRAWL',h:'To fish with a trawl net; or to search widely.'},
+      {w:'TREAD',h:'To walk; or the pattern on a tyre.'},
+      {w:'TREAT',h:'An event that gives great pleasure.'},
+      {w:'TREND',h:'A general direction of change.'},
+      {w:'TRIAL',h:'A formal examination of evidence in court.'},
+      {w:'TRIBE',h:'A group of people with shared ancestry.'},
+      {w:'TRICK',h:'A cunning act or scheme; or to deceive.'},
+      {w:'TRIED',h:'Past tense of try.'},
+      {w:'TROUT',h:'A freshwater fish of the salmon family.'},
+      {w:'TRUCE',h:'An agreement to stop fighting temporarily.'},
+      {w:'TRULY',h:'In a truthful way; genuinely.'},
+      {w:'TRUMP',h:'To outdo; or a card of the highest suit.'},
+      {w:'TRUNK',h:'The main stem of a tree; or a large travelling case.'},
+      {w:'TRUST',h:'Firm belief in reliability or truth.'},
+      {w:'TRUTH',h:'The quality of being in accordance with fact.'},
+      {w:'TUMOR',h:'An abnormal growth of cells.'},
+      {w:'TUTOR',h:'A private teacher.'},
+      {w:'TWINE',h:'Strong thread or string made of twisted strands.'},
+      {w:'TWIST',h:'To form into a bent shape; or a sudden change.'},
+      {w:'ULTRA',h:'Extreme; going beyond what is usual.'},
+      {w:'UNCLE',h:'The brother of your parent.'},
+      {w:'UNDER',h:'Extending or directly below.'},
+      {w:'UNION',h:'The action of joining together; or an organisation.'},
+      {w:'UNITE',h:'To come or bring together.'},
+      {w:'UNTIL',h:'Up to a specified time.'},
+      {w:'UPPER',h:'Situated above; higher in position or rank.'},
+      {w:'UPSET',h:'To make unhappy; or an unexpected defeat.'},
+      {w:'USAGE',h:'The way in which something is used.'},
+      {w:'USUAL',h:'Habitually or typically occurring.'},
+      {w:'UTTER',h:'To make a sound; or complete and total.'},
+      {w:'VAGUE',h:'Of uncertain meaning; not clearly expressed.'},
+      {w:'VALID',h:'Legally acceptable; or sound and to the point.'},
+      {w:'VALUE',h:'The importance or worth of something.'},
+      {w:'VALVE',h:'A device controlling flow; or a vacuum tube.'},
+      {w:'VAULT',h:'A roof formed of arches; or to jump over.'},
+      {w:'VERSE',h:'Writing arranged with a metrical rhythm.'},
+      {w:'VIGOR',h:'Physical strength and energy.'},
+      {w:'VIRAL',h:'Relating to a virus; or spreading rapidly online.'},
+      {w:'VIRUS',h:'A microscopic agent that causes disease.'},
+      {w:'VISIT',h:'To go to see a person or place.'},
+      {w:'VITAL',h:'Absolutely necessary; essential.'},
+      {w:'VIVID',h:'Producing powerful images in the mind.'},
+      {w:'VOCAL',h:'Relating to the voice; or outspoken.'},
+      {w:'VOICE',h:'The sound produced in the throat when speaking.'},
+      {w:'VOTER',h:'A person who votes.'},
+      {w:'VOWEL',h:'A speech sound produced with an open vocal tract.'},
+      {w:'VULGAR',h:'Lacking refinement; coarse.'},
+      {w:'WALTZ',h:'A ballroom dance in triple time.'},
+      {w:'WASTE',h:'To use more than necessary; or unusable material.'},
+      {w:'WATCH',h:'To look at; or a timepiece worn on the wrist.'},
+      {w:'WATER',h:'The liquid essential for life.'},
+      {w:'WEARY',h:'Feeling or showing tiredness.'},
+      {w:'WEDGE',h:'A piece of wood narrowing to a thin edge.'},
+      {w:'WEIRD',h:'Suggesting something supernatural; strange.'},
+      {w:'WHALE',h:'A very large marine mammal.'},
+      {w:'WHEEL',h:'A circular object that rotates around an axle.'},
+      {w:'WHERE',h:'In or to what place.'},
+      {w:'WHICH',h:'Asking for information about a specific thing.'},
+      {w:'WHILE',h:'During the time that; or a period of time.'},
+      {w:'WHITE',h:'The colour of fresh snow.'},
+      {w:'WHOLE',h:'Complete; including all parts.'},
+      {w:'WHOSE',h:'Belonging to which person.'},
+      {w:'WIDER',h:'Of greater width; more comprehensive.'},
+      {w:'WITCH',h:'A person believed to practise magic.'},
+      {w:'WOMAN',h:'An adult human female.'},
+      {w:'WORLD',h:'The earth together with all its countries.'},
+      {w:'WORRY',h:'To feel anxious or troubled.'},
+      {w:'WORSE',h:'More serious or severe.'},
+      {w:'WORTH',h:'The value of something; deserving of.'},
+      {w:'WOULD',h:'Past tense of will; expressing desire or supposition.'},
+      {w:'WRIST',h:'The joint connecting hand and forearm.'},
+      {w:'WRITE',h:'To mark letters or words on a surface.'},
+      {w:'WRONG',h:'Not correct; or an unjust act.'},
+      {w:'YACHT',h:'A medium-sized sailing boat.'},
+      {w:'YIELD',h:'To produce or provide; or to surrender.'},
+      {w:'YOUNG',h:'Having lived for only a short time.'},
+      {w:'YOURS',h:'Belonging to or associated with you.'},
+      {w:'YOUTH',h:'The period between childhood and adulthood.'},
+      {w:'ZEBRA',h:'An African wild horse with black and white stripes.'},
+      {w:'ZONAL',h:'Relating to or divided into zones.'}
+    ];
+    function shuffle(arr,seed){
+      var a=arr.slice();
+      for(var i=a.length-1;i>0;i--){
+        var j=(seed*9301+49297)%233280;seed=j;j=Math.floor((j/233280)*( i+1));
+        var tmp=a[i];a[i]=a[j];a[j]=tmp;
+      }
+      return a;
+    }
+    function getDayIndex(){
+      var now=new Date();
+      var start=new Date(now.getFullYear(),0,0);
+      var diff=now-start;
+      return Math.floor(diff/(1000*60*60*24));
+    }
+    var dayIdx=getDayIndex();
+    var entry=DC_WORDS[dayIdx % DC_WORDS.length];
+    var dcWord=entry.w;
+    var dcHint=entry.h;
+    var dcRevealed=false;
+    var dcAttempts=0;
+    // Scramble the word (never same order as original)
+    var scrambled=shuffle(dcWord.split(''),dayIdx+7).join('');
+    if(scrambled===dcWord) scrambled=shuffle(dcWord.split(''),dayIdx+13).join('');
+    // Render tiles
+    var tilesEl=document.getElementById('dcTiles');
+    scrambled.split('').forEach(function(ch){
+      var t=document.createElement('div');
+      t.className='dc-tile';t.textContent=ch.toUpperCase();
+      tilesEl.appendChild(t);
+    });
+    // Date label
+    var d=new Date();
+    document.getElementById('dcDate').textContent=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    window.checkDC=function(){
+      var inp=document.getElementById('dcInput');
+      var fb=document.getElementById('dcFeedback');
+      var val=inp.value.trim().toUpperCase();
+      if(!val)return;
+      dcAttempts++;
+      if(val===dcWord){
+        fb.className='dc-feedback win';
+        fb.textContent='Correct! '+dcWord+' — '+dcHint;
+        inp.disabled=true;
+        document.getElementById('dcRevealBtn').disabled=true;
+      } else if(dcAttempts>=3){
+        fb.className='dc-feedback lose';
+        fb.textContent='Not quite. The word was '+dcWord+' — '+dcHint;
+        inp.disabled=true;
+        document.getElementById('dcRevealBtn').disabled=true;
+      } else {
+        fb.className='dc-feedback hint';
+        fb.textContent='Not quite — '+(3-dcAttempts)+' attempt'+(dcAttempts<2?'s':'') +' left. Hint: '+dcHint.split(' ').slice(0,4).join(' ')+'…';
+        inp.value='';
+        inp.focus();
+      }
+    };
+    window.revealDC=function(){
+      var fb=document.getElementById('dcFeedback');
+      fb.className='dc-feedback hint';
+      fb.textContent='The word is '+dcWord+' — '+dcHint;
+      document.getElementById('dcInput').disabled=true;
+      document.getElementById('dcRevealBtn').disabled=true;
+    };
+    document.getElementById('dcInput').addEventListener('keydown',function(e){if(e.key==='Enter')checkDC();});
+  })();
+  </script>
 </body>
 </html>
