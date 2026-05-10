@@ -27,7 +27,12 @@
 body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--t);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
 a{color:var(--p);text-decoration:none}a:hover{text-decoration:underline}
 header{background:var(--s);border-bottom:1px solid var(--b);padding:0 16px}
-.hi{max-width:500px;margin:0 auto;height:52px;display:flex;align-items:center;justify-content:space-between}
+.hi{max-width:900px;margin:0 auto;height:52px;display:flex;align-items:center;justify-content:space-between}
+.hi-nav{display:flex;align-items:center;gap:2px;flex:1;justify-content:flex-end;margin:0 12px}
+.hi-nav a{padding:5px 10px;font-size:12px;font-weight:600;color:var(--t2);border-radius:6px;text-decoration:none;transition:color .15s,background .15s;white-space:nowrap}
+.hi-nav a:hover{color:var(--p);background:rgba(59,130,246,.1)}
+.hi-nav a.active{color:var(--p)}
+@media(max-width:560px){.hi-nav{display:none}}
 .logo{font-weight:800;font-size:15px;color:var(--t);display:flex;align-items:center;gap:6px}
 .logo svg{color:var(--p)}.lp{color:var(--p)}
 .streak-pill{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--b);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--t2)}
@@ -102,6 +107,12 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
       Unscramble Words <span class="lp">Pro</span>
     </a>
+    <nav class="hi-nav" aria-label="Site navigation">
+      <a href="../../">Home</a>
+      <a href="../../guides/best-wordle-starting-words.html">Wordle Strategy</a>
+      <a href="../../guides/wordle-elimination-strategy.html">Elimination Guide</a>
+      <a href="../../guides/">All Guides</a>
+    </nav>
     <div class="streak-pill" id="streak-display">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2C8.5 6 6 9 6 12.5a6 6 0 0012 0C18 9 15.5 6 12 2z"/></svg>
       <span id="streak-count">0</span> streak
@@ -150,6 +161,8 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
         <a href="../../guides/wordle-letter-frequency.html">→ Most Common Wordle Letters — Full Analysis</a>
         <a href="../../guides/wordle-elimination-strategy.html">→ Wordle Elimination Strategy Guide</a>
         <a href="../../guides/wordle-tips-and-tricks.html">→ 10 Wordle Tips &amp; Tricks</a>
+        <a href="../../guides/worst-wordle-starting-words.html">→ Worst Wordle Starting Words &mdash; Openers to Avoid</a>
+        <a href="../../guides/wordle-solving-techniques.html">→ Advanced Wordle Solving Techniques</a>
         <a href="../../">→ Open Wordle Helper / Word Unscrambler</a>
       </div>
     </div>

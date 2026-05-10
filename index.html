@@ -410,6 +410,18 @@
     .dc-btn.sec:hover{background:#475569}
     .dc-feedback{margin-top:10px;font-size:14px;font-weight:600;min-height:20px}
     .dc-feedback.win{color:#34d399}.dc-feedback.lose{color:#f87171}.dc-feedback.hint{color:#fbbf24}
+    /* ===== Dual Daily Challenge grid ===== */
+    .dual-challenge{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
+    .dual-challenge>.daily-challenge{margin-bottom:0}
+    @media(max-width:640px){.dual-challenge{grid-template-columns:1fr}}
+    .wordle-challenge{background:linear-gradient(135deg,#0d2b1a 0%,#112718 60%,#1e293b 100%);border:1px solid #538d4e66}
+    .wc-badge{background:#538d4e}
+    .wc-play-btn{display:inline-flex;align-items:center;gap:6px;background:#538d4e;color:#fff;text-decoration:none;border-radius:8px;padding:9px 16px;font-size:14px;font-weight:700;transition:background .15s,color .15s}
+    .wc-play-btn:hover{background:#4ade80;color:#0f172a;text-decoration:none}
+    .wc-features{font-size:12px;color:#4a7d52;margin-top:10px;letter-spacing:.01em}
+    .wc-sample{display:flex;gap:5px;margin-bottom:14px}
+    .wc-tile{width:36px;height:40px;border-radius:5px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;color:#fff;flex-shrink:0}
+    .wt-c{background:#538d4e}.wt-p{background:#b59f3b}.wt-a{background:#3a3a3c}
     /* ===== Players Also Searched ===== */
     .also-searched{margin-bottom:32px}
     .also-searched h2{font-size:18px;font-weight:700;margin-bottom:14px;color:#f1f5f9}
@@ -499,6 +511,8 @@
     .hub-nav{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;padding:4px 0 12px}
     .hub-link{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;transition:all .15s;white-space:nowrap}
     .hub-link:hover{border-color:var(--primary);color:var(--primary);background:var(--primary-bg);text-decoration:none}
+    .hub-link-wordle{background:rgba(83,141,78,.12);border-color:#538d4e;color:#4ade80;font-weight:700}
+    .hub-link-wordle:hover{background:rgba(83,141,78,.22);border-color:#4ade80;color:#4ade80}
     /* ===== Popular Searches ===== */
     .pop-searches{padding:20px 0 4px}
     .pop-searches h3{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:6px}
@@ -554,6 +568,7 @@
         <a href="guides/">Guides</a>
         <a href="word-lists/">Word Lists</a>
         <a href="blog/">Blog</a>
+        <a href="wordle/daily-challenge/" style="color:#4ade80;font-weight:700">&#129001; Wordle</a>
         <a href="about.html">About</a>
       </nav>
       <div class="header-right">
@@ -597,27 +612,52 @@
     <!-- Hub Nav -->
     <nav class="hub-nav" aria-label="Site sections">
       <a href="guides/scrabble-strategy-guide.html" class="hub-link">&#9822; Scrabble Strategy</a>
+      <a href="wordle/daily-challenge/" class="hub-link hub-link-wordle">&#129001; Play Daily Wordle</a>
       <a href="guides/best-wordle-starting-words.html" class="hub-link">&#129001; Wordle Guide</a>
       <a href="guides/two-letter-scrabble-words.html" class="hub-link">&#128221; Two-Letter Words</a>
       <a href="word-lists/" class="hub-link">&#128196; Word Lists</a>
       <a href="blog/" class="hub-link">&#128218; Blog</a>
-      <a href="guides/" class="hub-link">&#128161; All Guides</a>
     </nav>
 
-    <!-- Daily Word Challenge -->
-    <div class="daily-challenge" id="dailyChallenge" aria-label="Daily Word Challenge">
-      <div class="dc-top">
-        <span class="dc-badge">&#127881; Daily Challenge</span>
-        <span class="dc-date" id="dcDate"></span>
+    <!-- Daily Challenges (side by side) -->
+    <div class="dual-challenge">
+
+      <!-- Unscramble Daily Challenge -->
+      <div class="daily-challenge" id="dailyChallenge" aria-label="Word Unscramble Daily Challenge">
+        <div class="dc-top">
+          <span class="dc-badge">&#127881; Word Unscramble</span>
+          <span class="dc-date" id="dcDate"></span>
+        </div>
+        <p class="dc-prompt">Unscramble today's word — a new puzzle every day.</p>
+        <div class="dc-tiles" id="dcTiles"></div>
+        <div class="dc-controls">
+          <input class="dc-input" id="dcInput" type="text" placeholder="Your answer..." maxlength="15" autocomplete="off" autocapitalize="off">
+          <button class="dc-btn" onclick="checkDC()">Check</button>
+          <button class="dc-btn sec" onclick="revealDC()" id="dcRevealBtn">Reveal</button>
+        </div>
+        <div class="dc-feedback" id="dcFeedback"></div>
       </div>
-      <p class="dc-prompt">Unscramble today's word — a new puzzle every day.</p>
-      <div class="dc-tiles" id="dcTiles"></div>
-      <div class="dc-controls">
-        <input class="dc-input" id="dcInput" type="text" placeholder="Your answer..." maxlength="15" autocomplete="off" autocapitalize="off">
-        <button class="dc-btn" onclick="checkDC()">Check</button>
-        <button class="dc-btn sec" onclick="revealDC()" id="dcRevealBtn">Reveal</button>
+
+      <!-- Wordle Daily Challenge -->
+      <div class="daily-challenge wordle-challenge" aria-label="Wordle Daily Challenge">
+        <div class="dc-top">
+          <span class="dc-badge wc-badge">&#129001; Daily Wordle</span>
+          <span class="dc-date" id="wcDate"></span>
+        </div>
+        <p class="dc-prompt">Guess today&rsquo;s 5-letter word in 6 tries. Hints &amp; streak included.</p>
+        <div class="wc-sample">
+          <div class="wc-tile wt-c">S</div>
+          <div class="wc-tile wt-p">L</div>
+          <div class="wc-tile wt-a">A</div>
+          <div class="wc-tile wt-c">T</div>
+          <div class="wc-tile wt-p">E</div>
+        </div>
+        <div class="dc-controls">
+          <a href="wordle/daily-challenge/" class="wc-play-btn">&#129001; Play Today&rsquo;s Wordle &rarr;</a>
+        </div>
+        <p class="wc-features">&#128293; Streak &nbsp;&middot;&nbsp; &#128161; Hints &nbsp;&middot;&nbsp; &#128200; Post-game strategy</p>
       </div>
-      <div class="dc-feedback" id="dcFeedback"></div>
+
     </div>
 
     <!-- Ad Slot 1 -->
@@ -713,15 +753,23 @@
       <!-- Training Hub -->
       <div class="training-hub">
         <h2>Word-Game Training Hub</h2>
-        <p>Choose a path below &mdash; strategy guides, word references, and vocabulary tools written for players in the US, UK, Canada, and Australia.</p>
+        <p>Choose a path below &mdash; strategy guides, daily challenges, and vocabulary tools for Scrabble &amp; Wordle players in the US, UK, Canada, and Australia.</p>
         <div class="article-links">
-          <a href="guides/scrabble-strategy-guide.html" class="article-link-card">
+          <a href="wordle/daily-challenge/" class="article-link-card" style="border-left:3px solid #538d4e">
+            <div class="al-icon">&#127381;</div>
+            <div class="al-text"><strong>Daily Wordle Challenge</strong><span>Play today&rsquo;s 5-letter puzzle &mdash; hints, streak tracking &amp; strategy tips.</span></div>
+          </a>
+          <a href="guides/scrabble-strategy-guide.html" class="article-link-card" style="border-left:3px solid var(--primary)">
             <div class="al-icon">&#9822;</div>
             <div class="al-text"><strong>Scrabble Strategy Guide</strong><span>Rack management, bingos, premium squares &amp; endgame technique.</span></div>
           </a>
           <a href="guides/best-wordle-starting-words.html" class="article-link-card">
             <div class="al-icon">&#129001;</div>
             <div class="al-text"><strong>Best Wordle Starting Words</strong><span>CRANE vs SLATE vs STARE ranked by letter frequency.</span></div>
+          </a>
+          <a href="guides/wordle-elimination-strategy.html" class="article-link-card">
+            <div class="al-icon">&#129001;</div>
+            <div class="al-text"><strong>Wordle Elimination Strategy</strong><span>Solve every puzzle in 4 guesses or fewer with systematic logic.</span></div>
           </a>
           <a href="guides/two-letter-scrabble-words.html" class="article-link-card">
             <div class="al-icon">&#128221;</div>
@@ -863,6 +911,11 @@
       <a href="guides/best-wordle-starting-words.html" class="ctx-banner">
         <span class="ctx-icon">&#129001;</span>
         <div class="ctx-text"><strong>Maximise your Wordle guesses</strong><span>Best Wordle Starting Words &mdash; CRANE vs SLATE vs STARE ranked by letter frequency, with Hard Mode tips.</span></div>
+        <span class="ctx-arrow">&rarr;</span>
+      </a>
+      <a href="wordle/daily-challenge/" class="ctx-banner" style="border-left-color:#538d4e;margin-top:10px">
+        <span class="ctx-icon">&#127381;</span>
+        <div class="ctx-text"><strong>Play Today&rsquo;s Daily Wordle Challenge</strong><span>New 5-letter puzzle every day &mdash; hints, streak tracking &amp; post-game strategy analysis. No sign-up.</span></div>
         <span class="ctx-arrow">&rarr;</span>
       </a>
 
@@ -1803,6 +1856,7 @@
     // Date label
     var d=new Date();
     document.getElementById('dcDate').textContent=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    document.getElementById('wcDate').textContent=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
     window.checkDC=function(){
       var inp=document.getElementById('dcInput');
       var fb=document.getElementById('dcFeedback');
