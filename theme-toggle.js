@@ -25,6 +25,7 @@
     + '.site-nav a:hover{color:var(--primary,#2563eb);background:rgba(37,99,235,.08);text-decoration:none}'
     + '.site-nav a.sn-wl{color:#4ade80!important;font-weight:700}'
     + '.site-nav a.sn-wl:hover{background:rgba(83,141,78,.15)!important}'
+    + '[data-theme="light"] .site-nav a.sn-wl{color:#16a34a!important}'
     + '@media(max-width:640px){.site-nav{display:none}}';
   document.head.appendChild(s);
 
