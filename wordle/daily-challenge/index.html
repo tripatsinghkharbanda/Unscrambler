@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCJTBHHQPX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZCJTBHHQPX');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="google-adsense-account" content="ca-pub-6261071610831190">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Daily Wordle Challenge — Play Today's Puzzle &amp; Build Your Streak</title>
+<meta name="description" content="Play today's free Daily Wordle Challenge. New 5-letter puzzle every day with hints, streak tracking, and post-game strategy analysis. No account needed.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://unscramblewordspro.com/wordle/daily-challenge/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Daily Wordle Challenge — Play Today's Puzzle">
+<meta property="og:description" content="A new 5-letter Wordle challenge every day. Hints, streak tracking, share results, and post-game strategy tips included.">
+<meta property="og:url" content="https://unscramblewordspro.com/wordle/daily-challenge/">
+<meta property="og:site_name" content="Unscramble Words Pro">
+<link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6261071610831190" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#0f172a;--s:#1e293b;--b:#334155;--t:#e2e8f0;--t2:#cbd5e1;--t3:#94a3b8;--p:#3b82f6;--pb:#1e3a5f;
+  --correct:#538d4e;--present:#b59f3b;--absent:#3a3a3c}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--t);min-height:100vh;display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}
+a{color:var(--p);text-decoration:none}a:hover{text-decoration:underline}
+header{background:var(--s);border-bottom:1px solid var(--b);padding:0 16px}
+.hi{max-width:500px;margin:0 auto;height:52px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-weight:800;font-size:15px;color:var(--t);display:flex;align-items:center;gap:6px}
+.logo svg{color:var(--p)}.lp{color:var(--p)}
+.streak-pill{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--b);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--t2)}
+.streak-pill svg{color:#f59e0b}
+#date-label{font-size:12px;color:var(--t3);text-align:center;padding:8px 0 4px;font-weight:600;letter-spacing:.04em}
+main{flex:1;padding:0 12px 32px}
+.game-wrap{max-width:500px;margin:0 auto}
+/* Board */
+#board{display:grid;grid-template-rows:repeat(6,1fr);gap:5px;width:100%;max-width:330px;height:396px;margin:10px auto 16px}
+.row{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.tile{display:flex;align-items:center;justify-content:center;font-size:1.8rem;font-weight:800;border:2px solid var(--b);border-radius:4px;background:transparent;color:var(--t);user-select:none;transition:border-color .05s;will-change:transform}
+.tile[data-state="tbd"]{border-color:#565758;animation:popIn .1s ease}
+.tile[data-state="correct"]{background:var(--correct);border-color:var(--correct);color:#fff;animation:flip .5s ease forwards}
+.tile[data-state="present"]{background:var(--present);border-color:var(--present);color:#fff;animation:flip .5s ease forwards}
+.tile[data-state="absent"]{background:var(--absent);border-color:var(--absent);color:#fff;animation:flip .5s ease forwards}
+.tile.shake{animation:shake .4s ease}
+.tile.bounce{animation:bounce .4s ease}
+@keyframes popIn{0%{transform:scale(.8)}40%{transform:scale(1.12)}100%{transform:scale(1)}}
+@keyframes flip{0%{transform:rotateX(0)}50%{transform:rotateX(-90deg)}100%{transform:rotateX(0)}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-20px)}}
+/* Toast */
+#toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:var(--t);color:var(--bg);padding:10px 18px;border-radius:8px;font-size:14px;font-weight:600;z-index:100;opacity:0;pointer-events:none;transition:opacity .2s}
+#toast.show{opacity:1}
+/* Keyboard */
+#keyboard{max-width:500px;margin:0 auto;display:flex;flex-direction:column;gap:6px}
+.kb-row{display:flex;justify-content:center;gap:5px}
+.key{height:58px;min-width:43px;padding:0 6px;border:0;border-radius:6px;background:#818384;color:#fff;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;user-select:none;transition:background .15s,transform .1s;-webkit-tap-highlight-color:transparent}
+.key:active{transform:scale(.95)}
+.key.wide{min-width:65px;font-size:12px}
+.key[data-state="correct"]{background:var(--correct)}
+.key[data-state="present"]{background:var(--present)}
+.key[data-state="absent"]{background:#3a3a3c}
+/* Hint section */
+.hint-bar{max-width:500px;margin:14px auto 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.hint-btn{background:var(--s);border:1px solid var(--b);color:var(--t2);border-radius:8px;padding:8px 14px;font-size:13px;font-weight:600;cursor:pointer;transition:border-color .15s;display:flex;align-items:center;gap:6px}
+.hint-btn:hover{border-color:var(--p);color:var(--p)}
+.hint-btn:disabled{opacity:.4;cursor:default}
+#hint-display{max-width:500px;margin:8px auto 0;background:var(--pb);border:1px solid var(--p);border-radius:8px;padding:12px 16px;font-size:13.5px;color:var(--t2);display:none}
+#hint-display strong{color:var(--t)}
+/* End screen */
+#end-panel{display:none;max-width:500px;margin:18px auto 0;border-top:1px solid var(--b);padding-top:20px}
+.end-word{font-size:28px;font-weight:800;letter-spacing:.12em;color:var(--p);text-align:center;margin-bottom:4px}
+.end-def{font-size:14px;color:var(--t2);text-align:center;margin-bottom:20px;line-height:1.6}
+.end-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.stat-box{background:var(--s);border:1px solid var(--b);border-radius:8px;padding:12px 8px;text-align:center}
+.stat-num{font-size:26px;font-weight:800;color:var(--t)}
+.stat-label{font-size:11px;color:var(--t3);margin-top:3px}
+.share-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;background:var(--correct);color:#fff;border:none;border-radius:8px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;margin-bottom:14px;transition:background .15s}
+.share-btn:hover{background:#4a7f45}
+.strat-section{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:16px}
+.strat-section h3{font-size:14px;font-weight:700;margin-bottom:8px;color:var(--t)}
+.strat-section p{font-size:13.5px;color:var(--t2);line-height:1.7;margin-bottom:10px}
+.strat-section p:last-child{margin:0}
+.end-links{margin-top:14px}
+.end-links a{display:block;font-size:13px;color:var(--p);padding:5px 0;border-bottom:1px solid var(--b)}
+.end-links a:last-child{border:none}
+/* Content area below game */
+.content{max-width:500px;margin:28px auto 0;padding-top:24px;border-top:1px solid var(--b)}
+.content h2{font-size:17px;font-weight:700;margin-bottom:10px;color:var(--t)}
+.content p{font-size:14px;color:var(--t2);line-height:1.75;margin-bottom:12px}
+.content ul{color:var(--t2);font-size:14px;padding-left:20px;line-height:1.75;margin-bottom:12px}
+footer{border-top:1px solid var(--b);padding:20px 16px;text-align:center;font-size:12px;color:var(--t3)}
+footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
+@media(max-width:400px){.tile{font-size:1.5rem}.key{min-width:32px;height:52px;font-size:12px}.key.wide{min-width:50px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="hi">
+    <a href="../../" class="logo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Unscramble Words <span class="lp">Pro</span>
+    </a>
+    <div class="streak-pill" id="streak-display">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2C8.5 6 6 9 6 12.5a6 6 0 0012 0C18 9 15.5 6 12 2z"/></svg>
+      <span id="streak-count">0</span> streak
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="game-wrap">
+    <div id="date-label"></div>
+    <div id="board"></div>
+
+    <div class="hint-bar">
+      <button class="hint-btn" id="hint1-btn" onclick="showHint(1)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Hint 1
+      </button>
+      <button class="hint-btn" id="hint2-btn" onclick="showHint(2)" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Hint 2
+      </button>
+      <button class="hint-btn" id="hint3-btn" onclick="showHint(3)" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        Hint 3
+      </button>
+    </div>
+    <div id="hint-display"></div>
+
+    <div id="keyboard"></div>
+
+    <div id="end-panel">
+      <div class="end-word" id="end-word"></div>
+      <div class="end-def" id="end-def"></div>
+      <div class="end-stats">
+        <div class="stat-box"><div class="stat-num" id="stat-played">0</div><div class="stat-label">Played</div></div>
+        <div class="stat-box"><div class="stat-num" id="stat-winpct">0%</div><div class="stat-label">Win %</div></div>
+        <div class="stat-box"><div class="stat-num" id="stat-streak">0</div><div class="stat-label">Streak 🔥</div></div>
+      </div>
+      <button class="share-btn" onclick="shareResult()">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        Share Result
+      </button>
+      <div class="strat-section" id="strat-section"></div>
+      <div class="end-links">
+        <a href="../../guides/best-wordle-starting-words.html">→ Best Wordle Starting Words Ranked by Win Rate</a>
+        <a href="../../guides/wordle-letter-frequency.html">→ Most Common Wordle Letters — Full Analysis</a>
+        <a href="../../guides/wordle-elimination-strategy.html">→ Wordle Elimination Strategy Guide</a>
+        <a href="../../guides/wordle-tips-and-tricks.html">→ 10 Wordle Tips &amp; Tricks</a>
+        <a href="../../">→ Open Wordle Helper / Word Unscrambler</a>
+      </div>
+    </div>
+
+    <div class="content">
+      <h2>How This Daily Challenge Works</h2>
+      <p>A new 5-letter puzzle appears every day at midnight. You have <strong>6 attempts</strong> to guess the hidden word. After each guess, tiles change colour:</p>
+      <ul>
+        <li><strong style="color:#538d4e">Green</strong> — correct letter, correct position</li>
+        <li><strong style="color:#b59f3b">Yellow</strong> — correct letter, wrong position</li>
+        <li><strong style="color:#818384">Grey</strong> — letter not in the word</li>
+      </ul>
+      <p>Three hints are available if you get stuck — unlock them one at a time. Your streak resets if you miss a day or fail to solve the puzzle.</p>
+      <h2>Daily Strategy Tips</h2>
+      <p>Start with <strong>STARE</strong> or <strong>SLATE</strong> — both test five of the nine most common letters in five-letter English words and eliminate over 60% of possible answers on guess 1. After your opener, avoid repeating eliminated letters and look for high-frequency patterns (-TION, -IGHT, -OUND) in the remaining candidates.</p>
+      <p>After you complete today's challenge, read the post-game analysis for the optimal solving path and alternative strategies for the word.</p>
+    </div>
+  </div>
+</main>
+
+<div id="toast"></div>
+
+<footer>
+  <div>
+    <a href="../../">Home</a>
+    <a href="../../guides/">Guides</a>
+    <a href="../../guides/best-wordle-starting-words.html">Best Starters</a>
+    <a href="../../about.html">About</a>
+    <a href="../../privacy.html">Privacy</a>
+  </div>
+  <p style="margin-top:10px">© 2026 Unscramble Words Pro · <a href="../../editorial-standards.html">Editorial Standards</a></p>
+  <p style="margin-top:6px;font-size:11px;color:#64748b">This is an independent fan word challenge. Not affiliated with or endorsed by The New York Times Company. &ldquo;Wordle&rdquo; is a trademark of The New York Times Company.</p>
+</footer>
+
+<script>
+/* ---- Word bank ---- */
+const ANSWERS = [
+  'CRANE','SLATE','STARE','RAISE','TRACE','LIGHT','EARTH','HEART','STORM','GRACE',
+  'BRAVE','PLATE','STONE','FLAME','SHARE','STEAM','OCEAN','DREAM','ANGEL','BLEND',
+  'FLOAT','FRESH','FROST','GRAIN','GRAND','GREAT','GREEN','GREET','GRIEF','GROVE',
+  'GUARD','GUIDE','BLADE','BLAND','BLAST','BLAZE','BLOAT','BLOOM','BOARD','BRACE',
+  'BRAND','BREAD','BREAK','BREED','BRINK','BRISK','BROOK','BROWN','BRUSH','BUILD',
+  'CABLE','CAMEL','CARGO','CHALK','CHARM','CHART','CHASE','CHEAP','CHEER','CHEST',
+  'CHILD','CHILL','CLASH','CLASS','CLEAN','CLEAR','CLIMB','CLING','CLOAK','CLOSE',
+  'CLOUD','CLOWN','COACH','COAST','CORAL','CRANE','CRISP','CROSS','CROWD','CROWN',
+  'CRUSH','CRUST','DANCE','DEALT','DECAY','DENSE','DEPTH','DEVIL','DODGE','DOUBT',
+  'DRAFT','DRAIN','DREAD','DRIFT','DRINK','DRIVE','DROVE','DRUNK','EAGLE','EARLY',
+  'EMBER','EMPTY','ERUPT','EXTRA','FABLE','FANCY','FATAL','FEAST','FEVER','FIERY',
+  'FIFTH','FIGHT','FINAL','FIRST','FLAKE','FLARE','FLASK','FLICK','FLING','FLOOD',
+  'FLOUR','FLUSH','FORUM','FOUND','FRANK','FRONT','FROZE','FROTH','FUNNY','GAUGE',
+  'GLEAM','GLIDE','GLOOM','GLORY','GLOSS','GLOVE','GRIPE','GROWL','GRUEL','GRUFF',
+  'HAUNT','HAVEN','HASTE','HATCH','HEARD','HEIST','HOIST','HONEY','HORSE','HOTEL',
+  'HOUND','HOVER','HUMAN','HUMOR','HURRY','IMAGE','INFER','INPUT','ISSUE','IVORY',
+  'JAUNT','JELLY','JEWEL','JUICE','KNACK','KNAVE','KNIFE','KNOCK','KNOLL','LABEL',
+  'LADEN','LADLE','LAPEL','LAPSE','LASER','LEMON','LINER','LOGIC','LODGE','LOVER',
+  'LUCID','LUCKY','LYRIC','MAGIC','MAJOR','MAPLE','MARCH','MATCH','MELEE','MERCY',
+  'MERIT','METAL','MIGHT','MIRTH','MODEL','MOIST','MONEY','MONTH','MORAL','MOUNT',
+  'MOUSE','MOUTH','MURAL','MUSIC','NAVAL','NERVE','NIGHT','NOBLE','NOISE','NORTH',
+  'NOTCH','NOVEL','NUDGE','NURSE','ORBIT','ORDER','OTTER','OXIDE','OZONE','PANEL',
+  'PANIC','PAPER','PARTY','PASTE','PATCH','PAUSE','PEACE','PEACH','PEARL','PETAL',
+  'PHASE','PHONE','PHOTO','PILOT','PINCH','PIVOT','PLACE','PLAIN','PLANK','PLANT',
+  'PLAZA','PLEAD','PLUCK','PLUMB','PLUME','POINT','POPPY','PORCH','POWER','PRESS',
+  'PRIDE','PRISM','PROBE','PROOF','PROSE','PROUD','PROVE','PRUNE','PULSE','QUAIL',
+  'QUEEN','QUEST','QUILL','QUIRK','QUOTE','RADAR','RANGE','REACT','REALM','RECAP',
+  'REIGN','RELAX','RENEW','RIDER','RIFLE','RIGID','RISKY','RIVAL','RIVET','RIVER',
+  'ROBIN','ROCKY','ROUGH','ROUSE','ROYAL','RUGBY','RULER','RUSTY','SAINT','SALAD',
+  'SAUCE','SCALP','SCARF','SCENE','SCENT','SCONE','SCOOP','SCORE','SCOUT','SCOWL',
+  'SERUM','SERVE','SEVEN','SHADE','SHAFT','SHAKE','SHAME','SHARK','SHARP','SHELL',
+  'SHIFT','SHIRT','SHOCK','SHORE','SHORT','SHOUT','SIEGE','SKILL','SLASH','SLAVE',
+  'SLEEK','SLEEP','SLICE','SLIDE','SLING','SLOPE','SLOTH','SMOKE','SNAKE','SNARE',
+  'SOLAR','SOLVE','SORRY','SOUTH','SPEAR','SPELL','SPEND','SPIKE','SPILL','SPINE',
+  'SPITE','SPLIT','SPOON','SPORE','SPORT','SPOUT','SPRAY','SQUAD','SQUAT','STACK',
+  'STAGE','STAKE','STALK','STALL','STAMP','STAND','STARK','START','STATE','STEAL',
+  'STEEL','STEEP','STEER','STERN','STICK','STIFF','STILL','STOMP','STORE','STORY',
+  'STOUT','STRAP','STRAW','STRAY','STRIP','STRUT','STUCK','STUDY','STUNT','STYLE',
+  'SUGAR','SURGE','SWAMP','SWEAR','SWEAT','SWEEP','SWEET','SWIFT','SWIRL','SWORD',
+  'SYRUP','TALON','TANGO','TASTE','TEACH','TEASE','TEMPO','TENSE','TENOR','TERSE',
+  'THEFT','THEME','THICK','THIEF','THIRD','THORN','THREE','THROW','THUMB','TIGER',
+  'TIMID','TIRED','TODAY','TOKEN','TONIC','TOPAZ','TOPIC','TORCH','TOTAL','TOXIC',
+  'TRACK','TRADE','TRAIL','TRAIN','TRAMP','TRAWL','TREND','TRIAL','TROUT','TRUCE',
+  'TRULY','TRUNK','TRUST','TRUTH','TUNER','TWICE','TWIST','ULTRA','UNITE','UNTIL',
+  'UTTER','VAGUE','VALID','VALUE','VAPOR','VAULT','VERSE','VIRAL','VIRUS','VISIT',
+  'VISTA','VITAL','VIVID','VOTER','WALTZ','WAVER','WEARY','WEAVE','WEDGE','WHALE',
+  'WHEAT','WHEEL','WHICH','WHILE','WHIRL','WHISK','WHOLE','WIDER','WIELD','WITCH',
+  'WITTY','WORLD','WORRY','WORST','WORTH','WRATH','WRECK','WRING','WROTE','YACHT',
+  'YIELD','YOUNG','YOUTH','ZESTY','ZIPPY','ZONAL','BLINK','BLUNT','BRAWN','BROIL',
+  'CAPER','CARRY','CARVE','CHAIN','CLAMP','CLERK','DROOL','DUNCE','ENVOY','EPOCH',
+  'EXACT','EXILE','FERRY','FIEND','FLASH','FLORA','FOCAL','FORTE','FRAUD','GROVE',
+  'IDEAL','INDIE','INTRO','JOUST','JUMPY','LINGO','LIVER','LOCAL','LOOSE','LOWLY',
+  'MAVEN','MOURN','MUCUS','MULCH','NASAL','OCCUR','ONSET','OUTER','OVERT','OWING',
+  'PEARL','PENAL','POLAR','POPPY','PRIVY','PRONG','PROWL','PSALM','PURGE','QUARK',
+  'RADAR','REALM','REPAY','RESET','ROUGE','SABRE','SANDY','SCALD','SCUBA','SIGMA',
+  'SOGGY','SPAWN','SPECK','SPOKE','SQUID','STEEP','TABOO','TAPIR','TEPID','TERRA',
+  'TIARA','TOKEN','TUNIC','TWIRL','UNIFY','VALVE','VIGIL','VODKA','VOMIT','WAFER',
+  'WEDGE','WHACK','WHIFF','WINDY','WORSE','WRACK','WREAK','YAWNS','ZILCH','AMBER',
+];
+
+const DEFINITIONS = {
+  CRANE:'a large wading bird with a long neck, or to stretch your neck to see something',
+  SLATE:'a grey-blue rock used in roofing tiles, or a list of candidates',
+  STARE:'to look fixedly at something for a long time',
+  RAISE:'to lift something to a higher position; to increase in level or amount',
+  TRACE:'a mark or sign left by something; to follow or copy the outline of',
+  LIGHT:'the natural agent that makes things visible; not heavy',
+  EARTH:'the planet we live on; soil or ground',
+  HEART:'the organ that pumps blood; the centre of a place or feeling',
+  STORM:'a violent disturbance of the atmosphere with strong winds and rain',
+  GRACE:'elegance and poise of movement; courteous goodwill',
+  BRAVE:'ready to face danger or pain; showing courage',
+  PLATE:'a flat dish for food; a thin flat sheet of metal',
+  STONE:'a hard, solid nonmetallic mineral matter; to remove the stone from fruit',
+  FLAME:'a hot glowing body of burning gas; a burning passion',
+  SHARE:'to use or enjoy something with others; a portion belonging to a person',
+  STEAM:'water in the form of vapour; to cook using steam',
+  OCEAN:'the expanse of salt water covering most of the earth\'s surface',
+  DREAM:'a series of thoughts during sleep; something desired greatly',
+  ANGEL:'a spiritual being believed to act as a messenger of God; a very kind person',
+  BLEND:'to mix together smoothly; a mixture of different elements',
+  FLOAT:'to rest on the surface of a liquid without sinking',
+  FRESH:'recently produced and not yet stale; new and different',
+  FROST:'a deposit of ice crystals formed on cold surfaces at night',
+  GRAIN:'a small hard seed of a cereal plant; the texture of wood or stone',
+  GRAND:'magnificent and impressive in appearance; a thousand dollars',
+  GREAT:'of an extent, amount, or intensity much above the normal',
+  GREEN:'the colour of fresh grass; inexperienced or environmentally conscious',
+  GRIEF:'intense sorrow especially caused by a loss',
+  GROVE:'a small group of trees',
+  GUARD:'a person who watches over a place; to watch over to keep safe',
+  GUIDE:'a person who shows others the way; to lead or direct',
+  BLADE:'the flat cutting edge of a knife or sword; a flat thin leaf',
+  BLAND:'lacking strong features; not highly seasoned or stimulating',
+  BLAST:'a strong gust of wind or air; an explosion',
+  BLAZE:'a very large or fierce fire; to burn fiercely',
+  BLOOM:'a flower, especially one cultivated for its beauty; to produce flowers',
+  BOARD:'a long thin flat piece of wood; to get on a vehicle or aircraft',
+  BRACE:'a device that holds something firmly in place; to prepare for impact',
+  BRAND:'a type of product made by a company; to mark with a hot iron',
+  BREAD:'food made from flour, water, and yeast baked together',
+  BREAK:'to separate into pieces; a pause in activity',
+  BREED:'to produce offspring; a specific type of animal',
+  BRINK:'the edge of a steep place; the point just before something happens',
+  BROWN:'a colour like that of dark wood or rich soil',
+  BRUSH:'an implement with bristles for cleaning or painting',
+  BUILD:'to construct by putting materials together; physique of a person',
+  CABLE:'a thick wire rope; an insulated wire for electricity or telecommunications',
+  CAMEL:'a large, long-necked mammal adapted to life in the desert',
+  CHALK:'a white soft earth used for writing on blackboards',
+  CHARM:'the power or quality of delighting people; to attract or delight',
+  CHART:'a sheet of information in the form of a table, graph or diagram',
+  CHASE:'to pursue in order to catch; to drive away',
+  CHEAP:'low in price; charging low prices',
+  CHEER:'a shout of encouragement; to give a shout of joy',
+  CHEST:'the upper front part of the body; a large strong box',
+  CHILD:'a young human being below the age of puberty',
+  CLEAN:'free from dirt; morally uncontaminated',
+  CLEAR:'easy to perceive or understand; free of obstacles',
+  CLIMB:'to go up something; a route up a mountain',
+  CLOSE:'only a short distance away; to move so as to cover an opening',
+  CLOUD:'a visible mass of condensed water vapour floating in the atmosphere',
+  DANCE:'to move rhythmically to music; a series of steps and movements',
+  DREAM:'a series of thoughts and images during sleep',
+  DRINK:'to take liquid into the mouth and swallow it; a liquid for drinking',
+  DRIVE:'to operate and control a motor vehicle; a journey in a vehicle',
+  EAGLE:'a large bird of prey with a massive hooked bill and long broad wings',
+  EMBER:'a small piece of burning or glowing coal or wood in a dying fire',
+  EXTRA:'added to an existing amount; beyond what is normal',
+  FANCY:'elaborate in structure or decoration; to feel a desire for',
+  FEAST:'a large meal, especially a celebratory one',
+  FEVER:'a high body temperature resulting from illness',
+  FIGHT:'to take part in a violent struggle; a violent struggle',
+  FINAL:'coming at the end; not able to be altered or questioned',
+  FIRST:'coming before all others in time or order',
+  FLOOD:'an overflow of a large amount of water over normally dry land',
+  FLOUR:'powder obtained by grinding grain, used to make bread and pastry',
+  FORUM:'a place or medium where ideas and views on a topic can be exchanged',
+  FOUND:'past tense of find; to establish an institution',
+  FRANK:'open, honest, and direct in speech',
+  FROST:'a deposit of ice crystals formed when temperature falls below freezing',
+  FUNNY:'causing laughter; difficult to explain or understand',
+  HAUNT:'to appear as a ghost; to be persistently preoccupied with',
+  HAVEN:'a place of safety or refuge',
+  HEARD:'past tense of hear',
+  HEIST:'a robbery; to steal',
+  HONEY:'a sweet sticky substance made by bees',
+  HORSE:'a large plant-eating domesticated mammal with a mane and tail',
+  HOTEL:'an establishment providing lodging and meals for travellers',
+  HUMAN:'relating to or characteristic of people',
+  HUMOR:'the quality of being amusing; the ability to perceive what is amusing',
+  IMAGE:'a representation of the external form of a person or thing',
+  IVORY:'a hard white substance composing the main part of tusks',
+  JELLY:'a sweet food made from fruit juice and sugar that sets into a soft mass',
+  JEWEL:'a precious stone; a person or thing that is highly valued',
+  JUICE:'the liquid obtained from or present in fruit or vegetables',
+  LABEL:'a small piece of paper attached to an object to give information',
+  LASER:'a device that generates an intense focused beam of light',
+  LEMON:'a yellow oval citrus fruit with thick skin and fragrant acidic juice',
+  LOGIC:'reasoning conducted according to strict principles of validity',
+  LOVER:'a person having a sexual relationship with another; someone who likes something greatly',
+  MAGIC:'the power of apparently influencing events by using mysterious forces',
+  MAJOR:'of greater importance or rank; a military officer',
+  MAPLE:'a tree with lobed leaves and winged fruits, grown for timber and its syrup',
+  MARCH:'the third month of the year; to walk in a military manner',
+  MERCY:'compassion or forgiveness shown towards someone',
+  MERIT:'the quality of being good or worthy of reward',
+  METAL:'a solid material typically hard, shiny, and malleable',
+  MIGHT:'great power or strength; past tense of may',
+  MODEL:'a three-dimensional representation; a person who poses for an artist',
+  MONEY:'a medium of exchange in the form of coins and banknotes',
+  MONTH:'each of the twelve named periods into which a year is divided',
+  MORAL:'concerned with the principles of right and wrong',
+  MOUSE:'a small rodent; a handheld device that controls a cursor on screen',
+  MUSIC:'vocal or instrumental sounds combined to produce beauty of form',
+  NERVE:'a fibre transmitting impulses between the brain and body',
+  NIGHT:'the period of darkness in each twenty-four hours',
+  NOBLE:'belonging to the aristocracy; having or showing fine personal qualities',
+  NOISE:'a sound especially a loud or unpleasant one',
+  NORTH:'the direction towards the North Pole',
+  NOVEL:'a fictitious prose narrative of book length',
+  ORBIT:'the curved path taken by a celestial object around another',
+  ORDER:'the arrangement of people or things according to a rule',
+  PANIC:'sudden uncontrollable fear or anxiety',
+  PAPER:'material manufactured in thin sheets from wood pulp',
+  PARTY:'a social gathering; a group working or travelling together',
+  PASTE:'a thick, soft moist mixture; to stick with paste',
+  PAUSE:'a temporary stop in action or speech',
+  PEACE:'freedom from disturbance; a state or period of tranquillity',
+  PEARL:'a hard, lustrous spherical mass formed inside an oyster',
+  PHASE:'a distinct period or stage in a process',
+  PHONE:'a telephone; to call someone on the telephone',
+  PHOTO:'a photograph taken using a camera',
+  PILOT:'a person who operates the flying controls of an aircraft',
+  PLACE:'a particular position or area; to put in a particular position',
+  PLANT:'a living organism of the kind typified by trees and shrubs',
+  PLAZA:'a public square or marketplace',
+  POINT:'a dot or mark; to direct attention towards something',
+  POWER:'the ability to do something; energy that is produced for use',
+  PRESS:'to move into contact with something by exerting continuous force',
+  PRIDE:'a feeling of deep pleasure from one\'s own achievements',
+  PRISM:'a solid glass shape that refracts and separates light',
+  PROOF:'evidence that establishes a fact or truth',
+  PROSE:'ordinary written or spoken language without metrical structure',
+  PROUD:'feeling deep pleasure from one\'s own achievements',
+  PULSE:'a rhythmical beat of the heart; dried seeds of legumes',
+  QUEEN:'the female ruler of an independent state',
+  QUEST:'a long search for something; to search',
+  QUOTE:'to repeat or copy out words from a text',
+  RADAR:'a system for detecting aircraft by reflecting radio waves',
+  RANGE:'the area of variation; a set of different things of the same type',
+  REACT:'to respond to something; to undergo a chemical reaction',
+  REALM:'a kingdom; a domain or sphere of activity',
+  REIGN:'the period of rule of a monarch; to rule as king or queen',
+  RIDER:'a person who rides a horse, bicycle, or motorcycle',
+  RIFLE:'a gun with a long spirally grooved barrel',
+  RIGID:'unable to bend or be forced out of shape; not flexible',
+  RIVAL:'a person competing with another; to be as good as',
+  RIVER:'a large natural stream of water flowing to the sea',
+  ROBIN:'a small thrush-like bird with a red breast',
+  ROCKY:'consisting of or full of rock; difficult or problematic',
+  ROUGH:'having an uneven or irregular surface; not gentle',
+  ROYAL:'having the status of a king or queen; of the best quality',
+  RULER:'a person who rules; a straight strip used to measure',
+  SAINT:'a person recognised for holiness and venerated by the Church',
+  SALAD:'a cold dish of raw vegetables',
+  SAUCE:'a liquid or semi-liquid substance served with food',
+  SCENE:'the place where an incident occurs; a sequence of a film or play',
+  SCENT:'a distinctive smell; perfume',
+  SCORE:'the number of points achieved in a game',
+  SERVE:'to perform duties for; to deliver food to',
+  SEVEN:'the number 7',
+  SHADE:'comparative darkness and coolness caused by shelter from the sun',
+  SHAKE:'to move quickly back and forth or up and down',
+  SHAME:'a painful feeling from wrong or foolish behaviour',
+  SHARK:'a long-bodied chiefly marine fish with a cartilaginous skeleton',
+  SHARP:'having a cutting edge; clear and distinct',
+  SHELL:'the hard protective outer case of something',
+  SHIFT:'a change in position or direction; a period of work',
+  SHIRT:'a garment for the upper body with a collar, sleeves, and buttons',
+  SHOCK:'a sudden upsetting or surprising event; impact',
+  SHORE:'the land along the edge of a sea, lake, or other water',
+  SHORT:'measuring a small amount from one end to the other',
+  SHOUT:'to utter a loud call or cry',
+  SKILL:'the ability to do something well',
+  SLEEP:'a condition of body and mind that typically recurs every night',
+  SLIDE:'move along a smooth surface; a playground structure',
+  SLOPE:'a surface of which one end is higher than the other',
+  SMOKE:'a visible suspension of carbon particles resulting from combustion',
+  SOLAR:'relating to or determined by the sun',
+  SOLVE:'to find an answer to a problem',
+  SOUTH:'the direction towards the South Pole',
+  SPEAR:'a long weapon with a pointed tip thrown or pushed by hand',
+  SPELL:'a form of words used as a magical charm; to write out letters of a word',
+  SPEND:'to pay out money; to pass time',
+  SPINE:'a series of vertebrae forming the backbone',
+  SPLIT:'to divide into parts; a gymnastic position',
+  SPOON:'a utensil with a round bowl on a handle',
+  SPORT:'an activity involving physical exertion and skill',
+  STAGE:'a point, period, or step in development; the floor area of a theatre',
+  STAKE:'a strong post driven into the ground; something gambled',
+  STAMP:'an instrument for stamping a pattern; to bring down the foot heavily',
+  STAND:'to be in an upright position; a structure for a specific purpose',
+  STARK:'severe or bare in appearance; complete or sheer',
+  START:'to begin; the beginning of something',
+  STATE:'the particular condition of a person or thing; a country',
+  STEAL:'to take something without permission',
+  STEEL:'a hard strong metal alloy',
+  STEER:'to guide the course of a vehicle; a young bullock',
+  STERN:'serious and unrelenting; the rearmost part of a ship',
+  STICK:'a thin piece of wood; to attach or remain fixed',
+  STILL:'not moving; up to and including the present time',
+  STONE:'hard solid nonmetallic mineral matter; to remove the stone from fruit',
+  STORE:'a place where goods are sold; to keep for future use',
+  STORY:'an account of imaginary events; a floor of a building',
+  STRAP:'a strip of leather or other flexible material',
+  STRAW:'dried stalks of grain; a tube for sucking drink',
+  STRIP:'to remove covering from; a long narrow piece',
+  STUDY:'the devotion of time and attention to gaining knowledge',
+  STYLE:'a manner of doing something; a design or fashion',
+  SURGE:'a sudden powerful forward or upward movement',
+  SWAMP:'wetland that is seasonally flooded; to overwhelm',
+  SWEAR:'to state solemnly; to use offensive language',
+  SWEET:'having the pleasant taste of sugar; lovable',
+  SWIFT:'happening quickly; a fast-flying bird',
+  SWIRL:'to move in a twisting pattern',
+  SWORD:'a weapon with a long metal blade',
+  TALON:'a claw of a bird of prey',
+  TASTE:'the sensation of flavour; to perceive flavour',
+  TEACH:'to impart knowledge or instruct',
+  TENSE:'stretched tight; a set of verb forms indicating time',
+  THEFT:'the action of stealing',
+  THEME:'the subject of a piece of writing; a recurring melody',
+  THICK:'large in diameter; not easily moved',
+  THIEF:'a person who steals',
+  THIRD:'constituting number three in a sequence',
+  THORN:'a stiff sharp pointed projection on a plant',
+  THREE:'the number 3',
+  TIGER:'a large tiger-striped wild cat of Asia',
+  TIRED:'feeling fatigued; dull or uninteresting',
+  TODAY:'on or in the course of this present day',
+  TOKEN:'a thing serving as a visible symbol; a disc used instead of money',
+  TOPIC:'a matter dealt with in a text or conversation',
+  TORCH:'a portable battery-powered electric lamp; a burning stick',
+  TOTAL:'comprising the whole number; the whole amount',
+  TOXIC:'poisonous; relating to or caused by poison',
+  TRACK:'a rough path; to follow the trail of',
+  TRADE:'the activity of buying and selling; to exchange',
+  TRAIL:'a mark left by a person or animal; to walk slowly behind',
+  TRAIN:'a series of connected railway vehicles; to teach skills',
+  TREND:'a general direction in which something is developing',
+  TRIAL:'a formal examination in a law court; a test',
+  TROUT:'a freshwater or sea fish valued as food and game',
+  TRUCE:'an agreement between enemies to stop fighting',
+  TRUNK:'the main woody stem of a tree; a large travelling box',
+  TRUST:'firm belief in reliability or truth; to believe in',
+  TRUTH:'the quality of being true; a fact',
+  TWICE:'two times; on two occasions',
+  TWIST:'to form into a curved or distorted shape',
+  UNITE:'to come together; to make or become united',
+  UNTIL:'up to the point in time or event mentioned',
+  UTTER:'complete; to make a sound with the voice',
+  VALID:'actually producing the desired result; legally binding',
+  VALUE:'the importance or usefulness of something',
+  VAPOR:'moisture in the air; a substance in the gas phase',
+  VAULT:'an arched roof; to leap using a pole or one\'s hands',
+  VERSE:'writing arranged with a metrical rhythm; a stanza of a poem',
+  VIRAL:'relating to a virus; spread rapidly online',
+  VIRUS:'an infective agent; a piece of malicious computer code',
+  VISIT:'to go to see a person or place; an act of visiting',
+  VISTA:'a long view through a gap; a mental view of a series of events',
+  VITAL:'absolutely necessary; relating to life',
+  VIVID:'producing powerful feelings; clear and bright',
+  VOTER:'a person who votes or has the right to vote',
+  WALTZ:'a ballroom dance in triple time',
+  WAVER:'to be undecided; to move with a quivering motion',
+  WEARY:'feeling or showing extreme tiredness',
+  WEAVE:'to form fabric by interlacing threads; to move through obstacles',
+  WHALE:'a very large marine mammal',
+  WHEAT:'a cereal plant widely cultivated for its edible grain',
+  WHEEL:'a circular object that rotates on an axle',
+  WHILE:'during the time that; a period of time',
+  WHOLE:'all of; not broken, intact',
+  WIELD:'to hold and use a weapon or tool; to have and exert power',
+  WORLD:'the earth; a particular region or domain',
+  WORRY:'to feel or cause to feel anxious',
+  WORTH:'the value equivalent to that of someone or something; deserving of',
+  WRATH:'extreme anger',
+  WRECK:'a vehicle that has been badly damaged; to cause destruction of',
+  WROTE:'past tense of write',
+  YACHT:'a medium-sized sailing boat; a large powered boat',
+  YIELD:'to produce or provide; to give way to pressure',
+  YOUNG:'having lived or existed for only a short time',
+  YOUTH:'the period between childhood and adult age',
+  ZESTY:'having a strong, pleasant, and somewhat spicy flavour',
+};
+
+/* ---- Date utils ---- */
+function getDateStr() {
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+}
+function getDayIndex() {
+  const start = new Date(2026, 0, 1);
+  const today = new Date(); today.setHours(0,0,0,0);
+  return Math.max(0, Math.floor((today - start) / 86400000)) % ANSWERS.length;
+}
+function formatDateLabel() {
+  const d = new Date();
+  return d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+}
+
+/* ---- Game state ---- */
+const TARGET = ANSWERS[getDayIndex()];
+const TODAY = getDateStr();
+let board = Array.from({length:6},()=>Array(5).fill(''));
+let states = Array.from({length:6},()=>Array(5).fill(''));
+let currentRow = 0, currentCol = 0, gameOver = false;
+let hintsUsed = 0;
+let shareGrid = [];
+
+/* ---- localStorage helpers ---- */
+const LS = {
+  get(k, def) { try { const v = localStorage.getItem('wdc_'+k); return v !== null ? JSON.parse(v) : def; } catch(e){ return def; } },
+  set(k, v) { try { localStorage.setItem('wdc_'+k, JSON.stringify(v)); } catch(e){} }
+};
+
+/* ---- Stats ---- */
+let stats = LS.get('stats', {played:0, won:0, streak:0, maxStreak:0, lastDate:null});
+
+function checkAlreadyPlayed() {
+  const saved = LS.get('today', null);
+  if (saved && saved.date === TODAY) {
+    board = saved.board;
+    states = saved.states;
+    currentRow = saved.currentRow;
+    currentCol = saved.currentCol;
+    gameOver = saved.gameOver;
+    shareGrid = saved.shareGrid || [];
+    hintsUsed = saved.hintsUsed || 0;
+    return true;
+  }
+  return false;
+}
+
+/* ---- Build board ---- */
+function buildBoard() {
+  const el = document.getElementById('board');
+  el.innerHTML = '';
+  for (let r = 0; r < 6; r++) {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.id = 'row-'+r;
+    for (let c = 0; c < 5; c++) {
+      const tile = document.createElement('div');
+      tile.className = 'tile';
+      tile.id = `tile-${r}-${c}`;
+      row.appendChild(tile);
+    }
+    el.appendChild(row);
+  }
+}
+
+function buildKeyboard() {
+  const rows = [['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['Enter','Z','X','C','V','B','N','M','Del']];
+  const kb = document.getElementById('keyboard');
+  kb.innerHTML = '';
+  rows.forEach(row => {
+    const div = document.createElement('div');
+    div.className = 'kb-row';
+    row.forEach(k => {
+      const btn = document.createElement('button');
+      btn.className = 'key' + (k.length > 1 ? ' wide' : '');
+      btn.textContent = k;
+      btn.dataset.key = k;
+      btn.onclick = () => handleKey(k === 'Del' ? 'Backspace' : k);
+      div.appendChild(btn);
+    });
+    kb.appendChild(div);
+  });
+}
+
+/* ---- Restore saved state ---- */
+function restoreBoard() {
+  for (let r = 0; r < currentRow; r++) {
+    for (let c = 0; c < 5; c++) {
+      const tile = document.getElementById(`tile-${r}-${c}`);
+      tile.textContent = board[r][c];
+      tile.dataset.state = states[r][c];
+    }
+  }
+  // Restore partial current row if game not over
+  if (!gameOver && currentRow < 6) {
+    for (let c = 0; c < currentCol; c++) {
+      const tile = document.getElementById(`tile-${currentRow}-${c}`);
+      tile.textContent = board[currentRow][c];
+      tile.dataset.state = 'tbd';
+    }
+  }
+  updateKeyboard();
+  if (gameOver) {
+    setTimeout(() => showEndPanel(), 300);
+    updateHintButtons();
+  }
+}
+
+/* ---- Input ---- */
+function handleKey(key) {
+  if (gameOver) return;
+  if (key === 'Backspace') {
+    if (currentCol > 0) {
+      currentCol--;
+      board[currentRow][currentCol] = '';
+      const tile = document.getElementById(`tile-${currentRow}-${currentCol}`);
+      tile.textContent = '';
+      tile.dataset.state = '';
+    }
+    return;
+  }
+  if (key === 'Enter') {
+    submitGuess();
+    return;
+  }
+  if (/^[a-zA-Z]$/.test(key) && currentCol < 5) {
+    const letter = key.toUpperCase();
+    board[currentRow][currentCol] = letter;
+    const tile = document.getElementById(`tile-${currentRow}-${currentCol}`);
+    tile.textContent = letter;
+    tile.dataset.state = 'tbd';
+    currentCol++;
+  }
+}
+
+function submitGuess() {
+  if (currentCol < 5) { showToast('Not enough letters'); shakeTiles(); return; }
+  const word = board[currentRow].join('');
+  const result = evaluateGuess(word);
+  const rowEls = Array.from({length:5},(_,c)=>document.getElementById(`tile-${currentRow}-${c}`));
+  const row = [];
+  result.forEach((state, i) => {
+    const delay = i * 300;
+    setTimeout(() => {
+      states[currentRow][i] = state;
+      rowEls[i].dataset.state = state;
+    }, delay + 150);
+    const emoji = state === 'correct' ? '🟩' : state === 'present' ? '🟨' : '⬛';
+    row.push(emoji);
+  });
+  shareGrid.push(row);
+  setTimeout(() => {
+    currentRow++;
+    currentCol = 0;
+    updateKeyboard();
+    saveState();
+    if (word === TARGET) {
+      gameOver = true;
+      saveState();
+      updateStats(true);
+      setTimeout(() => { showToast(currentRow === 1 ? 'Genius!' : currentRow <= 3 ? 'Impressive!' : currentRow <= 5 ? 'Nice solve!' : 'Phew!'); setTimeout(showEndPanel, 1000); }, 1500);
+    } else if (currentRow >= 6) {
+      gameOver = true;
+      saveState();
+      updateStats(false);
+      setTimeout(() => { showToast(TARGET, 3500); setTimeout(showEndPanel, 1000); }, 1500);
+    }
+    updateHintButtons();
+  }, 5 * 300 + 200);
+}
+
+function evaluateGuess(word) {
+  const result = Array(5).fill('absent');
+  const targetArr = TARGET.split('');
+  const wordArr = word.split('');
+  // First pass: correct
+  wordArr.forEach((l,i) => { if (l === targetArr[i]) { result[i] = 'correct'; targetArr[i] = null; wordArr[i] = null; } });
+  // Second pass: present
+  wordArr.forEach((l,i) => { if (l === null) return; const ti = targetArr.indexOf(l); if (ti !== -1) { result[i] = 'present'; targetArr[ti] = null; } });
+  return result;
+}
+
+function shakeTiles() {
+  for (let c = 0; c < currentCol; c++) {
+    const tile = document.getElementById(`tile-${currentRow}-${c}`);
+    tile.classList.add('shake');
+    tile.addEventListener('animationend', () => tile.classList.remove('shake'), {once:true});
+  }
+}
+
+function updateKeyboard() {
+  const keyStates = {};
+  const priority = {correct:3,present:2,absent:1};
+  for (let r = 0; r < currentRow; r++) {
+    board[r].forEach((l,i) => {
+      const s = states[r][i];
+      if (!keyStates[l] || (priority[s]||0) > (priority[keyStates[l]]||0)) keyStates[l] = s;
+    });
+  }
+  document.querySelectorAll('.key').forEach(btn => {
+    const k = btn.dataset.key;
+    if (keyStates[k]) btn.dataset.state = keyStates[k];
+  });
+}
+
+/* ---- Hints ---- */
+function updateHintButtons() {
+  document.getElementById('hint2-btn').disabled = hintsUsed < 1 || gameOver;
+  document.getElementById('hint3-btn').disabled = hintsUsed < 2 || gameOver;
+  if (gameOver) {
+    document.getElementById('hint1-btn').disabled = true;
+    document.getElementById('hint2-btn').disabled = true;
+    document.getElementById('hint3-btn').disabled = true;
+  }
+}
+
+function showHint(n) {
+  if (gameOver) return;
+  const vowels = TARGET.split('').filter(l=>'AEIOU'.includes(l));
+  const msgs = [
+    `The word contains ${vowels.length > 0 ? 'the vowel' + (vowels.length>1?'s':'')+' '+[...new Set(vowels)].join(', ') : 'no vowels'}.`,
+    `The word starts with the letter <strong>${TARGET[0]}</strong>.`,
+    `The word ends with the letter <strong>${TARGET[4]}</strong>.`,
+  ];
+  const display = document.getElementById('hint-display');
+  display.innerHTML = `<strong>Hint ${n}:</strong> ${msgs[n-1]}`;
+  display.style.display = 'block';
+  hintsUsed = Math.max(hintsUsed, n);
+  document.getElementById('hint1-btn').disabled = hintsUsed >= 1;
+  updateHintButtons();
+  saveState();
+}
+
+/* ---- Share ---- */
+function shareResult() {
+  const guesses = gameOver && board.slice(0,currentRow).some(r=>r.join('')===TARGET) ? currentRow : 'X';
+  const lines = [`Unscramble Words Pro — Daily Wordle`, `${TODAY} · ${guesses}/6${hintsUsed > 0 ? ' ('+hintsUsed+' hint'+(hintsUsed>1?'s':'')+')' : ''}`, ''];
+  shareGrid.forEach(row => lines.push(row.join('')));
+  lines.push('', 'https://unscramblewordspro.com/wordle/daily-challenge/');
+  const text = lines.join('\n');
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => showToast('Result copied to clipboard!'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); showToast('Result copied!'); } catch(e) { showToast('Copy failed — please copy manually'); }
+    document.body.removeChild(ta);
+  }
+}
+
+/* ---- End panel ---- */
+function showEndPanel() {
+  const won = board.slice(0,currentRow).some(r=>r.join('')===TARGET) || (gameOver && currentRow <= 6 && board[currentRow-1]?.join('')===TARGET);
+  const def = DEFINITIONS[TARGET] || 'a five-letter English word';
+  document.getElementById('end-word').textContent = TARGET;
+  document.getElementById('end-def').textContent = `"${TARGET}" — ${def}.`;
+  // Stats
+  const s = LS.get('stats', {played:0,won:0,streak:0,maxStreak:0});
+  document.getElementById('stat-played').textContent = s.played;
+  document.getElementById('stat-winpct').textContent = s.played > 0 ? Math.round(s.won/s.played*100)+'%' : '0%';
+  document.getElementById('stat-streak').textContent = s.streak;
+  document.getElementById('streak-count').textContent = s.streak;
+  // Strategy
+  const guess = board.slice(0,currentRow).findIndex(r=>r.join('')===TARGET)+1 || (won ? currentRow : 0);
+  const strat = buildStrategyHTML(won, guess);
+  document.getElementById('strat-section').innerHTML = strat;
+  document.getElementById('end-panel').style.display = 'block';
+  document.getElementById('end-panel').scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+
+function buildStrategyHTML(won, guessNum) {
+  const openers = ['STARE','SLATE','CRANE','RAISE'];
+  const usedOpener = board[0]?.join('');
+  const openerNote = openers.includes(usedOpener)
+    ? `<strong>${usedOpener}</strong> is one of the statistically strongest openers — it eliminates ~60% of the answer pool on guess 1.`
+    : `A top opener like <strong>STARE</strong> or <strong>SLATE</strong> would have eliminated ~62% of answers on guess 1, potentially reducing your total guesses.`;
+  const wonMsg = won
+    ? (guessNum <= 3 ? `Excellent! Solving in ${guessNum} ${guessNum===1?'guess':'guesses'} puts you in the top tier of Wordle players.` : `Solved in ${guessNum} guesses — solid result.`)
+    : `The word was <strong>${TARGET}</strong>. Don't worry — some words are genuinely tricky. The key is opening consistently with a high-entropy word.`;
+  return `<h3>${won ? '✅ Post-Game Analysis' : '❌ Post-Game Analysis'}</h3>
+    <p>${wonMsg}</p>
+    <p>${openerNote}</p>
+    <p>After each guess, prioritise plays that test <em>new</em> letters rather than confirming known positions. Each grey result eliminates ~6.3 additional candidates on average. Read the <a href="../../guides/wordle-elimination-strategy.html">elimination strategy guide</a> to sharpen this skill.</p>`;
+}
+
+/* ---- Toast ---- */
+function showToast(msg, duration = 1800) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
+}
+
+/* ---- Save / Load ---- */
+function saveState() {
+  LS.set('today', {date:TODAY, board, states, currentRow, currentCol, gameOver, shareGrid, hintsUsed});
+}
+
+function updateStats(won) {
+  const s = LS.get('stats', {played:0,won:0,streak:0,maxStreak:0,lastDate:null});
+  s.played++;
+  if (won) { s.won++; s.streak = (s.lastDate && dateDiff(s.lastDate, TODAY) === 1) ? s.streak+1 : 1; }
+  else { s.streak = 0; }
+  s.maxStreak = Math.max(s.maxStreak, s.streak);
+  s.lastDate = TODAY;
+  LS.set('stats', s);
+  document.getElementById('streak-count').textContent = s.streak;
+}
+
+function dateDiff(a, b) {
+  return Math.round((new Date(b) - new Date(a)) / 86400000);
+}
+
+/* ---- Init ---- */
+document.getElementById('date-label').textContent = formatDateLabel();
+buildBoard();
+buildKeyboard();
+document.getElementById('streak-count').textContent = LS.get('stats', {streak:0}).streak;
+
+const alreadyPlayed = checkAlreadyPlayed();
+if (alreadyPlayed) {
+  restoreBoard();
+} else {
+  // fresh game — nothing to restore
+}
+
+document.addEventListener('keydown', e => {
+  if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.key === 'Enter') handleKey('Enter');
+  else if (e.key === 'Backspace') handleKey('Backspace');
+  else if (/^[a-zA-Z]$/.test(e.key)) handleKey(e.key);
+});
+</script>
+</body>
+</html>

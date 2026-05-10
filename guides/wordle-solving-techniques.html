@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCJTBHHQPX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZCJTBHHQPX');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="google-adsense-account" content="ca-pub-6261071610831190">
+<title>Advanced Wordle Solving Techniques: Information Theory Made Simple</title>
+<meta name="description" content="Advanced Wordle techniques: information theory, entropy-based guessing sequences, pattern recognition, and the two-word strategy. Reach 3-guess average with these expert methods.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://unscramblewordspro.com/guides/wordle-solving-techniques.html">
+<script type="application/ld+json">
+[
+  {
+    "@context":"https://schema.org","@type":"Article",
+    "headline":"Advanced Wordle Solving Techniques: Information Theory Made Simple",
+    "description":"Expert-level Wordle techniques including entropy-based guessing, two-word opening sequences, pattern recognition, and systematic deduction for consistent 3-guess solves.",
+    "url":"https://unscramblewordspro.com/guides/wordle-solving-techniques.html",
+    "datePublished":"2026-05-10","dateModified":"2026-05-10",
+    "author":{"@type":"Organization","name":"Unscramble Words Pro","url":"https://unscramblewordspro.com"},
+    "publisher":{"@type":"Organization","name":"Unscramble Words Pro","url":"https://unscramblewordspro.com"}
+  },
+  {
+    "@context":"https://schema.org","@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What is entropy in Wordle?","acceptedAnswer":{"@type":"Answer","text":"In Wordle, entropy is a measure of how much information a guess provides on average across all possible answers. A guess with high entropy divides the remaining answer pool into many roughly equal-sized groups, leaving you with fewer candidates regardless of the colour result. STARE has near-maximum entropy because its letters are common and well-distributed across all five positions."}},
+      {"@type":"Question","name":"What is the best two-word Wordle opening sequence?","acceptedAnswer":{"@type":"Answer","text":"The best two-word Wordle opening sequences test 10 unique high-frequency letters. Top pairs include STARE + UNCOIL (tests S, T, A, R, E, U, N, C, O, I) and CRANE + MOIST (tests C, R, A, N, E, M, O, I, S, T). After both guesses, you have tested 10 of the top 11 most common letters in the Wordle answer set."}},
+      {"@type":"Question","name":"How can I solve Wordle in 3 guesses consistently?","acceptedAnswer":{"@type":"Answer","text":"Consistent 3-guess solves require: (1) a high-entropy opener like STARE that eliminates 60%+ of candidates immediately; (2) a targeted second guess based on your first-guess results that eliminates another 70-80% of remaining candidates; and (3) pattern recognition in guess 3 to identify the answer from the small remaining pool. Players who master these three steps average 3.2-3.4 guesses per puzzle."}}
+    ]
+  }
+]
+</script>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6261071610831190" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[data-theme="dark"]{--bg:#0F172A;--bg-alt:#1E293B;--bg-raised:#334155;--border:#334155;--text:#E5E7EB;--text-2:#94A3B8;--text-3:#64748B;--primary:#2563EB;--primary-bg:rgba(37,99,235,.12)}
+[data-theme="light"]{--bg:#F8FAFC;--bg-alt:#F1F5F9;--bg-raised:#E2E8F0;--border:#E2E8F0;--text:#0F172A;--text-2:#475569;--text-3:#94A3B8;--primary:#2563EB;--primary-bg:rgba(37,99,235,.08)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.header{background:var(--bg-alt);border-bottom:1px solid var(--border);padding:0 20px}
+.header-inner{max-width:860px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:16px;color:var(--text);text-decoration:none}
+.logo-pro{background:var(--primary);color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:700}
+.theme-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 8px;cursor:pointer;color:var(--text);display:flex;align-items:center}
+.container{max-width:860px;margin:0 auto;padding:40px 20px 80px}
+.breadcrumb{font-size:13px;color:var(--text-3);margin-bottom:28px}.breadcrumb a{color:var(--primary);text-decoration:none}
+.article-header{margin-bottom:36px;border-bottom:1px solid var(--border);padding-bottom:28px}
+.article-header h1{font-size:clamp(22px,4vw,32px);font-weight:800;line-height:1.25;margin-bottom:12px}
+.article-meta{font-size:13px;color:var(--text-3);display:flex;gap:16px;flex-wrap:wrap}
+.article-body h2{font-size:22px;font-weight:700;margin:40px 0 14px;border-left:3px solid var(--primary);padding-left:12px}
+.article-body h3{font-size:17px;font-weight:600;margin:28px 0 10px}
+.article-body p{font-size:15.5px;color:var(--text-2);margin-bottom:18px;line-height:1.8}
+.article-body ul,.article-body ol{color:var(--text-2);font-size:15.5px;line-height:1.85;margin:0 0 18px 24px}
+.article-body li{margin-bottom:6px}
+.article-body strong{color:var(--text)}
+.tip-box{background:var(--primary-bg);border:1px solid var(--primary);border-radius:10px;padding:16px 20px;margin:24px 0}
+.tip-box .tip-label{font-size:12px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.tip-box p{color:var(--text-2);font-size:14.5px;margin:0}
+.seq-table{width:100%;border-collapse:collapse;margin:16px 0 26px;font-size:14px}
+.seq-table th{text-align:left;padding:9px 12px;background:var(--bg-alt);color:var(--text);font-weight:600;border-bottom:2px solid var(--border)}
+.seq-table td{padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2);vertical-align:top}
+.seq-table tr:last-child td{border-bottom:none}
+.step-flow{counter-reset:step;margin:18px 0 24px}
+.step{display:flex;gap:14px;margin-bottom:14px;align-items:flex-start}
+.step-num{flex-shrink:0;width:30px;height:30px;background:var(--primary);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.step-body{flex:1;padding-top:4px}
+.step-body strong{color:var(--text);font-size:15px;display:block;margin-bottom:4px}
+.step-body p{font-size:14px;color:var(--text-2);margin:0;line-height:1.6}
+.cta-box{background:var(--bg-alt);border:1px solid var(--border);border-radius:12px;padding:24px;margin:40px 0;text-align:center}
+.cta-box h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.cta-box p{color:var(--text-2);font-size:14px;margin-bottom:16px}
+.cta-btn{display:inline-block;background:var(--primary);color:#fff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:700;font-size:15px}
+.footer{background:var(--bg-alt);border-top:1px solid var(--border);padding:24px 20px;text-align:center;font-size:13px;color:var(--text-3)}
+.footer a{color:var(--primary);text-decoration:none;margin:0 8px}
+a{color:var(--primary)}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../" class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Unscramble Words <span class="logo-pro">Pro</span>
+    </a>
+    <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb"><a href="../">Home</a> &rsaquo; <a href="../guides/">Guides</a> &rsaquo; <span>Advanced Wordle Solving Techniques</span></nav>
+
+  <header class="article-header">
+    <h1>Advanced Wordle Solving Techniques: Information Theory Made Simple</h1>
+    <div class="article-meta"><span>&#128203; 2,000 words</span><span>&#9200; 8 min read</span><span>&#127381; Wordle &bull; Advanced Strategy &bull; Information Theory</span></div>
+  </header>
+
+  <article class="article-body">
+
+    <p>Most Wordle strategy guides stop at "use a good starting word and avoid grey letters." That advice will get you to a 3.8&ndash;4.0 average. Getting to 3.2&ndash;3.4 &mdash; where consistent 3-guess solves become routine &mdash; requires understanding the deeper logic of information-efficient guessing. This guide introduces information theory concepts at a practical level, presents proven two-word opening sequences, and walks through the decision-making process that separates expert Wordle players from casual ones.</p>
+
+    <div style="background:var(--primary-bg);border:1px solid var(--primary);border-radius:10px;padding:16px 20px;margin-bottom:24px">
+      <div style="font-size:11px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Who This Guide Is For</div>
+      <p style="margin:0;font-size:15px;color:var(--text)">This guide assumes you already use a consistent, good opener (STARE, SLATE, or CRANE) and want to push your average below 3.5 guesses. If you are still using random openers or words like ADIEU, start with the <a href="best-wordle-starting-words.html">Best Wordle Starting Words</a> guide first.</p>
+    </div>
+
+    <h2>Entropy: The Real Measure of Guess Quality</h2>
+    <p>In information theory, <strong>entropy</strong> measures uncertainty &mdash; specifically, how many equally-likely possibilities remain in a system. In Wordle, entropy applied to a guess means: "How evenly does this guess divide the remaining answer pool across all possible colour patterns?"</p>
+
+    <p>A guess with high entropy produces many different colour-pattern outcomes, each eliminating a roughly equal share of remaining candidates. A guess with low entropy produces mostly one outcome (usually all grey), leaving your candidate pool nearly unchanged. Here is why this matters practically:</p>
+
+    <ul>
+      <li>STARE guessed against a 2,000-word pool produces approximately 243 different colour patterns (3^5), with each pattern leaving roughly 8 candidates on average &mdash; high entropy.</li>
+      <li>A word like MUMMY, with repeated letters and low-frequency consonants, might produce only 3&ndash;4 distinct patterns against the same pool, with one pattern (all grey) covering 90%+ of cases &mdash; low entropy.</li>
+    </ul>
+
+    <p>You do not need to calculate entropy manually. The practical takeaway: <strong>guess words that are most likely to produce varied colour patterns</strong>, not words that are most likely to be the answer. The latter is a trap until you have fewer than 5 candidates.</p>
+
+    <h2>The Two-Word Opening System</h2>
+    <p>The two-word opening system replaces guess-by-guess adaptation with a fixed, pre-planned two-word sequence designed to test the 10 most informative letters before making any deductive guesses. The system sacrifices guesses 1 and 2 as pure information gatherers, leaving guesses 3 through 6 for deduction and solution.</p>
+
+    <p>The best two-word pairs test 10 unique, high-frequency letters collectively covering approximately 68% of all letter occurrences in the Wordle answer set. Here are the proven pairs:</p>
+
+    <table class="seq-table">
+      <thead><tr><th>Pair</th><th>Letters Tested</th><th>Coverage</th><th>Best For</th></tr></thead>
+      <tbody>
+        <tr><td><strong>STARE + UNCOIL</strong></td><td>S, T, A, R, E, U, N, C, O, I</td><td>~68% of letter occurrences</td><td>Standard mode, best overall coverage</td></tr>
+        <tr><td><strong>CRANE + MOIST</strong></td><td>C, R, A, N, E, M, O, I, S, T</td><td>~67% of letter occurrences</td><td>Standard and Hard Mode adaptation</td></tr>
+        <tr><td><strong>SLATE + CORNI</strong></td><td>S, L, A, T, E, C, O, R, N, I</td><td>~67% of letter occurrences</td><td>Players who prefer SLATE as opener</td></tr>
+        <tr><td><strong>RAISE + CLOUT</strong></td><td>R, A, I, S, E, C, L, O, U, T</td><td>~66% of letter occurrences</td><td>Vowel-forward strategy</td></tr>
+      </tbody>
+    </table>
+
+    <div class="tip-box">
+      <div class="tip-label">The Two-Word System Tradeoff</div>
+      <p>Spending two guesses on pure elimination means you are in "solve mode" from guess 3, with only four guesses remaining. In most cases this is plenty &mdash; two strong elimination guesses typically leave fewer than 10 candidates. But on rare occasions when the answer pool after both guesses is still 15+ candidates, you may need a third elimination guess, leaving only 3 guesses to solve. Know this risk before committing to the system.</p>
+    </div>
+
+    <h2>Pattern Recognition: The Expert Edge</h2>
+    <p>Pattern recognition in Wordle means having a mental library of common 5-letter word patterns &mdash; letter combinations that frequently appear together &mdash; so that when you have partial information, you can rapidly identify candidates without exhaustive search.</p>
+
+    <h3>High-Value Ending Patterns</h3>
+    <p>The most useful patterns to internalise are word endings, because a confirmed final letter (green in position 5) dramatically narrows the candidate pool:</p>
+    <ul>
+      <li><strong>-IGHT</strong> &mdash; LIGHT, NIGHT, FIGHT, TIGHT, MIGHT, SIGHT, RIGHT, WIGHT (8 common answers)</li>
+      <li><strong>-OUND</strong> &mdash; FOUND, ROUND, SOUND, BOUND, WOUND, MOUND, POUND, HOUND (8 common answers)</li>
+      <li><strong>-TION</strong> pattern (as -TION in 4-5 letters) &mdash; rare in 5-letter Wordle words but appears in POTION, LOTION, MOTION, NOTION, NATION</li>
+      <li><strong>-ENCH</strong> &mdash; BENCH, WENCH, RENCH (less common but distinctive)</li>
+      <li><strong>-ATCH</strong> &mdash; BATCH, CATCH, HATCH, LATCH, MATCH, PATCH, WATCH, NOTCH (8 common answers)</li>
+      <li><strong>-OULD</strong> &mdash; COULD, WOULD, MOULD, FOULD, SCOLD (fewer but recognisable)</li>
+    </ul>
+    <p>When you confirm -IGHT by guess 3, you are facing at most 8 candidates. A single guess that places one of the distinguishing letters (L, N, F, T, M, S, R, W) in position 1 eliminates 7 of those 8 options.</p>
+
+    <h3>High-Value Starting Patterns</h3>
+    <p>Similarly, knowing that certain letter clusters frequently begin Wordle answers helps you generate candidates quickly:</p>
+    <ul>
+      <li><strong>ST-</strong> &mdash; STARE, STALL, STAMP, STAND, STARK, STEEL, STEEP, STERN, STONE, STOOL, STORE, STOUT, STORM, STORY</li>
+      <li><strong>SH-</strong> &mdash; SHADE, SHAKE, SHALL, SHAME, SHARE, SHARK, SHARP, SHEAR, SHELL, SHIFT, SHIRT, SHOCK, SHORE, SHORT, SHOUT</li>
+      <li><strong>CH-</strong> &mdash; CHAIN, CHAIR, CHALK, CHARM, CHART, CHASE, CHEAP, CHEER, CHESS, CHIEF, CHILL, CHOKE, CHORD, CHOSE</li>
+      <li><strong>TR-</strong> &mdash; TRACE, TRACK, TRADE, TRAIL, TRAIN, TRASH, TRAWL, TREAD, TREAT, TREND, TRIAL, TRIED, TROLL, TROUT, TRUCE, TRULY, TRUMP, TRUNK, TRUST, TRUTH</li>
+    </ul>
+
+    <h2>The Systematic Deduction Flowchart</h2>
+    <p>Expert players follow a consistent mental process at every guess. Here is the flowchart that produces consistent 3&ndash;4 guess solves:</p>
+
+    <div class="step-flow">
+      <div class="step"><div class="step-num">1</div><div class="step-body"><strong>Count remaining candidates</strong><p>After each guess, estimate how many answers are still possible. If &gt;50, you need another elimination guess. If 5&ndash;50, consider a targeted elimination. If &lt;5, guess the most likely answer.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-body"><strong>Apply all constraints rigorously</strong><p>List known greens (letter + position), known yellows (letter + excluded positions), and confirmed absents. Any candidate violating any constraint is eliminated. Be especially careful about yellow position exclusions &mdash; this is the most commonly missed constraint.</p></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-body"><strong>Identify the distinguishing letter</strong><p>Among remaining candidates, find the letter that most evenly splits the group. If 8 candidates all end in -IGHT but have different starting letters, the starting letter is the distinguishing variable. Design your next guess to test as many of those starting letters as possible.</p></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-body"><strong>Choose between elimination and solution</strong><p>If a single elimination guess can reduce your pool to 1&ndash;2 candidates, play it. If you already have only 1&ndash;3 candidates and you are on guess 4 or later, guess the most likely one directly.</p></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-body"><strong>Account for common word patterns</strong><p>Use your pattern library to quickly generate candidates that satisfy all constraints. A player who immediately recognises "-ATCH words" when they see A in position 2, T in position 3, C in position 4, H in position 5 will deduce the first letter far faster than someone generating candidates from scratch.</p></div></div>
+    </div>
+
+    <h2>Advanced Technique: The Positional Frequency Tiebreaker</h2>
+    <p>When two or more candidates are equally plausible after applying all constraints, use positional frequency to choose. Each position in a Wordle answer has a probability distribution over all 26 letters. When you have two final candidates &mdash; say LIGHT and NIGHT &mdash; and both are equally possible, the letter with higher positional frequency in position 1 is the better guess.</p>
+    <p>In position 1, N has approximately 4.8% frequency and L has 5.1% frequency. All else being equal, LIGHT is very slightly more likely than NIGHT as a Wordle answer. Differences this small rarely matter in practice, but when you track your Wordle statistics over weeks and months, these marginal edge decisions compound.</p>
+
+    <h2>Hard Mode Advanced Strategy</h2>
+    <p>In Hard Mode, the constraint that confirmed letters must appear in every subsequent guess forces a different approach to the deduction flowchart:</p>
+    <ul>
+      <li><strong>After a green in position X</strong> &mdash; Every subsequent guess must contain that letter in position X. Design your guess around this constraint while testing new letters in the remaining four slots.</li>
+      <li><strong>After a yellow on letter L</strong> &mdash; Every subsequent guess must contain L in a position other than where it turned yellow. This limits your word options significantly in later guesses.</li>
+      <li><strong>The "trap" problem</strong> &mdash; Hard Mode's biggest risk is accumulating so many confirmed letters that your remaining valid guesses all happen to be similar words (e.g., -IGHT words). If you have confirmed -IGHT and need to distinguish L, N, S, F in position 1, you must guess a valid -IGHT word to proceed, which means guessing one answer at a time rather than testing multiple candidates in a single guess.</li>
+    </ul>
+    <p>The Hard Mode mitigation: use CRANE as your opener. Its letters C, R, A, N, E are placed in positions that leave you more flexibility in subsequent guesses compared to SLATE (where S in position 1 frequently leads to -S constraint traps).</p>
+
+    <h2>Practise System: Building Expert Intuition</h2>
+    <p>Expert-level pattern recognition is built through deliberate practice, not just daily play. Three specific exercises accelerate the development of Wordle intuition:</p>
+    <ol>
+      <li><strong>Post-game analysis</strong> &mdash; After each solve, identify the first guess where you had fewer than 10 candidates. Could you have solved it in one fewer guess with different guessing logic? Most improvement comes from recognising where elimination opportunities were missed.</li>
+      <li><strong>Speed constraint application</strong> &mdash; Set a 30-second timer after each result and practise rapidly listing all remaining candidates that satisfy every constraint. Speed here matters because slow constraint application leads to "overlooking" valid options in real games.</li>
+      <li><strong>Pattern flash cards</strong> &mdash; Spend 5 minutes once a week memorising -IGHT, -OUND, -ATCH, -ENCH, ST-, SH-, CH-, TR- pattern lists. This mental vocabulary reduces your working memory load during actual games.</li>
+    </ol>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <h3>What is entropy in Wordle?</h3>
+    <p>Entropy in Wordle measures how much information a guess provides on average across all possible answers. A high-entropy guess divides the remaining answer pool into many equal-sized groups, maximising the information you gain regardless of which colour pattern you receive. STARE has near-maximum entropy because its five letters are high-frequency and well-distributed across all positions.</p>
+
+    <h3>What is the best two-word Wordle opening sequence?</h3>
+    <p>STARE + UNCOIL is the best overall two-word sequence, testing 10 unique high-frequency letters (S, T, A, R, E, U, N, C, O, I) that collectively appear in approximately 68% of all letter positions in the Wordle answer set. CRANE + MOIST is the best pair for Hard Mode adaptation.</p>
+
+    <h3>How can I solve Wordle in 3 guesses consistently?</h3>
+    <p>Consistent 3-guess solves require three skills working together: a high-entropy opener (STARE/SLATE) that cuts the pool by 60%+; a second guess targeting the most common remaining letters; and fast pattern recognition to identify the answer from the small remaining pool. Players who master these three skills average 3.2&ndash;3.4 guesses per puzzle.</p>
+
+    <div class="cta-box">
+      <h3>Apply These Techniques Now</h3>
+      <p>Today's daily challenge is the best place to practise the two-word system and entropy-first guessing.</p>
+      <a href="../wordle/daily-challenge/" class="cta-btn">Play Daily Challenge &rarr;</a>
+    </div>
+
+    <div style="margin-top:32px;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px 24px">
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;color:#f1f5f9">Complete Wordle Strategy Hub</h3>
+      <ul style="padding-left:18px;margin:0">
+        <li style="margin-bottom:8px;font-size:14px"><a href="best-wordle-starting-words.html">Best Wordle Starting Words Ranked by Win Rate</a></li>
+        <li style="margin-bottom:8px;font-size:14px"><a href="wordle-letter-frequency.html">Most Common Wordle Letters &mdash; Full Frequency Analysis</a></li>
+        <li style="margin-bottom:8px;font-size:14px"><a href="wordle-elimination-strategy.html">Wordle Elimination Strategy Guide</a></li>
+        <li style="margin-bottom:8px;font-size:14px"><a href="worst-wordle-starting-words.html">Worst Wordle Starting Words</a></li>
+        <li style="margin-bottom:8px;font-size:14px"><a href="wordle-tips-and-tricks.html">Wordle Tips &amp; Tricks: 10 Strategies</a></li>
+        <li style="margin-bottom:0;font-size:14px"><a href="../">Free Wordle Helper Tool &rarr;</a></li>
+      </ul>
+    </div>
+
+  </article>
+</div>
+
+<footer class="footer">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;margin-bottom:10px">
+      <a href="/">Home</a><a href="/about.html">About</a><a href="/guides/">Guides</a><a href="/blog/">Blog</a><a href="/privacy.html">Privacy</a>
+    </div>
+    <p>&copy; 2026 Unscramble Words Pro &mdash; Free word finder &amp; Wordle strategy guides</p>
+  </div>
+  <div style="font-size:13px;color:var(--text-3);padding:10px 16px;border-top:1px solid var(--border);margin-top:16px;text-align:center">
+    Written &amp; reviewed by <a href="../author/wordpro-editorial-team.html" style="color:var(--primary);font-weight:600">Unscramble Words Pro Editorial Team</a> &mdash; Last updated: May 2026
+  </div>
+</footer>
+<script src="../theme-toggle.js"></script>
+</body>
+</html>

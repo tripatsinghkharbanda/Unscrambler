@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCJTBHHQPX"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ZCJTBHHQPX');</script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta name="google-adsense-account" content="ca-pub-6261071610831190">
+<title>Wordle Elimination Strategy: Solve Every Puzzle in 4 Guesses or Fewer</title>
+<meta name="description" content="Master the Wordle elimination strategy: how to use grey, yellow, and green tiles to narrow candidates systematically. Includes decision tree, Hard Mode tips, and common mistakes.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://unscramblewordspro.com/guides/wordle-elimination-strategy.html">
+<script type="application/ld+json">
+[
+  {
+    "@context":"https://schema.org","@type":"Article",
+    "headline":"Wordle Elimination Strategy: Solve Every Puzzle in 4 Guesses or Fewer",
+    "description":"A systematic guide to Wordle elimination logic: how to read tile colours, eliminate candidates efficiently, and solve any puzzle in 4 guesses or fewer.",
+    "url":"https://unscramblewordspro.com/guides/wordle-elimination-strategy.html",
+    "datePublished":"2026-05-10","dateModified":"2026-05-10",
+    "author":{"@type":"Organization","name":"Unscramble Words Pro","url":"https://unscramblewordspro.com"},
+    "publisher":{"@type":"Organization","name":"Unscramble Words Pro","url":"https://unscramblewordspro.com"}
+  },
+  {
+    "@context":"https://schema.org","@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"What is the Wordle elimination strategy?","acceptedAnswer":{"@type":"Answer","text":"The Wordle elimination strategy means prioritising guesses that maximise the number of answer candidates you can eliminate, rather than simply guessing words that fit the known constraints. Every grey tile eliminates all remaining candidates containing that letter; every yellow tile eliminates all candidates without that letter; every green tile eliminates all candidates with a different letter in that position."}},
+      {"@type":"Question","name":"Should I always guess the most likely answer or guess to eliminate?","acceptedAnswer":{"@type":"Answer","text":"Until you reach guess 5, it is almost always better to guess a word that eliminates the most candidates rather than guess the most likely answer. The exception is if you are down to 2-3 candidates and the risk of failure is low — in that case, guessing a likely answer is defensible. In Hard Mode, you are forced to guess from valid candidates, which changes this calculation."}},
+      {"@type":"Question","name":"How does Wordle Hard Mode change the elimination strategy?","acceptedAnswer":{"@type":"Answer","text":"In Hard Mode, every confirmed letter must appear in every subsequent guess. This prevents pure elimination guesses and forces you to work within tighter constraints. The strategy shifts toward choosing guess words that satisfy Hard Mode constraints while still testing as many new positions as possible for your confirmed letters."}}
+    ]
+  }
+]
+</script>
+<link rel="icon" type="image/svg+xml" href="../favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6261071610831190" crossorigin="anonymous"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+[data-theme="dark"]{--bg:#0F172A;--bg-alt:#1E293B;--bg-raised:#334155;--border:#334155;--text:#E5E7EB;--text-2:#94A3B8;--text-3:#64748B;--primary:#2563EB;--primary-bg:rgba(37,99,235,.12)}
+[data-theme="light"]{--bg:#F8FAFC;--bg-alt:#F1F5F9;--bg-raised:#E2E8F0;--border:#E2E8F0;--text:#0F172A;--text-2:#475569;--text-3:#94A3B8;--primary:#2563EB;--primary-bg:rgba(37,99,235,.08)}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+.header{background:var(--bg-alt);border-bottom:1px solid var(--border);padding:0 20px}
+.header-inner{max-width:860px;margin:0 auto;height:56px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;font-size:16px;color:var(--text);text-decoration:none}
+.logo-pro{background:var(--primary);color:#fff;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:700}
+.theme-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:6px 8px;cursor:pointer;color:var(--text);display:flex;align-items:center}
+.container{max-width:860px;margin:0 auto;padding:40px 20px 80px}
+.breadcrumb{font-size:13px;color:var(--text-3);margin-bottom:28px}.breadcrumb a{color:var(--primary);text-decoration:none}
+.article-header{margin-bottom:36px;border-bottom:1px solid var(--border);padding-bottom:28px}
+.article-header h1{font-size:clamp(22px,4vw,32px);font-weight:800;line-height:1.25;margin-bottom:12px}
+.article-meta{font-size:13px;color:var(--text-3);display:flex;gap:16px;flex-wrap:wrap}
+.article-body h2{font-size:22px;font-weight:700;margin:40px 0 14px;border-left:3px solid var(--primary);padding-left:12px}
+.article-body h3{font-size:17px;font-weight:600;margin:28px 0 10px}
+.article-body p{font-size:15.5px;color:var(--text-2);margin-bottom:18px;line-height:1.8}
+.article-body ul,.article-body ol{color:var(--text-2);font-size:15.5px;line-height:1.85;margin:0 0 18px 24px}
+.article-body li{margin-bottom:6px}
+.article-body strong{color:var(--text)}
+.tip-box{background:var(--primary-bg);border:1px solid var(--primary);border-radius:10px;padding:16px 20px;margin:24px 0}
+.tip-box .tip-label{font-size:12px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.tip-box p{color:var(--text-2);font-size:14.5px;margin:0}
+.tile-demo{display:inline-flex;gap:4px;margin:10px 0 4px}
+.tile-d{width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;font-weight:800;font-size:15px;border-radius:4px;color:#fff}
+.t-correct{background:#538d4e}.t-present{background:#b59f3b}.t-absent{background:#3a3a3c}.t-empty{background:transparent;border:2px solid #334155;color:var(--text)}
+.example-block{background:var(--bg-alt);border:1px solid var(--border);border-radius:10px;padding:18px 20px;margin:18px 0}
+.example-block .ex-title{font-size:12px;font-weight:700;color:var(--text-3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.ex-word{font-family:'Inter',monospace;font-size:17px;font-weight:700;letter-spacing:.2em;margin-bottom:6px;color:var(--text)}
+.cta-box{background:var(--bg-alt);border:1px solid var(--border);border-radius:12px;padding:24px;margin:40px 0;text-align:center}
+.cta-box h3{font-size:18px;font-weight:700;margin-bottom:8px}
+.cta-box p{color:var(--text-2);font-size:14px;margin-bottom:16px}
+.cta-btn{display:inline-block;background:var(--primary);color:#fff;text-decoration:none;padding:12px 28px;border-radius:8px;font-weight:700;font-size:15px}
+.decision-tree{background:var(--bg-alt);border:1px solid var(--border);border-radius:10px;padding:20px;margin:20px 0;font-size:14px}
+.dt-row{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.dt-row:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.dt-badge{flex-shrink:0;width:80px;padding:4px 8px;border-radius:6px;font-size:11px;font-weight:700;text-align:center}
+.badge-green{background:#538d4e;color:#fff}.badge-yellow{background:#b59f3b;color:#fff}.badge-grey{background:#3a3a3c;color:#fff}
+.dt-text{color:var(--text-2);line-height:1.6}
+.dt-text strong{color:var(--text)}
+.footer{background:var(--bg-alt);border-top:1px solid var(--border);padding:24px 20px;text-align:center;font-size:13px;color:var(--text-3)}
+.footer a{color:var(--primary);text-decoration:none;margin:0 8px}
+a{color:var(--primary)}
+</style>
+</head>
+<body>
+<header class="header">
+  <div class="header-inner">
+    <a href="../" class="logo">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Unscramble Words <span class="logo-pro">Pro</span>
+    </a>
+    <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="container">
+  <nav class="breadcrumb"><a href="../">Home</a> &rsaquo; <a href="../guides/">Guides</a> &rsaquo; <span>Wordle Elimination Strategy</span></nav>
+
+  <header class="article-header">
+    <h1>Wordle Elimination Strategy: Solve Every Puzzle in 4 Guesses or Fewer</h1>
+    <div class="article-meta"><span>&#128203; 1,800 words</span><span>&#9200; 7 min read</span><span>&#127381; Wordle &bull; Strategy &bull; Hard Mode</span></div>
+  </header>
+
+  <article class="article-body">
+
+    <p>Most Wordle players guess based on what words are possible given the colours they see. Expert players do something different: they guess based on what words eliminate the <em>most candidates</em>. This distinction &mdash; between guessing to answer and guessing to eliminate &mdash; is the single most important insight in Wordle strategy, and mastering it will take your average solve from 4&ndash;5 guesses down to 3&ndash;4.</p>
+
+    <div style="background:var(--primary-bg);border:1px solid var(--primary);border-radius:10px;padding:16px 20px;margin-bottom:24px">
+      <div style="font-size:11px;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Core Principle</div>
+      <p style="margin:0;font-size:15px;color:var(--text)"><strong>Elimination beats confirmation.</strong> A guess that turns fully grey but eliminates 1,200 candidates is better than a guess that gives you a green tile but eliminates only 80 candidates. Until guess 5, your primary goal is information, not a solution.</p>
+    </div>
+
+    <h2>How to Read Every Tile Result</h2>
+    <p>The three tile colours each carry specific, actionable information about the remaining answer pool. Understanding exactly what each colour eliminates &mdash; not just "is in the word" and "is not in the word" &mdash; is the foundation of elimination thinking.</p>
+
+    <div class="decision-tree">
+      <div class="dt-row">
+        <div class="dt-badge badge-green">Green</div>
+        <div class="dt-text"><strong>Correct letter, correct position.</strong> Eliminate every remaining candidate that does not have this letter in this exact position. In a typical mid-game state with 200 remaining candidates, a green tile in position 3 eliminates roughly 80% of those candidates instantly.</div>
+      </div>
+      <div class="dt-row">
+        <div class="dt-badge badge-yellow">Yellow</div>
+        <div class="dt-text"><strong>Correct letter, wrong position.</strong> Eliminate (1) every candidate without this letter, AND (2) every candidate with this letter in the position just guessed. Note that yellow tiles are often under-used: players remember "the letter is in the word" but forget to also eliminate candidates that place the letter in the wrong spot.</div>
+      </div>
+      <div class="dt-row">
+        <div class="dt-badge badge-grey">Grey</div>
+        <div class="dt-text"><strong>Letter not in the answer (in this position).</strong> Eliminate every remaining candidate containing this letter. Note the "in this position" caveat: if you have already established that a letter <em>is</em> in the word (yellow in a previous guess), a grey on a different guess of the same letter means the answer has exactly one of that letter, not zero.</div>
+      </div>
+    </div>
+
+    <h2>The Elimination Decision at Every Stage of the Game</h2>
+
+    <h3>Guess 1: Maximum Entropy Opening</h3>
+    <p>Your first guess should be chosen purely for its elimination power. The best openers &mdash; STARE, SLATE, CRANE &mdash; each test five high-frequency letters in positions where they commonly appear. On average, a strong opener like STARE eliminates 62% of the 2,309-word answer pool on guess 1, leaving around 877 candidates. A weak opener like JAZZY eliminates almost nothing: J, A, Z, Z, Y rarely appear in the answer list.</p>
+
+    <div class="example-block">
+      <div class="ex-title">Example &mdash; Guess 1: STARE</div>
+      <div class="tile-demo">
+        <div class="tile-d t-absent">S</div>
+        <div class="tile-d t-correct">T</div>
+        <div class="tile-d t-present">A</div>
+        <div class="tile-d t-absent">R</div>
+        <div class="tile-d t-absent">E</div>
+      </div>
+      <p style="font-size:14px;color:var(--text-2);margin-top:10px;margin-bottom:0">Result: T is correct in position 2 (green). A is in the word but not in position 3 (yellow). S, R, E are not in the answer (grey). This single guess eliminates ~91% of all possible answers. Roughly 200 candidates remain.</p>
+    </div>
+
+    <h3>Guess 2: Targeted Second Elimination</h3>
+    <p>After guess 1, you have meaningful constraints. But in most cases you should not immediately try to solve &mdash; you should play another elimination guess. Your goal for guess 2 is to test letters you did not cover in guess 1 while respecting what you already know. Common mistakes at this stage include:</p>
+    <ul>
+      <li>Guessing a word that repeats a confirmed letter in a known-wrong position (wasting yellow information)</li>
+      <li>Including a letter you already established is absent (grey)</li>
+      <li>Guessing a word that only tests one or two new letters when a different word could test four</li>
+    </ul>
+    <p>For example, after the STARE result above (T correct in pos 2, A is in the word), a strong guess 2 might be <strong>UNTIL</strong> or <strong>MONTH</strong> &mdash; these avoid S, R, E (grey) and test completely new high-frequency letters like O, I, N, L, H.</p>
+
+    <h3>Guess 3: Narrowing to a Small Candidate Set</h3>
+    <p>By guess 3, most players using a good opener are down to 5&ndash;25 remaining candidates. At this point, two paths diverge:</p>
+    <ol>
+      <li><strong>Fewer than 5 candidates remain</strong> &mdash; Guess one of them. The risk of failure is low, and the expected gain from another elimination guess is minimal.</li>
+      <li><strong>5&ndash;25 candidates remain</strong> &mdash; Consider one more elimination guess that tests letters shared across multiple remaining candidates. If 12 of your 15 remaining candidates end in -IGHT, a guess containing G, H, and N (to distinguish NIGHT, LIGHT, SIGHT) eliminates 2 of those 3 simultaneously.</li>
+    </ol>
+
+    <div class="example-block">
+      <div class="ex-title">Continuing the example after 2 guesses</div>
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:10px">After STARE (T correct pos 2, A in word) and a second guess UNTIL (O grey, U grey, N correct pos 4, I grey, L yellow):</p>
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:4px">Known: T in pos 2. A is in the word (not pos 3). N in pos 4. L is in the word (not pos 4). Absent: S, R, E, O, U, I.</p>
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:0">Remaining candidates that fit: words like ATONAL, ANTAL... Down to perhaps 4&ndash;6 words. Guess 3 should be one of them.</p>
+    </div>
+
+    <h2>The "Solve vs. Eliminate" Decision Framework</h2>
+    <p>The most critical skill in Wordle is knowing when to switch from elimination mode to solution mode. Here is a simple framework based on remaining candidate count:</p>
+
+    <table style="width:100%;border-collapse:collapse;margin:16px 0 26px;font-size:14px">
+      <thead><tr style="background:var(--bg-alt)"><th style="text-align:left;padding:9px 12px;border-bottom:2px solid var(--border);color:var(--text);font-weight:600">Remaining Candidates</th><th style="text-align:left;padding:9px 12px;border-bottom:2px solid var(--border);color:var(--text);font-weight:600">Recommended Action</th><th style="text-align:left;padding:9px 12px;border-bottom:2px solid var(--border);color:var(--text);font-weight:600">Why</th></tr></thead>
+      <tbody>
+        <tr><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">&gt; 100</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">Pure elimination guess</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">Every elimination guess cuts the pool roughly in half</td></tr>
+        <tr><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">20&ndash;100</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">Targeted elimination guess</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">Test letters shared by most candidates</td></tr>
+        <tr><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">5&ndash;20</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">Situation-dependent</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">Consider elimination if many candidates share a distinguishing letter</td></tr>
+        <tr><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">2&ndash;5</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">Guess a likely answer</td><td style="padding:8px 12px;border-bottom:1px solid var(--border);color:var(--text-2)">The gain from another elimination is minimal vs. the risk of wasting a guess</td></tr>
+        <tr><td style="padding:8px 12px;border-bottom:0;color:var(--text-2)">1</td><td style="padding:8px 12px;border-bottom:0;color:var(--text-2)">Guess it</td><td style="padding:8px 12px;border-bottom:0;color:var(--text-2)">Only one answer remains — there is nothing to eliminate</td></tr>
+      </tbody>
+    </table>
+
+    <h2>Common Elimination Mistakes and How to Avoid Them</h2>
+
+    <h3>Mistake 1: Ignoring yellow tile position information</h3>
+    <p>When a tile turns yellow, many players only note "this letter is in the word" and forget the second constraint: "this letter is <em>not</em> in this position." If you guess CRANE and A turns yellow in position 3, your next guess must have A somewhere other than position 3. A guess of READS with A in position 3 violates this and wastes information.</p>
+
+    <h3>Mistake 2: Repeated letter guessing after a grey</h3>
+    <p>Using a letter in a later guess after it turned grey is the most common beginner error. If S turned grey in guess 1, no subsequent guess should contain S. Every time you include a known-absent letter you lose a slot that could test a new unknown letter.</p>
+
+    <div class="tip-box">
+      <div class="tip-label">Track Your Letters</div>
+      <p>Keep a mental (or physical) record of your letter states: confirmed letters (green), known letters in wrong positions (yellow), and eliminated letters (grey). Any guess that uses a grey letter is automatically suboptimal. The best Wordle apps and solvers display this tracking automatically, but training your eye to do it mentally is a core skill.</p>
+    </div>
+
+    <h3>Mistake 3: Playing to confirm rather than to eliminate</h3>
+    <p>After a green tile, many players craft their next guess specifically to place that green letter again. But a green tile is already confirmed &mdash; you do not need to test it again. Your next guess should use a completely different five-letter word that maximises new letter coverage, even if it cannot include your green letter (since Hard Mode does require it, but standard mode does not).</p>
+
+    <h3>Mistake 4: Neglecting the double-letter possibility</h3>
+    <p>Around 9% of Wordle answers contain a repeated letter. If you have exhausted most single-occurrence explanations by guess 4 and are stuck, consider that a confirmed letter might appear twice. Words like SPELL, CREEK, FLOOD, and TEETH have fooled many experienced players precisely because eliminating a letter after one grey tile is an oversimplification when it has already been confirmed yellow or green.</p>
+
+    <h2>Elimination Strategy in Hard Mode</h2>
+    <p>Hard Mode forces you to use confirmed letters in every subsequent guess. This changes the elimination calculus significantly:</p>
+    <ul>
+      <li>You cannot play a pure elimination word like UNTIL after confirming T and A from STARE &mdash; UNTIL contains neither T nor A in any position</li>
+      <li>You must choose words that satisfy all confirmed constraints AND test new letters wherever possible</li>
+      <li>This constraint often reduces the number of testable new letters per guess from 3&ndash;4 to 1&ndash;2</li>
+    </ul>
+    <p>The key Hard Mode adaptation: choose your opener even more carefully. <strong>CRANE</strong> is often better than SLATE in Hard Mode because C, R, N in their respective positions are less likely to force you into letter-combination traps. Avoid STARE in Hard Mode if your second guess needs to end in E &mdash; that consumes a potentially useful ending position.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <h3>What is the Wordle elimination strategy?</h3>
+    <p>The elimination strategy means choosing each guess based on how many answer candidates it removes, not just whether it might be the answer. Grey tiles remove all candidates containing that letter. Yellow tiles remove all candidates missing that letter or placing it in the same position. Green tiles remove all candidates with a different letter in that slot. Every guess is evaluated on total candidates eliminated, not probability of being correct.</p>
+
+    <h3>Should I always guess to eliminate or guess the likely answer?</h3>
+    <p>Until guess 5, prioritise elimination whenever more than 5 candidates remain. If you are on guess 5 with 3 candidates, guess your best answer &mdash; another elimination guess burns your last safe attempt. In standard mode (non-Hard), you can play elimination guesses that do not themselves satisfy the known constraints, which is a significant advantage over Hard Mode players.</p>
+
+    <h3>How does Hard Mode change elimination strategy?</h3>
+    <p>Hard Mode forces every guess to include confirmed letters in their known positions, which severely limits pure elimination play. Adapt by choosing an opener with lower "constraint trap" risk (CRANE over SLATE) and prioritising openers that test common letters in positions that leave flexible room for follow-up guesses.</p>
+
+    <div class="cta-box">
+      <h3>Practise Your Elimination Skills</h3>
+      <p>Apply this strategy on today's daily challenge &mdash; see if you can solve it in 3 guesses.</p>
+      <a href="../wordle/daily-challenge/" class="cta-btn">Play Daily Challenge &rarr;</a>
+    </div>
+
+    <div style="margin-top:32px;background:#1e293b;border:1px solid #334155;border-radius:12px;padding:20px 24px">
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;color:#f1f5f9">Complete Wordle Strategy Hub</h3>
+      <ul style="padding-left:18px;margin:0">
+        <li style="margin-bottom:8px;font-size:14px"><a href="best-wordle-starting-words.html">Best Wordle Starting Words Ranked by Win Rate</a></li>
+        <li style="margin-bottom:8px;font-size:14px"><a href="wordle-letter-frequency.html">Most Common Wordle Letters &mdash; Full Frequency Analysis</a></li>
+        <li style="margin-bottom:8px;font-size:14px"><a href="worst-wordle-starting-words.html">Worst Wordle Starting Words &mdash; What Most Players Get Wrong</a></li>
+        <li style="margin-bottom:8px;font-size:14px"><a href="wordle-solving-techniques.html">Advanced Wordle Solving Techniques</a></li>
+        <li style="margin-bottom:8px;font-size:14px"><a href="wordle-tips-and-tricks.html">Wordle Tips &amp; Tricks: 10 Strategies</a></li>
+        <li style="margin-bottom:0;font-size:14px"><a href="../">Free Wordle Helper Tool &rarr;</a></li>
+      </ul>
+    </div>
+
+  </article>
+</div>
+
+<footer class="footer">
+  <div style="max-width:900px;margin:0 auto">
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px 16px;margin-bottom:10px">
+      <a href="/">Home</a><a href="/about.html">About</a><a href="/guides/">Guides</a><a href="/blog/">Blog</a><a href="/privacy.html">Privacy</a>
+    </div>
+    <p>&copy; 2026 Unscramble Words Pro &mdash; Free word finder &amp; Wordle strategy guides</p>
+  </div>
+  <div style="font-size:13px;color:var(--text-3);padding:10px 16px;border-top:1px solid var(--border);margin-top:16px;text-align:center">
+    Written &amp; reviewed by <a href="../author/wordpro-editorial-team.html" style="color:var(--primary);font-weight:600">Unscramble Words Pro Editorial Team</a> &mdash; Last updated: May 2026
+  </div>
+</footer>
+<script src="../theme-toggle.js"></script>
+</body>
+</html>
