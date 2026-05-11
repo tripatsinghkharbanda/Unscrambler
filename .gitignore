@@ -1,0 +1,13 @@
+# PowerShell utility scripts (not for deployment)
+restore-nav.ps1
+submit-indexnow.ps1
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+desktop.ini
+*.log
+*.tmp
+
+# Node (if ever used locally)
+node_modules/
