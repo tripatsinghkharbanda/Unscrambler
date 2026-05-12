@@ -17,6 +17,12 @@
 <meta property="og:url" content="https://unscramblewordspro.com/wordle/daily-challenge/">
 <meta property="og:site_name" content="Unscramble Words Pro">
 <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://unscramblewordspro.com/"},{"@type":"ListItem","position":2,"name":"Daily Wordle Challenge","item":"https://unscramblewordspro.com/wordle/daily-challenge/"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"How does the Daily Word Challenge scoring work?","acceptedAnswer":{"@type":"Answer","text":"Your score is (7 minus guesses used) times 100, giving a maximum of 600 base points. Solving without hints adds 50 bonus points. Words containing rare letters Q, Z, X or J add 100 bonus points. Every 7-day streak adds 50 streak points. Maximum possible score is 999."}},{"@type":"Question","name":"What are the scoring tiers in the Daily Word Challenge?","acceptedAnswer":{"@type":"Answer","text":"There are 5 tiers: Beginner (1–100 pts), Skilled (101–250 pts), Expert (251–400 pts), Master (401–550 pts), and Grandmaster (551+ pts)."}},{"@type":"Question","name":"How does the streak system work?","acceptedAnswer":{"@type":"Answer","text":"Play every consecutive day without missing to build your streak. Special milestone badges are awarded at 3, 7, 14, 30, 50, and 100-day streaks. Missing a day or failing to solve resets the streak to zero."}},{"@type":"Question","name":"What are the daily challenge themes?","acceptedAnswer":{"@type":"Answer","text":"Puzzles rotate through five themed categories: Nature, Music, Science, Sport, and Food, mixed with general word challenges. The theme is displayed below the date on the challenge page."}},{"@type":"Question","name":"How do I share my Daily Word Challenge result?","acceptedAnswer":{"@type":"Answer","text":"After completing the puzzle, the result card shows your score, tier, and emoji grid. Use the Facebook, Twitter/X, WhatsApp, or LinkedIn buttons to share directly, or click Copy Result to Clipboard to paste anywhere."}}]}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6261071610831190" crossorigin="anonymous"></script>
@@ -98,6 +104,28 @@ main{flex:1;padding:0 12px 32px}
 footer{border-top:1px solid var(--b);padding:20px 16px;text-align:center;font-size:12px;color:var(--t3)}
 footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
 @media(max-width:400px){.tile{font-size:1.5rem}.key{min-width:32px;height:52px;font-size:12px}.key.wide{min-width:50px}}
+/* ── Phases 4-11 ── */
+.score-display{text-align:center;margin-bottom:14px}
+.score-num{font-size:46px;font-weight:800;color:var(--p);line-height:1}
+.score-label{font-size:11px;color:var(--t3);margin-top:4px;letter-spacing:.08em;text-transform:uppercase}
+.tier-badge{display:inline-flex;align-items:center;gap:6px;background:var(--s);border:1px solid var(--b);border-radius:20px;padding:6px 16px;font-size:14px;font-weight:700;margin:4px 0 14px;color:var(--t)}
+.tier-badge.grandmaster{border-color:#f59e0b;color:#f59e0b;box-shadow:0 0 14px rgba(245,158,11,.2)}
+.tier-badge.master{border-color:#8b5cf6;color:#8b5cf6;box-shadow:0 0 14px rgba(139,92,246,.2)}
+.tier-badge.expert{border-color:#3b82f6;color:#3b82f6}
+.tier-badge.skilled{border-color:#10b981;color:#10b981}
+.milestone-badge{text-align:center;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(30,58,95,.4));border:1px solid rgba(245,158,11,.4);border-radius:10px;padding:10px 16px;margin-bottom:14px;font-size:14px;font-weight:700;color:#f59e0b;display:none}
+.milestone-badge.show{display:block;animation:badgeIn .6s ease}
+@keyframes badgeIn{0%{transform:scale(.8);opacity:0}70%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+.share-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.soc-btn{display:flex;align-items:center;justify-content:center;gap:7px;border:none;border-radius:8px;padding:11px 8px;font-size:13px;font-weight:700;cursor:pointer;color:#fff;font-family:'Inter',sans-serif;transition:opacity .15s,transform .1s}
+.soc-btn:active{transform:scale(.97)}.soc-btn:hover{opacity:.86}
+.soc-btn.fb{background:#1877f2}.soc-btn.tw{background:#000}.soc-btn.wa{background:#25d366}.soc-btn.li{background:#0a66c2}
+.end-stats-4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+@media(max-width:400px){.end-stats-4{grid-template-columns:repeat(2,1fr)}}
+.confetti-piece{position:fixed;top:0;pointer-events:none;z-index:999;border-radius:2px;animation:cFall var(--dur,1s) var(--delay,0s) ease-in forwards;opacity:0}
+@keyframes cFall{0%{transform:translate(0,0) rotate(0deg);opacity:1}100%{transform:translate(var(--dx,0px),105vh) rotate(var(--rot,360deg));opacity:0}}
+@keyframes tileGlow{0%{box-shadow:none}50%{box-shadow:0 0 18px rgba(83,141,78,.9)}100%{box-shadow:0 0 6px rgba(83,141,78,.3)}}
+.tile-win{animation:tileGlow .7s ease forwards}
 </style>
 </head>
 <body>
@@ -108,10 +136,10 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
       Unscramble Words <span class="lp">Pro</span>
     </a>
     <nav class="hi-nav" aria-label="Site navigation">
-      <a href="../../">Home</a>
-      <a href="../../guides/best-wordle-starting-words.html">Wordle Strategy</a>
-      <a href="../../guides/wordle-elimination-strategy.html">Elimination Guide</a>
-      <a href="../../guides/">All Guides</a>
+      <a href="../../guides/">Guides</a>
+      <a href="../../word-lists/">Word Lists</a>
+      <a href="../../blog/">Blog</a>
+      <a href="../../about.html">About</a>
     </nav>
     <div class="streak-pill" id="streak-display">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2C8.5 6 6 9 6 12.5a6 6 0 0012 0C18 9 15.5 6 12 2z"/></svg>
@@ -123,6 +151,7 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
 <main>
   <div class="game-wrap">
     <div id="date-label"></div>
+    <div id="challenge-meta" style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:8px"></div>
     <div id="board"></div>
 
     <div class="hint-bar">
@@ -146,14 +175,37 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
     <div id="end-panel">
       <div class="end-word" id="end-word"></div>
       <div class="end-def" id="end-def"></div>
-      <div class="end-stats">
+      <div class="score-display">
+        <div class="score-num" id="score-num">0</div>
+        <div class="score-label">points</div>
+      </div>
+      <div style="text-align:center">
+        <span class="tier-badge" id="tier-badge">—</span>
+      </div>
+      <div class="milestone-badge" id="milestone-badge"></div>
+      <div class="end-stats-4">
         <div class="stat-box"><div class="stat-num" id="stat-played">0</div><div class="stat-label">Played</div></div>
         <div class="stat-box"><div class="stat-num" id="stat-winpct">0%</div><div class="stat-label">Win %</div></div>
         <div class="stat-box"><div class="stat-num" id="stat-streak">0</div><div class="stat-label">Streak 🔥</div></div>
+        <div class="stat-box"><div class="stat-num" id="stat-best">0</div><div class="stat-label">Best 🏆</div></div>
+      </div>
+      <div class="share-row">
+        <button class="soc-btn fb" onclick="socialShare('facebook')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>Facebook
+        </button>
+        <button class="soc-btn tw" onclick="socialShare('twitter')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>Twitter/X
+        </button>
+        <button class="soc-btn wa" onclick="socialShare('whatsapp')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp
+        </button>
+        <button class="soc-btn li" onclick="socialShare('linkedin')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>LinkedIn
+        </button>
       </div>
       <button class="share-btn" onclick="shareResult()">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        Share Result
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        Copy Result to Clipboard
       </button>
       <div class="strat-section" id="strat-section"></div>
       <div class="end-links">
@@ -183,6 +235,7 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
   </div>
 </main>
 
+<div id="confetti-container" aria-hidden="true"></div>
 <div id="toast"></div>
 
 <footer>
@@ -196,6 +249,7 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
     <a href="../../privacy.html">Privacy Policy</a>
     <a href="../../terms.html">Terms</a>
     <a href="../../contact.html">Contact</a>
+    <a href="../../sitemap.html">Site Index</a>
   </div>
   <p style="margin-top:10px">© 2026 Unscramble Words Pro · <a href="../../editorial-standards.html">Editorial Standards</a></p>
   <p style="margin-top:6px;font-size:11px;color:#64748b">This is an independent fan word challenge. Not affiliated with or endorsed by The New York Times Company. &ldquo;Wordle&rdquo; is a trademark of The New York Times Company.</p>
@@ -795,22 +849,113 @@ function showHint(n) {
   saveState();
 }
 
+/* ---- Score system (Phase 6) ---- */
+const RARE_LETTERS = new Set(['Q','Z','X','J']);
+function computeScore(won, guessNum) {
+  if (!won) return 0;
+  let s = (7 - guessNum) * 100;
+  if (hintsUsed === 0) s += 50;
+  if ([...TARGET].some(l => RARE_LETTERS.has(l))) s += 100;
+  const st = LS.get('stats', {streak:0});
+  s += Math.floor(Math.max(0, st.streak) / 7) * 50;
+  return Math.min(s, 999);
+}
+const TIERS = [
+  {min:551, label:'\u{1F451} Grandmaster', cls:'grandmaster'},
+  {min:401, label:'\u{1F3C6} Master',      cls:'master'},
+  {min:251, label:'\u26A1 Expert',         cls:'expert'},
+  {min:101, label:'\u{1F31F} Skilled',     cls:'skilled'},
+  {min:0,   label:'\u{1F331} Beginner',    cls:''},
+];
+function getTier(score) { return TIERS.find(t => score >= t.min) || TIERS[TIERS.length-1]; }
+
+/* ---- Streak milestones (Phase 4) ---- */
+const MILESTONES = [
+  {n:100, text:'\u{1F451} Century Player \u2014 100-Day Streak!'},
+  {n:50,  text:'\u{1F48E} Diamond Solver \u2014 50-Day Streak!'},
+  {n:30,  text:'\u{1F3C6} Month Champion \u2014 30-Day Streak!'},
+  {n:14,  text:'\u26A1 Two-Week Run \u2014 14-Day Streak!'},
+  {n:7,   text:'\u{1F525} Week Warrior \u2014 7-Day Streak!'},
+  {n:3,   text:'\u{1F331} Getting Started \u2014 3-Day Streak!'},
+];
+function getMilestone(streak) { return MILESTONES.find(m => streak > 0 && streak % m.n === 0) || null; }
+
+/* ---- Daily theme (Phase 10) ---- */
+const THEME_MAP = {
+  '\u{1F33F} Nature':  ['CRANE','OCEAN','EARTH','STORM','FLAME','BLOOM','FROST','GRAIN','GROVE','EAGLE','CORAL','TIGER','ROBIN','WHALE','SHARK','HORSE','CAMEL','AMBER','THORN','PETAL','FLORA','TROUT','OTTER'],
+  '\u{1F3B5} Music':   ['TEMPO','LYRIC','TENOR','WALTZ','CHORD','MUSIC','VERSE','DANCE','PITCH','BLUES'],
+  '\u26A1 Science': ['ORBIT','SOLAR','LASER','RADAR','VIRUS','OXIDE','OZONE','PRISM','VAPOR','LOGIC','FORCE','SIGMA'],
+  '\u{1F3C5} Sport':   ['TRACK','RUGBY','SERVE','SCORE','GUARD','SPORT','JOUST','TRAIL','SQUAD'],
+  '\u{1F37D}\uFE0F Food': ['HONEY','LEMON','SAUCE','SALAD','FEAST','BREAD','FLOUR','SYRUP','JUICE','TOAST','CREAM','GRAIN'],
+};
+function getTheme(w) {
+  for (const [theme, words] of Object.entries(THEME_MAP)) { if (words.includes(w)) return theme; }
+  return '\u{1F4DD} Word Challenge';
+}
+
+/* ---- Confetti (Phase 9) ---- */
+const CC = ['#538d4e','#b59f3b','#3b82f6','#f59e0b','#ec4899','#8b5cf6','#ef4444'];
+function launchConfetti() {
+  const box = document.getElementById('confetti-container');
+  box.innerHTML = '';
+  for (let i = 0; i < 60; i++) {
+    const p = document.createElement('div');
+    p.className = 'confetti-piece';
+    p.style.left    = (Math.random() * 100) + 'vw';
+    p.style.background = CC[Math.floor(Math.random() * CC.length)];
+    p.style.width   = (7 + Math.random() * 6) + 'px';
+    p.style.height  = (7 + Math.random() * 6) + 'px';
+    p.style.setProperty('--dur',   (0.7 + Math.random() * 1.2) + 's');
+    p.style.setProperty('--delay', (Math.random() * 0.7) + 's');
+    p.style.setProperty('--dx',    (Math.random() * 100 - 50) + 'px');
+    p.style.setProperty('--rot',   (Math.random() * 720 - 360) + 'deg');
+    box.appendChild(p);
+  }
+  setTimeout(() => { box.innerHTML = ''; }, 4000);
+}
+
+/* ---- GA event tracking (Phase 11) ---- */
+function trackEvent(name, params) {
+  try { if (typeof gtag === 'function') gtag('event', name, params || {}); } catch(e) {}
+}
+
+/* ---- Social sharing + share text (Phase 5) ---- */
+function buildShareText() {
+  const won = gameOver && board.slice(0, currentRow).some(r => r.join('') === TARGET);
+  const guesses = won ? currentRow : 'X';
+  const n = getDayIndex() + 1;
+  const score = computeScore(won, currentRow);
+  const tier  = getTier(score);
+  const grid  = shareGrid.map(r => r.join('')).join('\n');
+  return `Daily Word Challenge #${n}\n${guesses}/6 \u00B7 ${score} pts \u00B7 ${tier.label}\n\n${grid}\n\n\u{1F517} https://unscramblewordspro.com/wordle/daily-challenge/`;
+}
+function socialShare(platform) {
+  const text = buildShareText();
+  const url  = 'https://unscramblewordspro.com/wordle/daily-challenge/';
+  const t = encodeURIComponent(text), u = encodeURIComponent(url);
+  const links = {
+    facebook: `https://www.facebook.com/sharer/sharer.php?u=${u}&quote=${t}`,
+    twitter:  `https://twitter.com/intent/tweet?text=${t}`,
+    whatsapp: `https://wa.me/?text=${t}`,
+    linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${u}`,
+  };
+  if (links[platform]) window.open(links[platform], '_blank', 'noopener,width=620,height=520');
+  trackEvent('share', {method: platform, challenge: getDayIndex() + 1});
+}
+
 /* ---- Share ---- */
 function shareResult() {
-  const guesses = gameOver && board.slice(0,currentRow).some(r=>r.join('')===TARGET) ? currentRow : 'X';
-  const lines = [`Unscramble Words Pro — Daily Wordle`, `${TODAY} · ${guesses}/6${hintsUsed > 0 ? ' ('+hintsUsed+' hint'+(hintsUsed>1?'s':'')+')' : ''}`, ''];
-  shareGrid.forEach(row => lines.push(row.join('')));
-  lines.push('', 'https://unscramblewordspro.com/wordle/daily-challenge/');
-  const text = lines.join('\n');
+  const text = buildShareText();
   if (navigator.clipboard) {
     navigator.clipboard.writeText(text).then(() => showToast('Result copied to clipboard!'));
   } else {
     const ta = document.createElement('textarea');
-    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
     document.body.appendChild(ta); ta.select();
     try { document.execCommand('copy'); showToast('Result copied!'); } catch(e) { showToast('Copy failed — please copy manually'); }
     document.body.removeChild(ta);
   }
+  trackEvent('share', {method: 'copy', challenge: getDayIndex() + 1});
 }
 
 /* ---- End panel ---- */
@@ -818,35 +963,63 @@ function showEndPanel() {
   const won = board.slice(0,currentRow).some(r=>r.join('')===TARGET) || (gameOver && currentRow <= 6 && board[currentRow-1]?.join('')===TARGET);
   const def = DEFINITIONS[TARGET] || 'a five-letter English word';
   document.getElementById('end-word').textContent = TARGET;
-  document.getElementById('end-def').textContent = `"${TARGET}" — ${def}.`;
+  document.getElementById('end-def').textContent = `"${TARGET}" \u2014 ${def}.`;
+  // Score + tier
+  const score = computeScore(won, currentRow);
+  const tier  = getTier(score);
+  document.getElementById('score-num').textContent = score;
+  const tb = document.getElementById('tier-badge');
+  tb.textContent = tier.label; tb.className = 'tier-badge ' + tier.cls;
+  // Milestone
+  const s = LS.get('stats', {played:0, won:0, streak:0, maxStreak:0});
+  const ms = getMilestone(s.streak);
+  const mb = document.getElementById('milestone-badge');
+  if (ms && won) { mb.textContent = ms.text; mb.classList.add('show'); } else { mb.classList.remove('show'); }
   // Stats
-  const s = LS.get('stats', {played:0,won:0,streak:0,maxStreak:0});
   document.getElementById('stat-played').textContent = s.played;
-  document.getElementById('stat-winpct').textContent = s.played > 0 ? Math.round(s.won/s.played*100)+'%' : '0%';
+  document.getElementById('stat-winpct').textContent = s.played > 0 ? Math.round(s.won / s.played * 100) + '%' : '0%';
   document.getElementById('stat-streak').textContent = s.streak;
+  document.getElementById('stat-best').textContent   = s.maxStreak || 0;
   document.getElementById('streak-count').textContent = s.streak;
   // Strategy
-  const guess = board.slice(0,currentRow).findIndex(r=>r.join('')===TARGET)+1 || (won ? currentRow : 0);
-  const strat = buildStrategyHTML(won, guess);
-  document.getElementById('strat-section').innerHTML = strat;
+  const guess = board.slice(0,currentRow).findIndex(r=>r.join('')===TARGET) + 1 || (won ? currentRow : 0);
+  document.getElementById('strat-section').innerHTML = buildStrategyHTML(won, guess, score);
   document.getElementById('end-panel').style.display = 'block';
   document.getElementById('end-panel').scrollIntoView({behavior:'smooth', block:'nearest'});
+  // Win effects
+  if (won) {
+    launchConfetti();
+    for (let c = 0; c < 5; c++) {
+      const tile = document.getElementById(`tile-${currentRow - 1}-${c}`);
+      if (tile) setTimeout(() => tile.classList.add('tile-win'), c * 100);
+    }
+  }
+  trackEvent('puzzle_complete', {won, guesses: won ? currentRow : 'X', score, challenge: getDayIndex() + 1});
 }
 
-function buildStrategyHTML(won, guessNum) {
-  const openers = ['STARE','SLATE','CRANE','RAISE'];
+function buildStrategyHTML(won, guessNum, score) {
+  const openers = ['STARE','SLATE','CRANE','RAISE','TRACE','AUDIO'];
   const usedOpener = board[0]?.join('');
-  const openerNote = openers.includes(usedOpener)
-    ? `<strong>${usedOpener}</strong> is one of the statistically strongest openers — it eliminates ~60% of the answer pool on guess 1.`
+  const isGoodOpener = openers.includes(usedOpener);
+  const openerNote = isGoodOpener
+    ? `<strong>${usedOpener}</strong> is a statistically strong opener \u2014 it tests 5 high-frequency letters and eliminates ~62% of the answer pool on guess 1. \u2705`
     : `A top opener like <strong>STARE</strong> or <strong>SLATE</strong> would have eliminated ~62% of answers on guess 1, potentially reducing your total guesses.`;
   const wonMsg = won
-    ? (guessNum <= 3 ? `Excellent! Solving in ${guessNum} ${guessNum===1?'guess':'guesses'} puts you in the top tier of Wordle players.` : `Solved in ${guessNum} guesses — solid result.`)
-    : `The word was <strong>${TARGET}</strong>. Don't worry — some words are genuinely tricky. The key is opening consistently with a high-entropy word.`;
-  return `<h3>${won ? '✅ Post-Game Analysis' : '❌ Post-Game Analysis'}</h3>
+    ? guessNum <= 2 ? `Outstanding! Solving in ${guessNum} ${guessNum===1?'guess':'guesses'} puts you in the top 5% of players.`
+    : guessNum <= 3 ? `Excellent \u2014 ${guessNum} guesses puts you well above the 4.2 average.`
+    : guessNum <= 4 ? `Solid solve in ${guessNum} guesses. Average player takes 4.2.`
+    : `Solved in ${guessNum} guesses. You made it!`
+    : `The word was <strong>${TARGET}</strong>. Some answers sit in the bottom 10% of frequency \u2014 if this was one, don't be hard on yourself.`;
+  const LFREQ = {E:11.2,T:9.1,A:8.2,O:7.5,I:7.0,N:6.7,S:6.3,H:6.1,R:6.0,D:4.3,L:4.0,C:2.8,U:2.8,M:2.4,W:2.4,F:2.2,G:2.0,Y:2.0,P:1.9,B:1.5,V:1.0,K:0.8,X:0.2,J:0.2,Q:0.1,Z:0.1};
+  const LPTS  = {A:1,E:1,I:1,O:1,U:1,L:1,N:1,S:1,T:1,R:1,D:2,G:2,B:3,C:3,M:3,P:3,F:4,H:4,V:4,W:4,Y:4,K:5,J:8,X:8,Q:10,Z:10};
+  const freqStr = [...new Set(TARGET.split(''))].map(l => `${l}\u00A0(${LFREQ[l]||'<1'}%)`).join(' \u00B7 ');
+  const scrabblePts = TARGET.split('').reduce((a,l) => a + (LPTS[l] || 0), 0);
+  return `<h3>${won ? '\u2705' : '\u274C'} Post-Game Analysis</h3>
     <p>${wonMsg}</p>
     <p>${openerNote}</p>
-    <p>After each guess, prioritise plays that test <em>new</em> letters rather than confirming known positions. Each grey result eliminates ~6.3 additional candidates on average. Read the <a href="../../guides/wordle-elimination-strategy.html">elimination strategy guide</a> to sharpen this skill.</p>`;
-}
+    <p><strong>Letter frequencies in ${TARGET}:</strong> ${freqStr}</p>
+    <p><strong>Scrabble value:</strong> ${TARGET} is worth <strong>${scrabblePts} pts</strong> using standard tile values${[...TARGET].some(l=>RARE_LETTERS.has(l))?' \u2014 contains a rare high-value letter!':''}.</p>
+    <p style="font-size:12.5px;color:var(--t3)">Tip: prioritise testing new letters after each guess \u2014 each grey result eliminates ~6 additional candidates on average. <a href="../../guides/wordle-elimination-strategy.html">Read the elimination guide \u2192</a></p>`;}
 
 /* ---- Toast ---- */
 function showToast(msg, duration = 1800) {
@@ -862,10 +1035,13 @@ function saveState() {
 }
 
 function updateStats(won) {
-  const s = LS.get('stats', {played:0,won:0,streak:0,maxStreak:0,lastDate:null});
+  const s = LS.get('stats', {played:0, won:0, streak:0, maxStreak:0, lastDate:null, totalScore:0});
   s.played++;
-  if (won) { s.won++; s.streak = (s.lastDate && dateDiff(s.lastDate, TODAY) === 1) ? s.streak+1 : 1; }
-  else { s.streak = 0; }
+  if (won) {
+    s.won++;
+    s.streak = (s.lastDate && dateDiff(s.lastDate, TODAY) === 1) ? s.streak + 1 : 1;
+    s.totalScore = (s.totalScore || 0) + computeScore(true, currentRow);
+  } else { s.streak = 0; }
   s.maxStreak = Math.max(s.maxStreak, s.streak);
   s.lastDate = TODAY;
   LS.set('stats', s);
@@ -877,10 +1053,13 @@ function dateDiff(a, b) {
 }
 
 /* ---- Init ---- */
+const challengeNum = getDayIndex() + 1;
 document.getElementById('date-label').textContent = formatDateLabel();
+document.getElementById('challenge-meta').textContent = `Challenge #${challengeNum} \u00B7 ${getTheme(TARGET)}`;
 buildBoard();
 buildKeyboard();
 document.getElementById('streak-count').textContent = LS.get('stats', {streak:0}).streak;
+trackEvent('challenge_start', {challenge: challengeNum, word_theme: getTheme(TARGET)});
 
 const alreadyPlayed = checkAlreadyPlayed();
 if (alreadyPlayed) {
