@@ -450,7 +450,7 @@
     cached = findWords(raw);
     pipeline();
     /* Meaningful result: confetti once per session, card on every attempt */
-    if (raw.length >= 4 && cached.length >= 5) {
+    if (raw.length >= 4 && cached.length >= 3) {
       var now = Date.now();
       if (!confettiFired) {
         confettiFired = true;

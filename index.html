@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark">
 <head>
+  <meta charset="UTF-8">
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZCJTBHHQPX"></script>
 <script>
@@ -10,7 +11,6 @@
   gtag('config', 'G-ZCJTBHHQPX');
 </script>
 <!-- Facebook Pixel Code --><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js'); fbq('init', '856534823442516'); fbq('track', 'PageView');</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=856534823442516&ev=PageView&noscript=1"/></noscript><!-- End Facebook Pixel Code -->
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googlesyndication.com https://*.googletagservices.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleadservices.com https://connect.facebook.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://www.googletagmanager.com https://www.google-analytics.com https://region1.google-analytics.com https://raw.githubusercontent.com https://ipapi.co https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleapis.com https://*.adtrafficquality.google https://*.googleadservices.com https://connect.facebook.net https://www.facebook.com; img-src 'self' data: https://*.googlesyndication.com https://*.google.com https://*.google.co.uk https://*.doubleclick.net https://*.googleusercontent.com https://www.facebook.com; frame-src https://*.doubleclick.net https://*.googlesyndication.com https://*.google.com; base-uri 'self'; form-action 'self';">
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -1873,6 +1873,42 @@
     var d=new Date();
     document.getElementById('dcDate').textContent=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
     document.getElementById('wcDate').textContent=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    /* ---- Inline confetti (no app.js dependency) ---- */
+    function dcConfetti(){
+      var el=document.getElementById('wup-confetti');
+      if(!el)return;
+      var cols=['#f59e0b','#3b82f6','#22c55e','#ef4444','#a855f7','#06b6d4','#f97316'];
+      el.innerHTML='';
+      for(var i=0;i<70;i++){
+        var p=document.createElement('div');
+        p.className='cp';
+        p.style.left=Math.random()*100+'%';
+        p.style.background=cols[Math.floor(Math.random()*cols.length)];
+        p.style.width=(5+Math.random()*7)+'px';
+        p.style.height=(5+Math.random()*7)+'px';
+        p.style.animationDuration=(1.8+Math.random()*1.2)+'s';
+        p.style.animationDelay=(Math.random()*0.7)+'s';
+        el.appendChild(p);
+      }
+      setTimeout(function(){el.innerHTML='';},3500);
+    }
+    /* ---- Inline streak (reads/writes same localStorage keys as app.js) ---- */
+    function dcMarkStreak(){
+      var SK='wup_streak',SKD='wup_streak_date',SKB='wup_streak_best';
+      var today=new Date().toISOString().slice(0,10);
+      var streak=parseInt(localStorage.getItem(SK)||'0',10);
+      var date=localStorage.getItem(SKD)||'';
+      if(date===today)return streak;
+      var yest=new Date(Date.now()-864e5).toISOString().slice(0,10);
+      streak=(date===yest)?streak+1:1;
+      var best=Math.max(parseInt(localStorage.getItem(SKB)||'0',10),streak);
+      localStorage.setItem(SK,streak);
+      localStorage.setItem(SKD,today);
+      localStorage.setItem(SKB,best);
+      var cnt=document.getElementById('wupStreakCount');
+      if(cnt)cnt.textContent=streak;
+      return streak;
+    }
     window.checkDC=function(){
       var inp=document.getElementById('dcInput');
       var fb=document.getElementById('dcFeedback');
@@ -1884,8 +1920,9 @@
         fb.textContent='Correct! '+dcWord+' — '+dcHint;
         inp.disabled=true;
         document.getElementById('dcRevealBtn').disabled=true;
-        if(window.wupMarkStreakToday){var _s=window.wupMarkStreakToday();if(window.wupRenderStreakPill)window.wupRenderStreakPill(_s);if(window.showMotivationCard)window.showMotivationCard(_s);}
-        if(window.launchConfetti)window.launchConfetti();
+        var _s=dcMarkStreak();
+        dcConfetti();
+        if(window.showMotivationCard)window.showMotivationCard(_s);
       } else if(dcAttempts>=3){
         fb.className='dc-feedback lose';
         fb.textContent='Not quite. The word was '+dcWord+' — '+dcHint;
