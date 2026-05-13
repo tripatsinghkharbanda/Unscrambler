@@ -188,12 +188,13 @@
 
     /* ===== Streak Pill ===== */
     .wup-streak-pill{display:flex;align-items:center;gap:5px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.28);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700;color:#f59e0b;white-space:nowrap;user-select:none;transition:transform .15s}
-    .wup-streak-pill:hover{transform:scale(1.06)}
+    @media(hover:hover){.wup-streak-pill:hover{transform:scale(1.06)}}
     .wup-streak-pill svg{flex-shrink:0}
     @media(max-width:480px){.wup-streak-pill .sp-label{display:none}}
+    @media(max-width:360px){.wup-streak-pill{display:none}}
 
     /* ===== Confetti ===== */
-    #wup-confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999;overflow:hidden}
+    #wup-confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
     .cp{position:absolute;border-radius:2px;opacity:0;animation:cpfall 2.4s ease-in forwards}
     @keyframes cpfall{0%{opacity:1;transform:translateY(-20px) rotate(0deg)}100%{opacity:0;transform:translateY(105vh) rotate(720deg)}}
 
@@ -1883,6 +1884,8 @@
         fb.textContent='Correct! '+dcWord+' — '+dcHint;
         inp.disabled=true;
         document.getElementById('dcRevealBtn').disabled=true;
+        if(window.wupMarkStreakToday){var _s=window.wupMarkStreakToday();if(window.wupRenderStreakPill)window.wupRenderStreakPill(_s);if(window.showMotivationCard)window.showMotivationCard(_s);}
+        if(window.launchConfetti)window.launchConfetti();
       } else if(dcAttempts>=3){
         fb.className='dc-feedback lose';
         fb.textContent='Not quite. The word was '+dcWord+' — '+dcHint;

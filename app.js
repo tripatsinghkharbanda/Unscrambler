@@ -620,6 +620,9 @@
     saveStreakData(s, today, b);
     return s;
   }
+  window.wupMarkStreakToday  = markStreakToday;
+  window.wupRenderStreakPill = renderStreakPill;
+  window.launchConfetti      = function () { launchConfetti(); };
 
   function renderStreakPill(n) {
     if (dom.streakCount) dom.streakCount.textContent = n;
