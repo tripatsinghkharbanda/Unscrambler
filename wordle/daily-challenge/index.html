@@ -255,6 +255,7 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
   <p style="margin-top:6px;font-size:11px;color:#64748b">This is an independent fan word challenge. Not affiliated with or endorsed by The New York Times Company. &ldquo;Wordle&rdquo; is a trademark of The New York Times Company.</p>
 </footer>
 
+<script src="../../message-card.js"></script>
 <script>
 /* ---- Word bank ---- */
 const ANSWERS = [
@@ -993,6 +994,7 @@ function showEndPanel() {
       const tile = document.getElementById(`tile-${currentRow - 1}-${c}`);
       if (tile) setTimeout(() => tile.classList.add('tile-win'), c * 100);
     }
+    if (window.showMotivationCard) setTimeout(() => window.showMotivationCard(s.streak), 600);
   }
   trackEvent('puzzle_complete', {won, guesses: won ? currentRow : 'X', score, challenge: getDayIndex() + 1});
 }

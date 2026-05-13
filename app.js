@@ -32,6 +32,9 @@
     iconSun:      $("iconSun"),
     iconMoon:     $("iconMoon"),
     toast:        $("toast"),
+    streakPill:   $("wupStreakPill"),
+    streakCount:  $("wupStreakCount"),
+    confettiEl:   $("wup-confetti"),
     trustBar:     $("trustBar"),
     geoBanner:    $("geoBanner"),
     bestSection:  $("bestSection"),
@@ -94,6 +97,8 @@
   var lastRendered = [];       // words currently shown (for Copy All)
   var _gameMode = "all";        // active game mode
   var debounceTimer = null;
+  var confettiFired = false;   // once per session
+  var lastMsgTime   = 0;       // cooldown between message cards
   var recentSearches = loadRecent();
 
   /* ================================================================
@@ -444,6 +449,21 @@
     lastRaw = raw;
     cached = findWords(raw);
     pipeline();
+    /* Meaningful result: confetti once per session, card on every attempt */
+    if (raw.length >= 4 && cached.length >= 5) {
+      var now = Date.now();
+      if (!confettiFired) {
+        confettiFired = true;
+        var s = markStreakToday();
+        renderStreakPill(s);
+        launchConfetti();
+        if (window.showMotivationCard) window.showMotivationCard(s);
+        lastMsgTime = now;
+      } else if (now - lastMsgTime >= 2000) {
+        lastMsgTime = now;
+        if (window.showMotivationCard) window.showMotivationCard(loadStreakData().streak);
+      }
+    }
   }
 
   /* ================================================================
@@ -561,6 +581,74 @@
     });
     dom.recentChips.innerHTML = "";
     dom.recentChips.appendChild(frag);
+  }
+
+  /* ================================================================
+     DAILY STREAK
+     ================================================================ */
+  var WUP_SK  = "wup_streak";
+  var WUP_SKD = "wup_streak_date";
+  var WUP_SKB = "wup_streak_best";
+
+  function todayStr() { return new Date().toISOString().slice(0, 10); }
+
+  function loadStreakData() {
+    try {
+      return {
+        date:   localStorage.getItem(WUP_SKD) || "",
+        streak: parseInt(localStorage.getItem(WUP_SK)  || "0", 10) || 0,
+        best:   parseInt(localStorage.getItem(WUP_SKB) || "0", 10) || 0
+      };
+    } catch (e) { return { date: "", streak: 0, best: 0 }; }
+  }
+
+  function saveStreakData(streak, date, best) {
+    try {
+      localStorage.setItem(WUP_SK,  streak);
+      localStorage.setItem(WUP_SKD, date);
+      localStorage.setItem(WUP_SKB, best);
+    } catch (e) {}
+  }
+
+  function markStreakToday() {
+    var today     = todayStr();
+    var data      = loadStreakData();
+    if (data.date === today) return data.streak;       // already counted today
+    var yesterday = new Date(Date.now() - 864e5).toISOString().slice(0, 10);
+    var s = (data.date === yesterday) ? data.streak + 1 : 1;
+    var b = Math.max(s, data.best);
+    saveStreakData(s, today, b);
+    return s;
+  }
+
+  function renderStreakPill(n) {
+    if (dom.streakCount) dom.streakCount.textContent = n;
+    if (dom.streakPill)  dom.streakPill.title = n > 1
+      ? "\uD83D\uDD25 " + n + "-day streak! Come back tomorrow to keep it going."
+      : "Unscramble every day to build your streak!";
+  }
+
+  /* ================================================================
+     CONFETTI
+     ================================================================ */
+  var CONF_COLORS = ["#f59e0b","#3b82f6","#22c55e","#ef4444","#a855f7","#06b6d4","#f97316"];
+
+  function launchConfetti() {
+    var el = dom.confettiEl;
+    if (!el) return;
+    el.innerHTML = "";
+    for (var i = 0; i < 70; i++) {
+      var p = document.createElement("div");
+      p.className = "cp";
+      p.style.left              = Math.random() * 100 + "%";
+      p.style.background        = CONF_COLORS[Math.floor(Math.random() * CONF_COLORS.length)];
+      p.style.width             = (5 + Math.random() * 7) + "px";
+      p.style.height            = (5 + Math.random() * 7) + "px";
+      p.style.animationDuration = (1.8 + Math.random() * 1.2) + "s";
+      p.style.animationDelay    = (Math.random() * 0.7) + "s";
+      el.appendChild(p);
+    }
+    setTimeout(function () { if (el) el.innerHTML = ""; }, 3500);
   }
 
   /* ================================================================
@@ -783,5 +871,6 @@
   renderRecent();
   loadDictionary();
   detectGeo();
+  renderStreakPill(loadStreakData().streak);
 
 })();
