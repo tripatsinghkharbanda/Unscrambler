@@ -637,8 +637,9 @@
   var CONF_COLORS = ["#f59e0b","#3b82f6","#22c55e","#ef4444","#a855f7","#06b6d4","#f97316"];
 
   function launchConfetti() {
-    var el = dom.confettiEl;
+    var el = dom.confettiEl || document.getElementById('wup-confetti');
     if (!el) return;
+    dom.confettiEl = el;
     el.innerHTML = "";
     for (var i = 0; i < 70; i++) {
       var p = document.createElement("div");
