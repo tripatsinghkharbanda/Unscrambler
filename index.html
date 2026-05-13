@@ -635,13 +635,7 @@
       <div class="daily-challenge" id="dailyChallenge" aria-label="Word Unscramble Daily Challenge">
         <div class="dc-top">
           <span class="dc-badge">&#127881; Word Unscramble</span>
-          <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
-            <div class="wup-streak-pill" id="wupStreakPill" title="Your daily unscrambling streak">
-              <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2C8.5 6 6 9 6 12.5a6 6 0 0012 0C18 9 15.5 6 12 2z"/></svg>
-              <span id="wupStreakCount">0</span><span class="sp-label">&nbsp;streak</span>
-            </div>
-            <span class="dc-date" id="dcDate"></span>
-          </div>
+          <span class="dc-date" id="dcDate"></span>
         </div>
         <p class="dc-prompt">Unscramble today's word — a new puzzle every day.</p>
         <div class="dc-tiles" id="dcTiles"></div>
@@ -651,6 +645,10 @@
           <button class="dc-btn sec" onclick="revealDC()" id="dcRevealBtn">Reveal</button>
         </div>
         <div class="dc-feedback" id="dcFeedback"></div>
+        <div class="wup-streak-pill" id="wupStreakPill" style="margin-top:10px;justify-content:center" title="Your daily unscrambling streak">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2C8.5 6 6 9 6 12.5a6 6 0 0012 0C18 9 15.5 6 12 2z"/></svg>
+          <span id="wupStreakCount">0</span>&nbsp;day streak
+        </div>
       </div>
 
       <!-- Wordle Daily Challenge -->
@@ -1241,6 +1239,8 @@
 
   <!-- Toast -->
   <div id="toast" class="toast"></div>
+  <!-- Confetti (must be before scripts so dom ref is available at app.js init) -->
+  <div id="wup-confetti"></div>
 
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6261071610831190"
      crossorigin="anonymous"></script>
@@ -1908,6 +1908,5 @@
     document.getElementById('dcInput').addEventListener('keydown',function(e){if(e.key==='Enter')checkDC();});
   })();
   </script>
-<div id="wup-confetti"></div>
 </body>
 </html>

@@ -625,10 +625,12 @@
   window.launchConfetti      = function () { launchConfetti(); };
 
   function renderStreakPill(n) {
-    if (dom.streakCount) dom.streakCount.textContent = n;
-    if (dom.streakPill)  dom.streakPill.title = n > 1
+    var cnt  = dom.streakCount || document.getElementById('wupStreakCount');
+    var pill = dom.streakPill  || document.getElementById('wupStreakPill');
+    if (cnt)  { dom.streakCount = cnt;  cnt.textContent = n; }
+    if (pill) { dom.streakPill  = pill; pill.title = n > 1
       ? "\uD83D\uDD25 " + n + "-day streak! Come back tomorrow to keep it going."
-      : "Unscramble every day to build your streak!";
+      : "Unscramble every day to build your streak!"; }
   }
 
   /* ================================================================
