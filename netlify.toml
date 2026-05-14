@@ -1,6 +1,13 @@
 [build]
   publish = "."
 
+# Eliminate /index.html as a duplicate of /
+[[redirects]]
+  from   = "/index.html"
+  to     = "/"
+  status = 301
+  force  = true
+
 # Redirect the Netlify default subdomain to the canonical domain.
 # Netlify automatically adds X-Robots-Tag: noindex to *.netlify.app when
 # a custom domain is active. This 301 ensures Google never indexes those URLs.
@@ -25,3 +32,83 @@
   from   = "/word-lists"
   to     = "/word-lists/"
   status = 301
+
+# Redirect bare /wordle to the daily challenge
+[[redirects]]
+  from   = "/wordle"
+  to     = "/wordle/daily-challenge/"
+  status = 301
+
+[[redirects]]
+  from   = "/wordle/"
+  to     = "/wordle/daily-challenge/"
+  status = 301
+
+# Redirect old /unscramble/* placeholder pages to homepage
+[[redirects]]
+  from   = "/unscramble/*"
+  to     = "/"
+  status = 301
+
+# www → non-www canonical redirect
+[[redirects]]
+  from   = "https://www.unscramblewordspro.com/*"
+  to     = "https://unscramblewordspro.com/:splat"
+  status = 301
+  force  = true
+
+# Clean URL rewrites: /about → /about.html (200 rewrite, no URL change)
+[[redirects]]
+  from   = "/about"
+  to     = "/about.html"
+  status = 200
+
+[[redirects]]
+  from   = "/contact"
+  to     = "/contact.html"
+  status = 200
+
+[[redirects]]
+  from   = "/privacy"
+  to     = "/privacy.html"
+  status = 200
+
+[[redirects]]
+  from   = "/terms"
+  to     = "/terms.html"
+  status = 200
+
+[[redirects]]
+  from   = "/sitemap"
+  to     = "/sitemap.html"
+  status = 200
+
+[[redirects]]
+  from   = "/editorial-standards"
+  to     = "/editorial-standards.html"
+  status = 200
+
+[[redirects]]
+  from   = "/how-to-unscramble-words"
+  to     = "/how-to-unscramble-words.html"
+  status = 200
+
+[[redirects]]
+  from   = "/how-to-win-wordle"
+  to     = "/how-to-win-wordle.html"
+  status = 200
+
+[[redirects]]
+  from   = "/word-games-for-kids"
+  to     = "/word-games-for-kids.html"
+  status = 200
+
+[[redirects]]
+  from   = "/improve-vocabulary-for-students"
+  to     = "/improve-vocabulary-for-students.html"
+  status = 200
+
+[[redirects]]
+  from   = "/word-solver-for-word-games"
+  to     = "/word-solver-for-word-games.html"
+  status = 200
