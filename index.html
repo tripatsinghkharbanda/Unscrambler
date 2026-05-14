@@ -475,6 +475,10 @@
     .footer a { color: var(--primary); text-decoration: none; }
     .footer a:hover { text-decoration: underline; }
     .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 20px; margin-bottom: 10px; }
+    .author-bar { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 20px; font-size: 13px; text-align: center; flex-wrap: wrap; color: var(--text-3); background: var(--bg-alt); border-top: 1px solid var(--border); }
+    .author-bar a { color: var(--primary); font-weight: 600; text-decoration: none; }
+    .author-bar a:hover { text-decoration: underline; }
+    .author-bar-icon { flex-shrink: 0; opacity: .7; }
 
     /* ===== Toast ===== */
     .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(80px); padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 500; background: var(--text); color: var(--bg); box-shadow: var(--shadow); opacity: 0; transition: all .3s cubic-bezier(.4,0,.2,1); z-index: 100; pointer-events: none; }
@@ -1216,6 +1220,11 @@
     <script>
          (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+  </div>
+
+  <div class="author-bar">
+    <svg class="author-bar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+    Written &amp; reviewed by <a href="/editorial-team/">Unscramble Words Pro Editorial Team</a> &mdash; Last updated: May 2026
   </div>
 
   <!-- Footer -->

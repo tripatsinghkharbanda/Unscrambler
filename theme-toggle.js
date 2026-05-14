@@ -42,4 +42,21 @@
   var themeBtn = hi.querySelector('button');
   if (themeBtn) hi.insertBefore(nav, themeBtn);
   else hi.appendChild(nav);
+
+  /* ── Author bar ─────────────────────────────────────────────────────── */
+  if (!document.querySelector('.author-bar')) {
+    var as = document.createElement('style');
+    as.textContent = '.author-bar{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;font-size:13px;text-align:center;flex-wrap:wrap;color:var(--text-3,var(--t3,#64748b));background:var(--bg-alt,var(--bg-s,#1e293b));border-top:1px solid var(--border,var(--b,#334155))}'
+      + '.author-bar a{color:var(--primary,#2563eb);font-weight:600;text-decoration:none}'
+      + '.author-bar a:hover{text-decoration:underline}'
+      + '.author-bar-icon{flex-shrink:0;opacity:.7}';
+    document.head.appendChild(as);
+    var ab = document.createElement('div');
+    ab.className = 'author-bar';
+    ab.innerHTML = '<svg class="author-bar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>'
+      + 'Written &amp; reviewed by <a href="/editorial-team/">Unscramble Words Pro Editorial Team</a> &mdash; Last updated: May 2026';
+    var footer = document.querySelector('footer, [class*="footer"]');
+    if (footer) footer.parentNode.insertBefore(ab, footer);
+    else document.body.appendChild(ab);
+  }
 })();
