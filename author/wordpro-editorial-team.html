@@ -9,8 +9,8 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <script>try{var _t=localStorage.getItem('wup_theme');if(_t==='light'||_t==='dark')document.documentElement.setAttribute('data-theme',_t);}catch(e){}</script>
   <style>
-    :root{--bg:#0f172a;--bg-alt:#1e293b;--surface:#1e293b;--border:#334155;--text:#f1f5f9;--text-2:#94a3b8;--text-3:#64748b;--primary:#2563eb;--primary-hover:#1d4ed8}
-    [data-theme="light"]{--bg:#f8fafc;--bg-alt:#f1f5f9;--surface:#fff;--border:#e2e8f0;--text:#0f172a;--text-2:#475569;--text-3:#94a3b8}
+    [data-theme="dark"]{--bg:#0F172A;--bg-alt:#1E293B;--surface:#1E293B;--border:#334155;--border-hover:#475569;--text:#E5E7EB;--text-2:#94A3B8;--text-3:#64748B;--primary:#2563EB;--accent:#22C55E;--bg-raised:#334155}
+    [data-theme="light"]{--bg:#F8FAFC;--bg-alt:#FFFFFF;--surface:#FFFFFF;--border:#E2E8F0;--border-hover:#CBD5E1;--text:#0F172A;--text-2:#475569;--text-3:#94A3B8;--primary:#2563EB;--accent:#16A34A;--bg-raised:#F1F5F9}
     *{box-sizing:border-box;margin:0;padding:0}
     body{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:16px}
     a{color:var(--primary);text-decoration:none}a:hover{text-decoration:underline}
@@ -22,7 +22,7 @@
     nav a{color:var(--text-2);font-size:13px;font-weight:600;padding:6px 10px;border-radius:7px;text-decoration:none;white-space:nowrap}
     nav a:hover{color:var(--primary);background:rgba(37,99,235,.1);text-decoration:none}
     @media(max-width:640px){nav{display:none}}
-    .theme-btn{background:none;border:1px solid var(--border);border-radius:8px;padding:6px;cursor:pointer;color:var(--text-2);display:flex;align-items:center;flex-shrink:0}
+    .theme-btn{background:var(--bg-raised);border:1px solid var(--border);border-radius:8px;padding:6px;cursor:pointer;color:var(--text-2);display:flex;align-items:center;flex-shrink:0}
     .theme-btn:hover{border-color:var(--primary)}
     .container{max-width:800px;margin:0 auto;padding:40px 20px 60px}
     .breadcrumb{font-size:13px;color:var(--text-3);margin-bottom:24px}
@@ -49,7 +49,10 @@
 <body>
 <header class="site-header">
   <div class="header-inner">
-    <a href="/" class="logo">Unscramble Words <span>Pro</span></a>
+    <a href="/" class="logo">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--primary);flex-shrink:0;filter:drop-shadow(0 0 6px rgba(37,99,235,.4))"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+      Unscramble Words <span>Pro</span>
+    </a>
     <nav>
       <a href="/guides/">Guides</a>
       <a href="/word-lists/">Word Lists</a>
