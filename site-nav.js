@@ -30,7 +30,8 @@
     + '<a href="/word-lists/">Word Lists</a>'
     + '<a href="/blog/">Blog</a>'
     + '<a href="/wordle/daily-challenge/" class="sn-wl">&#129001;&nbsp;Wordle</a>'
-    + '<a href="/about.html">About</a>';
+    + '<a href="/about.html">About</a>'
+    + '<a href="/editorial-team/">Editorial Team</a>';
 
   var btn = container.querySelector('button');
   if (btn) container.insertBefore(nav, btn);

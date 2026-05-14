@@ -33,6 +33,12 @@
   to     = "/word-lists/"
   status = 301
 
+# editorial-team directory redirect
+[[redirects]]
+  from   = "/editorial-team"
+  to     = "/editorial-team/"
+  status = 301
+
 # Redirect bare /wordle to the daily challenge
 [[redirects]]
   from   = "/wordle"
