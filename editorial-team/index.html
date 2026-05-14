@@ -49,15 +49,18 @@
       padding: 0 20px; position: sticky; top: 0; z-index: 40;
     }
     .header-inner {
-      max-width: 1060px; margin: 0 auto; height: 56px;
-      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      max-width: 860px; margin: 0 auto; height: 56px;
+      display: flex; align-items: center; justify-content: space-between; gap: 8px;
     }
     .logo {
-      font-weight: 800; font-size: 18px; color: var(--text); text-decoration: none;
+      font-weight: 800; font-size: 17px; color: var(--text); text-decoration: none;
       display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+      font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     }
     .logo svg { color: var(--primary); flex-shrink: 0; filter: drop-shadow(0 0 6px rgba(37,99,235,0.4)); }
-    .logo-pro { color: var(--primary); }
+    .logo-pro { color: var(--primary); font-weight: 700; }
+    .nav-ham { display: none; background: none; border: 1px solid var(--border); border-radius: 8px; padding: 7px; cursor: pointer; color: var(--text-2); align-items: center; flex-shrink: 0; margin-left: 4px; transition: border-color .15s; }
+    .nav-ham:hover { border-color: var(--primary); }
     .nav-links {
       display: flex; align-items: center; gap: 2px; flex: 1;
       justify-content: flex-end; margin-right: 8px;
@@ -70,6 +73,15 @@
     .nav-links a:hover, .nav-links a[aria-current="page"] {
       color: var(--primary); background: var(--primary-bg); text-decoration: none;
     }
+    @media(max-width:640px){
+      .nav-links{display:none;position:fixed;top:56px;left:0;right:0;flex-direction:column;gap:0;
+        background:var(--bg-alt);border-bottom:1px solid var(--border);padding:8px 12px;
+        z-index:999;box-shadow:0 8px 24px rgba(0,0,0,.25)}
+      .nav-links.open{display:flex!important}
+      .nav-links a{padding:11px 14px;font-size:15px;border-radius:8px;border-bottom:1px solid var(--border)}
+      .nav-links a:last-child{border-bottom:none}
+      .nav-ham{display:flex}
+    }
     .nav-links .sn-wl { color: #4ade80 !important; font-weight: 700; }
     [data-theme="light"] .nav-links .sn-wl { color: #16a34a !important; }
     .theme-btn {
@@ -78,9 +90,6 @@
       align-items: center; flex-shrink: 0; transition: border-color .2s;
     }
     .theme-btn:hover { border-color: var(--primary); }
-    @media (max-width: 640px) {
-      .nav-links { display: none; }
-    }
 
     /* ── Layout ── */
     .container { max-width: 860px; margin: 0 auto; padding: 0 20px; }
@@ -258,10 +267,10 @@
       gap: 8px 20px; margin-bottom: 12px;
     }
     .footer-links a { color: var(--primary); }
-    .author-bar { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 20px; font-size: 13px; text-align: center; flex-wrap: wrap; color: var(--text-3); background: var(--bg-alt); border-top: 1px solid var(--border); }
-    .author-bar a { color: var(--primary); font-weight: 600; text-decoration: none; }
-    .author-bar a:hover { text-decoration: underline; }
-    .author-bar-icon { flex-shrink: 0; opacity: .7; }
+    .wup-author-bar{display:flex;align-items:center;justify-content:center;gap:8px;font-size:13px;color:var(--text-2);padding:10px 16px;border-top:1px solid var(--border);margin-top:24px;flex-wrap:wrap;text-align:center}
+    .wup-author-bar svg{flex-shrink:0;color:var(--primary)}
+    .wup-author-bar a{color:var(--primary);text-decoration:none;font-weight:600}
+    .wup-author-bar a:hover{text-decoration:underline}
   </style>
 </head>
 
@@ -281,6 +290,9 @@
       <a href="/about.html">About</a>
       <a href="/editorial-team/" aria-current="page">Editorial Team</a>
     </nav>
+    <button class="nav-ham" id="navHam" aria-label="Toggle navigation" aria-expanded="false">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
     <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
       <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
@@ -626,11 +638,6 @@
 
 </div><!-- /container -->
 
-<div class="author-bar">
-  <svg class="author-bar-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
-  Written &amp; reviewed by <a href="/editorial-team/">Unscramble Words Pro Editorial Team</a> &mdash; Last updated: May 2026
-</div>
-
 <!-- ── Footer ── -->
 <footer class="site-footer">
   <div class="container">
@@ -649,6 +656,7 @@
     </div>
     <p>&copy; 2026 Unscramble Words Pro &mdash; Free word finder, Scrabble solver &amp; anagram tool for US, UK, Canada &amp; Australia</p>
   </div>
+  <div class="wup-author-bar" itemscope itemtype="https://schema.org/Person"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Written &amp; reviewed by <a href="/author/wordpro-editorial-team.html" itemprop="url"><span itemprop="name">Unscramble Words Pro Editorial Team</span></a> &mdash; Last&nbsp;updated:&nbsp;May&nbsp;2026</span></div>
 </footer>
 
 <!-- ── Structured Data ── -->
@@ -705,6 +713,19 @@
       document.documentElement.setAttribute('data-theme', next);
       try { localStorage.setItem('wup_theme', next); } catch(e) {}
     });
+    var ham = document.getElementById('navHam');
+    var nav = ham && ham.closest('.header-inner').querySelector('.nav-links');
+    if (ham && nav) {
+      var hamI = ham.innerHTML;
+      var closeI = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+      ham.addEventListener('click', function(){
+        var o = nav.classList.toggle('open');
+        ham.setAttribute('aria-expanded', o);
+        ham.innerHTML = o ? closeI : hamI;
+      });
+      nav.addEventListener('click', function(e){ if(e.target.tagName==='A'){ nav.classList.remove('open'); ham.setAttribute('aria-expanded','false'); ham.innerHTML=hamI; } });
+      document.addEventListener('click', function(e){ if(!ham.closest('.header-inner').contains(e.target) && nav.classList.contains('open')){ nav.classList.remove('open'); ham.setAttribute('aria-expanded','false'); ham.innerHTML=hamI; } });
+    }
   })();
 </script>
 </body>
