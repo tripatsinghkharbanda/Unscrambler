@@ -1,15 +1,15 @@
 /* theme-toggle.js — shared across all pages */
 (function () {
-  /* ---- Theme toggle ---- */
+  /* ---- Theme toggle (key: wup_theme, with migration from legacy 'theme') ---- */
   var btn = document.getElementById('themeToggle');
   if (btn) {
-    var stored = localStorage.getItem('theme');
+    var stored = localStorage.getItem('wup_theme') || localStorage.getItem('theme');
     if (stored) document.documentElement.setAttribute('data-theme', stored);
     btn.addEventListener('click', function () {
       var current = document.documentElement.getAttribute('data-theme') || 'dark';
       var next = current === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
+      localStorage.setItem('wup_theme', next);
     });
   }
 
@@ -36,7 +36,8 @@
     + '<a href="/word-lists/">Word Lists</a>'
     + '<a href="/blog/">Blog</a>'
     + '<a href="/wordle/daily-challenge/" class="sn-wl">&#129001;&nbsp;Wordle</a>'
-    + '<a href="/about.html">About</a>';
+    + '<a href="/about.html">About</a>'
+    + '<a href="/editorial-team/">Editorial Team</a>';
 
   var themeBtn = hi.querySelector('button');
   if (themeBtn) hi.insertBefore(nav, themeBtn);
