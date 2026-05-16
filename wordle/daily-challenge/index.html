@@ -43,6 +43,8 @@ header{background:var(--s);border-bottom:1px solid var(--b);padding:0 16px}
 .logo svg{color:var(--p)}.lp{color:var(--p)}
 .streak-pill{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--b);border-radius:20px;padding:4px 10px;font-size:12px;font-weight:600;color:var(--t2)}
 .streak-pill svg{color:#f59e0b}
+.theme-btn{background:none;border:1px solid var(--b);border-radius:8px;padding:6px;cursor:pointer;color:var(--t2);display:flex;align-items:center;flex-shrink:0;margin-left:8px;transition:border-color .15s}
+.theme-btn:hover{border-color:var(--p)}
 #date-label{font-size:12px;color:var(--t3);text-align:center;padding:8px 0 4px;font-weight:600;letter-spacing:.04em}
 main{flex:1;padding:0 12px 32px}
 .game-wrap{max-width:500px;margin:0 auto}
@@ -141,6 +143,9 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
       <a href="../../blog/">Blog</a>
       <a href="../../about.html">About</a>
     </nav>
+    <button id="themeToggle" class="theme-btn" aria-label="Toggle theme">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
     <div class="streak-pill" id="streak-display">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2C8.5 6 6 9 6 12.5a6 6 0 0012 0C18 9 15.5 6 12 2z"/></svg>
       <span id="streak-count">0</span> streak
@@ -257,6 +262,20 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
 
 <script src="../../message-card.js"></script>
 <script>
+/* ---- Theme toggle ---- */
+(function(){
+  var btn = document.getElementById('themeToggle');
+  if (btn) {
+    var stored = localStorage.getItem('wup_theme') || localStorage.getItem('theme');
+    if (stored) document.documentElement.setAttribute('data-theme', stored);
+    btn.addEventListener('click', function(){
+      var current = document.documentElement.getAttribute('data-theme') || 'dark';
+      var next = current === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('wup_theme', next);
+    });
+  }
+})();
 /* ---- Word bank ---- */
 const ANSWERS = [
   'CRANE','SLATE','STARE','RAISE','TRACE','LIGHT','EARTH','HEART','STORM','GRACE',
