@@ -170,6 +170,31 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
       <div id="date-label" class="date-label-highlight"></div>
       <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">►</button>
     </div>
+    <script>
+      (function() {
+        var datePrevBtn = document.getElementById('datePrev');
+        var dateNextBtn = document.getElementById('dateNext');
+        
+        function attachListeners() {
+          if (typeof navigateDate === 'function') {
+            if (datePrevBtn) {
+              datePrevBtn.onclick = function() {
+                navigateDate(-1);
+              };
+            }
+            if (dateNextBtn) {
+              dateNextBtn.onclick = function() {
+                navigateDate(1);
+              };
+            }
+          } else {
+            setTimeout(attachListeners, 50);
+          }
+        }
+        
+        attachListeners();
+      })();
+    </script>
     <div id="challenge-meta" style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:8px"></div>
     <div id="board"></div>
 
@@ -1153,9 +1178,6 @@ buildKeyboard();
 document.getElementById('streak-count').textContent = LS.get('stats', {streak:0}).streak;
 trackEvent('challenge_start', {challenge: challengeNum, word_theme: getTheme(TARGET)});
 
-// Setup date navigation
-document.getElementById('datePrev').addEventListener('click', () => navigateDate(-1));
-document.getElementById('dateNext').addEventListener('click', () => navigateDate(1));
 updateDateNavButtons();
 
 const alreadyPlayed = checkAlreadyPlayed();
