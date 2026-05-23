@@ -315,6 +315,8 @@
       justify-content: space-between;
       margin-bottom: 16px;
       padding: 0 8px;
+      position: relative;
+      z-index: 5;
     }
     .carousel-nav {
       display: flex;
@@ -370,6 +372,7 @@
       transition: all .15s;
       padding: 0;
       z-index: 10;
+      position: relative;
     }
     .date-nav-btn:hover:not(:disabled) {
       background: var(--primary-bg);
@@ -834,14 +837,14 @@
     <!-- Daily Challenges (side by side) -->
     <div class="game-carousel">
       <div class="carousel-header">
-        <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day">◄</button>
+        <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day" onclick="window.updateCarouselDate(-1)">◄</button>
         <div class="carousel-date">
           <div class="date-label-wrapper">
             <span id="carouselDateLabel">Today</span>
             <span class="carousel-sub">Daily Challenges</span>
           </div>
         </div>
-        <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">►</button>
+        <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day" onclick="window.updateCarouselDate(1)">►</button>
       </div>
       <div class="carousel-track" id="carouselTrack">
         <!-- Unscramble Daily Challenge -->

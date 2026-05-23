@@ -914,6 +914,9 @@
     updateUnscrambleChallenge();
   }
 
+  // Expose updateCarouselDate to window for inline onclick handlers
+  window.updateCarouselDate = updateCarouselDate;
+
   function updateWordleLink() {
     var wordleLink = document.querySelector('.wc-play-btn');
     if (!wordleLink) return;
@@ -977,10 +980,12 @@
     if (datePrevBtn) {
       datePrevBtn.disabled = false;
       datePrevBtn.style.pointerEvents = 'auto';
+      datePrevBtn.style.cursor = 'pointer';
     }
     if (dateNextBtn) {
       dateNextBtn.disabled = isToday(carouselDate);
       dateNextBtn.style.pointerEvents = isToday(carouselDate) ? 'none' : 'auto';
+      dateNextBtn.style.cursor = isToday(carouselDate) ? 'not-allowed' : 'pointer';
     }
   }
 
@@ -1075,20 +1080,36 @@
   /* ================================================================
      CAROUSEL EVENT LISTENERS
      ================================================================ */
-  var datePrev = document.getElementById('datePrev');
-  var dateNext = document.getElementById('dateNext');
   var dots = document.querySelectorAll('.dot');
 
-  if (datePrev) {
-    datePrev.addEventListener('click', function() {
-      updateCarouselDate(-1);
-    });
+  // Attach event listeners directly to date navigation buttons
+  function attachDateNavListeners() {
+    var datePrevBtn = document.getElementById('datePrev');
+    var dateNextBtn = document.getElementById('dateNext');
+
+    if (datePrevBtn) {
+      datePrevBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateCarouselDate(-1);
+      };
+    }
+
+    if (dateNextBtn) {
+      dateNextBtn.onclick = function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateCarouselDate(1);
+      };
+    }
   }
 
-  if (dateNext) {
-    dateNext.addEventListener('click', function() {
-      updateCarouselDate(1);
-    });
+  // Try to attach listeners immediately
+  attachDateNavListeners();
+
+  // Also try after DOM is fully loaded
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attachDateNavListeners);
   }
 
   dots.forEach(function(dot, index) {
