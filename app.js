@@ -929,6 +929,9 @@
     }
   }
 
+  // Expose updateWordleLink to window for global script
+  window.updateWordleLink = updateWordleLink;
+
   function updateUnscrambleChallenge() {
     // Update date label in unscramble challenge
     var dcDateLabel = document.getElementById('dcDate');
