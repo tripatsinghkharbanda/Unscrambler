@@ -320,20 +320,24 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 36px;
-      height: 36px;
+      width: 40px;
+      height: 40px;
       border-radius: 8px;
       background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-2);
-      font-size: 18px;
+      border: 2px solid var(--border);
+      color: var(--text);
+      font-size: 22px;
+      font-weight: 700;
       cursor: pointer;
       transition: all .15s;
+      pointer-events: auto;
+      z-index: 10;
     }
     .carousel-nav:hover:not(:disabled) {
       background: var(--primary-bg);
       color: var(--primary);
       border-color: var(--primary);
+      transform: scale(1.05);
     }
     .carousel-nav:disabled {
       opacity: .4;
@@ -769,6 +773,14 @@
       <a href="blog/" class="hub-link">&#128218; Blog</a>
     </nav>
 
+    <!-- Best Words -->
+    <section id="bestSection" class="best-section hidden">
+      <div class="best-header">
+        <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Best Words</h2>
+      </div>
+      <div id="bestGrid" class="best-grid"></div>
+    </section>
+
     <!-- Daily Challenges (side by side) -->
     <div class="game-carousel">
       <div class="carousel-header">
@@ -857,14 +869,6 @@
 
     <!-- Ad Slot 1 -->
     <div class="ad-slot" id="ad-below-input"></div>
-
-    <!-- Best Words -->
-    <section id="bestSection" class="best-section hidden">
-      <div class="best-header">
-        <h2><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> Best Words</h2>
-      </div>
-      <div id="bestGrid" class="best-grid"></div>
-    </section>
 
     <!-- Toolbar -->
     <section class="toolbar">
