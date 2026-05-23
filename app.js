@@ -971,11 +971,11 @@
   }
 
   function updateNavButtons() {
-    var prevBtn = document.getElementById('carouselPrev');
-    var nextBtn = document.getElementById('carouselNext');
+    var datePrevBtn = document.getElementById('datePrev');
+    var dateNextBtn = document.getElementById('dateNext');
     
-    if (prevBtn) prevBtn.disabled = false;
-    if (nextBtn) nextBtn.disabled = isToday(carouselDate);
+    if (datePrevBtn) datePrevBtn.disabled = false;
+    if (dateNextBtn) dateNextBtn.disabled = isToday(carouselDate);
   }
 
   /* ================================================================
@@ -1073,16 +1073,30 @@
      ================================================================ */
   var carouselPrev = document.getElementById('carouselPrev');
   var carouselNext = document.getElementById('carouselNext');
+  var datePrev = document.getElementById('datePrev');
+  var dateNext = document.getElementById('dateNext');
   var dots = document.querySelectorAll('.dot');
 
   if (carouselPrev) {
     carouselPrev.addEventListener('click', function() {
-      updateCarouselDate(-1);
+      prevSlide();
     });
   }
 
   if (carouselNext) {
     carouselNext.addEventListener('click', function() {
+      nextSlide();
+    });
+  }
+
+  if (datePrev) {
+    datePrev.addEventListener('click', function() {
+      updateCarouselDate(-1);
+    });
+  }
+
+  if (dateNext) {
+    dateNext.addEventListener('click', function() {
       updateCarouselDate(1);
     });
   }

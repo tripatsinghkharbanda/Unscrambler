@@ -345,9 +345,38 @@
     }
     .carousel-date {
       display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .date-label-wrapper {
+      display: flex;
       flex-direction: column;
       align-items: center;
       gap: 2px;
+    }
+    .date-nav-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      font-size: 12px;
+      cursor: pointer;
+      transition: all .15s;
+      padding: 0;
+    }
+    .date-nav-btn:hover:not(:disabled) {
+      background: var(--primary-bg);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .date-nav-btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
     }
     .carousel-date #carouselDateLabel {
       font-size: 15px;
@@ -784,12 +813,16 @@
     <!-- Daily Challenges (side by side) -->
     <div class="game-carousel">
       <div class="carousel-header">
-        <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous day" disabled>←</button>
+        <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous game">←</button>
         <div class="carousel-date">
-          <span id="carouselDateLabel">Today</span>
-          <span class="carousel-sub">Daily Challenges</span>
+          <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day">◀</button>
+          <div class="date-label-wrapper">
+            <span id="carouselDateLabel">Today</span>
+            <span class="carousel-sub">Daily Challenges</span>
+          </div>
+          <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">▶</button>
         </div>
-        <button class="carousel-nav next" id="carouselNext" aria-label="Next day" disabled>→</button>
+        <button class="carousel-nav next" id="carouselNext" aria-label="Next game">→</button>
       </div>
       <div class="carousel-track" id="carouselTrack">
         <!-- Unscramble Daily Challenge -->
