@@ -1136,4 +1136,10 @@
   updateDateLabel();
   updateNavButtons();
 
+  // Process any pending date navigation from before app.js loaded
+  if (window.pendingDateNavOffset) {
+    updateCarouselDate(window.pendingDateNavOffset);
+    window.pendingDateNavOffset = null;
+  }
+
 })();
