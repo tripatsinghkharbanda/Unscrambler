@@ -1125,6 +1125,9 @@ function navigateDate(offset) {
   window.location.href = `?date=${dateStr}`;
 }
 
+// Expose navigateDate to window for event delegation
+window.navigateDate = navigateDate;
+
 function updateDateNavButtons() {
   const datePrevBtn = document.getElementById('datePrev');
   const dateNextBtn = document.getElementById('dateNext');
@@ -1148,14 +1151,14 @@ function updateDateNavButtons() {
 document.addEventListener('click', function(e) {
   if (e.target.id === 'datePrev' || e.target.closest('#datePrev')) {
     e.preventDefault();
-    if (typeof navigateDate === 'function') {
-      navigateDate(-1);
+    if (window.navigateDate) {
+      window.navigateDate(-1);
     }
   }
   if (e.target.id === 'dateNext' || e.target.closest('#dateNext')) {
     e.preventDefault();
-    if (typeof navigateDate === 'function') {
-      navigateDate(1);
+    if (window.navigateDate) {
+      window.navigateDate(1);
     }
   }
 });
