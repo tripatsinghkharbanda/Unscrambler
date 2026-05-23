@@ -380,6 +380,9 @@
       }
     }
 
+    /* update results visibility */
+    updateResultsVisibility(total > 0);
+
     /* find top score (across all visible words) */
     var topScore = 0;
     for (var t = 0; t < limited; t++) {
@@ -888,6 +891,209 @@
   }
 
   /* ================================================================
+     CAROUSEL DATE NAVIGATION
+     ================================================================ */
+  var carouselDate = new Date();
+  var maxDate = new Date();
+  
+  // Expose carouselDate to window for inline script access
+  window.carouselDate = carouselDate;
+
+  function updateCarouselDate(offset) {
+    var newDate = new Date(carouselDate);
+    newDate.setDate(newDate.getDate() + offset);
+    
+    // Block future dates
+    if (newDate > maxDate) return;
+    
+    carouselDate = newDate;
+    window.carouselDate = carouselDate; // Keep window object in sync
+    updateDateLabel();
+    updateNavButtons();
+    updateWordleLink();
+    updateUnscrambleChallenge();
+  }
+
+  function updateWordleLink() {
+    var wordleLink = document.querySelector('.wc-play-btn');
+    if (!wordleLink) return;
+    
+    var dateStr = carouselDate.toISOString().slice(0, 10);
+    if (isToday(carouselDate)) {
+      wordleLink.href = 'wordle/daily-challenge/';
+    } else {
+      wordleLink.href = 'wordle/daily-challenge/?date=' + dateStr;
+    }
+  }
+
+  function updateUnscrambleChallenge() {
+    // Update date label in unscramble challenge
+    var dcDateLabel = document.getElementById('dcDate');
+    if (dcDateLabel) {
+      dcDateLabel.textContent = carouselDate.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+    }
+    
+    // Update Wordle date label
+    var wcDateLabel = document.getElementById('wcDate');
+    if (wcDateLabel) {
+      wcDateLabel.textContent = carouselDate.toLocaleDateString('en-US', {month:'short',day:'numeric',year:'numeric'});
+    }
+    
+    // Reload unscramble tiles with new word
+    reloadUnscrambleTiles();
+  }
+
+  function reloadUnscrambleTiles() {
+    // This function will be called from the inline script
+    if (window.reloadUnscrambleChallenge) {
+      window.reloadUnscrambleChallenge(carouselDate);
+    }
+  }
+
+  function updateDateLabel() {
+    var label = document.getElementById('carouselDateLabel');
+    if (!label) return;
+    
+    if (isToday(carouselDate)) {
+      label.textContent = 'Today';
+    } else {
+      label.textContent = carouselDate.toLocaleDateString('en-US', { 
+        weekday: 'short', month: 'short', day: 'numeric' 
+      });
+    }
+  }
+
+  function isToday(date) {
+    var today = new Date();
+    return date.getDate() === today.getDate() &&
+           date.getMonth() === today.getMonth() &&
+           date.getFullYear() === today.getFullYear();
+  }
+
+  function updateNavButtons() {
+    var prevBtn = document.getElementById('carouselPrev');
+    var nextBtn = document.getElementById('carouselNext');
+    
+    if (prevBtn) prevBtn.disabled = false;
+    if (nextBtn) nextBtn.disabled = isToday(carouselDate);
+  }
+
+  /* ================================================================
+     CAROUSEL SLIDE NAVIGATION
+     ================================================================ */
+  var currentSlide = 0;
+  var totalSlides = 2;
+
+  function goToSlide(index) {
+    var slides = document.querySelectorAll('.carousel-slide');
+    var dots = document.querySelectorAll('.dot');
+    
+    if (index < 0 || index >= totalSlides) return;
+    
+    currentSlide = index;
+    
+    slides.forEach(function(slide, i) {
+      slide.classList.toggle('active', i === currentSlide);
+    });
+    
+    dots.forEach(function(dot, i) {
+      dot.classList.toggle('active', i === currentSlide);
+    });
+    
+    // Scroll to slide
+    var track = document.getElementById('carouselTrack');
+    if (track) {
+      var slideWidth = slides[0].offsetWidth;
+      track.scrollTo({
+        left: currentSlide * (slideWidth + 16),
+        behavior: 'smooth'
+      });
+    }
+  }
+
+  function nextSlide() {
+    goToSlide((currentSlide + 1) % totalSlides);
+  }
+
+  function prevSlide() {
+    goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+  }
+
+  /* ================================================================
+     RESULTS VISIBILITY TOGGLE
+     ================================================================ */
+  function updateResultsVisibility(hasResults) {
+    var resultsSection = document.getElementById('resultsSection');
+    var toolbar = document.querySelector('.toolbar');
+    
+    if (!resultsSection) return;
+    
+    if (hasResults) {
+      resultsSection.classList.remove('empty');
+      resultsSection.classList.add('has-results');
+      if (toolbar) toolbar.classList.add('hidden');
+    } else {
+      resultsSection.classList.add('empty');
+      resultsSection.classList.remove('has-results');
+      if (toolbar) toolbar.classList.remove('hidden');
+    }
+  }
+
+  /* ================================================================
+     TOUCH SWIPE SUPPORT
+     ================================================================ */
+  var touchStartX = 0;
+  var touchEndX = 0;
+  var carouselTrack = document.getElementById('carouselTrack');
+
+  if (carouselTrack) {
+    carouselTrack.addEventListener('touchstart', function(e) {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    carouselTrack.addEventListener('touchend', function(e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+  }
+
+  function handleSwipe() {
+    var diff = touchStartX - touchEndX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+    }
+  }
+
+  /* ================================================================
+     CAROUSEL EVENT LISTENERS
+     ================================================================ */
+  var carouselPrev = document.getElementById('carouselPrev');
+  var carouselNext = document.getElementById('carouselNext');
+  var dots = document.querySelectorAll('.dot');
+
+  if (carouselPrev) {
+    carouselPrev.addEventListener('click', function() {
+      updateCarouselDate(-1);
+    });
+  }
+
+  if (carouselNext) {
+    carouselNext.addEventListener('click', function() {
+      updateCarouselDate(1);
+    });
+  }
+
+  dots.forEach(function(dot, index) {
+    dot.addEventListener('click', function() {
+      goToSlide(index);
+    });
+  });
+
+  /* ================================================================
      INIT
      ================================================================ */
   applyTheme(loadTheme());
@@ -896,5 +1102,7 @@
   loadDictionary();
   detectGeo();
   renderStreakPill(loadStreakData().streak);
+  updateDateLabel();
+  updateNavButtons();
 
 })();

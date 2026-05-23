@@ -645,19 +645,41 @@ function getDateStr() {
   const d = new Date();
   return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
-function getDayIndex() {
+function getDayIndex(targetDate = null) {
   const start = new Date(2026, 0, 1);
-  const today = new Date(); today.setHours(0,0,0,0);
-  return Math.max(0, Math.floor((today - start) / 86400000)) % ANSWERS.length;
+  const date = targetDate || new Date();
+  date.setHours(0,0,0,0);
+  return Math.max(0, Math.floor((date - start) / 86400000)) % ANSWERS.length;
 }
-function formatDateLabel() {
-  const d = new Date();
+function formatDateLabel(date = null) {
+  const d = date || new Date();
   return d.toLocaleDateString('en-US',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
 }
 
+/* ---- Get date from URL parameter ---- */
+function getDateFromUrl() {
+  const params = new URLSearchParams(window.location.search);
+  const dateParam = params.get('date');
+  if (dateParam) {
+    const parts = dateParam.split('-');
+    if (parts.length === 3) {
+      const year = parseInt(parts[0]);
+      const month = parseInt(parts[1]) - 1;
+      const day = parseInt(parts[2]);
+      const date = new Date(year, month, day);
+      if (!isNaN(date.getTime())) {
+        return date;
+      }
+    }
+  }
+  return null;
+}
+
 /* ---- Game state ---- */
-const TARGET = ANSWERS[getDayIndex()];
+const urlDate = getDateFromUrl();
+const TARGET = ANSWERS[getDayIndex(urlDate)];
 const TODAY = getDateStr();
+let GAME_DATE = urlDate ? urlDate.toISOString().slice(0, 10) : TODAY;
 let board = Array.from({length:6},()=>Array(5).fill(''));
 let states = Array.from({length:6},()=>Array(5).fill(''));
 let currentRow = 0, currentCol = 0, gameOver = false;
@@ -674,8 +696,8 @@ const LS = {
 let stats = LS.get('stats', {played:0, won:0, streak:0, maxStreak:0, lastDate:null});
 
 function checkAlreadyPlayed() {
-  const saved = LS.get('today', null);
-  if (saved && saved.date === TODAY) {
+  const saved = LS.get(GAME_DATE, null);
+  if (saved && saved.date === GAME_DATE) {
     board = saved.board;
     states = saved.states;
     currentRow = saved.currentRow;
@@ -1057,7 +1079,7 @@ function showToast(msg, duration = 1800) {
 
 /* ---- Save / Load ---- */
 function saveState() {
-  LS.set('today', {date:TODAY, board, states, currentRow, currentCol, gameOver, shareGrid, hintsUsed});
+  LS.set(GAME_DATE, {date:GAME_DATE, board, states, currentRow, currentCol, gameOver, shareGrid, hintsUsed});
 }
 
 function updateStats(won) {
@@ -1065,11 +1087,11 @@ function updateStats(won) {
   s.played++;
   if (won) {
     s.won++;
-    s.streak = (s.lastDate && dateDiff(s.lastDate, TODAY) === 1) ? s.streak + 1 : 1;
+    s.streak = (s.lastDate && dateDiff(s.lastDate, GAME_DATE) === 1) ? s.streak + 1 : 1;
     s.totalScore = (s.totalScore || 0) + computeScore(true, currentRow);
   } else { s.streak = 0; }
   s.maxStreak = Math.max(s.maxStreak, s.streak);
-  s.lastDate = TODAY;
+  s.lastDate = GAME_DATE;
   LS.set('stats', s);
   document.getElementById('streak-count').textContent = s.streak;
 }

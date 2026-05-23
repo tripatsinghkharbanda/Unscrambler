@@ -302,8 +302,133 @@
     .filter-item input:focus, .filter-item select:focus { border-color: var(--primary); box-shadow: 0 0 0 3px var(--ring); }
     .filter-item select { appearance: none; cursor: pointer; }
 
-    /* ===== Results ===== */
-    .results { padding: 16px 0; min-height: 120px; }
+    /* ===== Game Carousel ===== */
+    .game-carousel {
+      width: 100%;
+      max-width: 1100px;
+      margin: 24px auto;
+      padding: 0 20px;
+    }
+    .carousel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding: 0 4px;
+    }
+    .carousel-nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-2);
+      font-size: 18px;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .carousel-nav:hover:not(:disabled) {
+      background: var(--primary-bg);
+      color: var(--primary);
+      border-color: var(--primary);
+    }
+    .carousel-nav:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+    .carousel-date {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+    }
+    .carousel-date #carouselDateLabel {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .carousel-sub {
+      font-size: 12px;
+      color: var(--text-3);
+      font-weight: 500;
+    }
+    .carousel-track {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 16px;
+      padding: 0 4px;
+      scrollbar-width: none;
+    }
+    .carousel-track::-webkit-scrollbar {
+      display: none;
+    }
+    .carousel-slide {
+      flex: 0 0 100%;
+      scroll-snap-align: start;
+      min-width: 280px;
+      transition: opacity .3s ease;
+    }
+    .carousel-slide:not(.active) {
+      opacity: .6;
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+    }
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .dot.active {
+      background: var(--primary);
+      width: 24px;
+      border-radius: 4px;
+    }
+    .dot:hover:not(.active) {
+      background: var(--border-hover);
+    }
+    @media (min-width: 768px) {
+      .carousel-slide {
+        flex: 0 0 calc(50% - 8px);
+      }
+    }
+    @media (min-width: 1024px) {
+      .carousel-slide {
+        flex: 0 0 calc(50% - 8px);
+      }
+    }
+
+    /* ===== Results (Auto-Height) ===== */
+    .results {
+      min-height: 0;
+      height: auto;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
+      opacity: 0;
+    }
+    .results.empty {
+      max-height: 0;
+      opacity: 0;
+      padding: 0;
+    }
+    .results.has-results {
+      max-height: 600px;
+      opacity: 1;
+      padding: 16px 0;
+    }
     .results-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(155px, 1fr)); gap: 8px; }
     .showing-note { font-size: 13px; color: var(--text-3); text-align: center; margin-top: 12px; }
     .group-header {
@@ -623,6 +748,17 @@
       </div>
     </section>
 
+    <!-- Results -->
+    <section class="results empty" id="resultsSection">
+      <div id="resultsGrid" class="results-grid"></div>
+      <div id="showingNote" class="showing-note hidden"></div>
+      <div id="navTip"></div>
+      <div id="emptyState" class="empty-state">
+        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <p>Type letters above to find words</p>
+      </div>
+    </section>
+
     <!-- Hub Nav -->
     <nav class="hub-nav" aria-label="Site sections">
       <a href="guides/scrabble-strategy-guide.html" class="hub-link">&#9822; Scrabble Strategy</a>
@@ -634,49 +770,90 @@
     </nav>
 
     <!-- Daily Challenges (side by side) -->
-    <div class="dual-challenge">
+    <div class="game-carousel">
+      <div class="carousel-header">
+        <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous day" disabled>←</button>
+        <div class="carousel-date">
+          <span id="carouselDateLabel">Today</span>
+          <span class="carousel-sub">Daily Challenges</span>
+        </div>
+        <button class="carousel-nav next" id="carouselNext" aria-label="Next day" disabled>→</button>
+      </div>
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Unscramble Daily Challenge -->
+        <div class="carousel-slide active" id="slide-unscramble">
+          <div class="daily-challenge" id="dailyChallenge" aria-label="Word Unscramble Daily Challenge">
+            <div class="dc-top">
+              <span class="dc-badge">&#127881; Word Unscramble</span>
+              <span class="dc-date" id="dcDate"></span>
+            </div>
+            <p class="dc-prompt">Unscramble today's word — a new puzzle every day.</p>
+            <div class="dc-tiles" id="dcTiles"></div>
+            <div class="dc-controls">
+              <input class="dc-input" id="dcInput" type="text" placeholder="Your answer..." maxlength="15" autocomplete="off" autocapitalize="off">
+              <button class="dc-btn" onclick="checkDC()">Check</button>
+              <button class="dc-btn sec" onclick="revealDC()" id="dcRevealBtn">Reveal</button>
+            </div>
+            <div class="dc-feedback" id="dcFeedback"></div>
+            <div class="wup-streak-pill" id="wupStreakPill" style="margin-top:10px;justify-content:center" title="Your daily unscrambling streak">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2C8.5 6 6 9 6 12.5a6 6 0 0012 0C18 9 15.5 6 12 2z"/></svg>
+              <span id="wupStreakCount">0</span>&nbsp;day streak
+            </div>
+          </div>
+        </div>
 
-      <!-- Unscramble Daily Challenge -->
-      <div class="daily-challenge" id="dailyChallenge" aria-label="Word Unscramble Daily Challenge">
-        <div class="dc-top">
-          <span class="dc-badge">&#127881; Word Unscramble</span>
-          <span class="dc-date" id="dcDate"></span>
-        </div>
-        <p class="dc-prompt">Unscramble today's word — a new puzzle every day.</p>
-        <div class="dc-tiles" id="dcTiles"></div>
-        <div class="dc-controls">
-          <input class="dc-input" id="dcInput" type="text" placeholder="Your answer..." maxlength="15" autocomplete="off" autocapitalize="off">
-          <button class="dc-btn" onclick="checkDC()">Check</button>
-          <button class="dc-btn sec" onclick="revealDC()" id="dcRevealBtn">Reveal</button>
-        </div>
-        <div class="dc-feedback" id="dcFeedback"></div>
-        <div class="wup-streak-pill" id="wupStreakPill" style="margin-top:10px;justify-content:center" title="Your daily unscrambling streak">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="#f59e0b" stroke="none"><path d="M12 2C8.5 6 6 9 6 12.5a6 6 0 0012 0C18 9 15.5 6 12 2z"/></svg>
-          <span id="wupStreakCount">0</span>&nbsp;day streak
+        <!-- Wordle Daily Challenge -->
+        <div class="carousel-slide" id="slide-wordle">
+          <div class="daily-challenge wordle-challenge" aria-label="Wordle Daily Challenge">
+            <div class="dc-top">
+              <span class="dc-badge wc-badge">&#129001; Daily Wordle</span>
+              <span class="dc-date" id="wcDate"></span>
+            </div>
+            <p class="dc-prompt">Guess today&rsquo;s 5-letter word in 6 tries. Hints &amp; streak included.</p>
+            <div class="wc-sample">
+              <div class="wc-tile wt-c">S</div>
+              <div class="wc-tile wt-p">L</div>
+              <div class="wc-tile wt-a">A</div>
+              <div class="wc-tile wt-c">T</div>
+              <div class="wc-tile wt-p">E</div>
+            </div>
+            <div class="dc-controls">
+              <a href="wordle/daily-challenge/" class="wc-play-btn">&#129001; Play Today&rsquo;s Wordle &rarr;</a>
+            </div>
+            <p class="wc-features">&#128293; Streak &nbsp;&middot;&nbsp; &#128161; Hints &nbsp;&middot;&nbsp; &#128200; Post-game strategy</p>
+          </div>
         </div>
       </div>
-
-      <!-- Wordle Daily Challenge -->
-      <div class="daily-challenge wordle-challenge" aria-label="Wordle Daily Challenge">
-        <div class="dc-top">
-          <span class="dc-badge wc-badge">&#129001; Daily Wordle</span>
-          <span class="dc-date" id="wcDate"></span>
-        </div>
-        <p class="dc-prompt">Guess today&rsquo;s 5-letter word in 6 tries. Hints &amp; streak included.</p>
-        <div class="wc-sample">
-          <div class="wc-tile wt-c">S</div>
-          <div class="wc-tile wt-p">L</div>
-          <div class="wc-tile wt-a">A</div>
-          <div class="wc-tile wt-c">T</div>
-          <div class="wc-tile wt-p">E</div>
-        </div>
-        <div class="dc-controls">
-          <a href="wordle/daily-challenge/" class="wc-play-btn">&#129001; Play Today&rsquo;s Wordle &rarr;</a>
-        </div>
-        <p class="wc-features">&#128293; Streak &nbsp;&middot;&nbsp; &#128161; Hints &nbsp;&middot;&nbsp; &#128200; Post-game strategy</p>
+      <div class="carousel-dots">
+        <button class="dot active" data-slide="0" aria-label="Word Unscramble"></button>
+        <button class="dot" data-slide="1" aria-label="Daily Wordle"></button>
       </div>
-
     </div>
+
+    <!-- Educational Context (shown when results are displayed) -->
+    <section id="eduContext" class="hidden" style="background:var(--bg-alt);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:20px 24px;margin:16px 0;">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+        Why These Words Score High
+      </h3>
+      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px;line-height:1.6;">
+        Scrabble scores are based on letter rarity. <strong>E, A, I, O, U, L, N, S, T, R</strong> are worth 1 point (most common). <strong>J, Q, X, Z</strong> are worth 8-10 points (rarest). Words with high-value letters or bingos (7+ letters) score highest.
+      </p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;">
+        <a href="guides/letter-frequency-data.html" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;transition:all .15s;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
+          Letter Frequency Data
+        </a>
+        <a href="guides/scrabble-strategy-guide.html" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;transition:all .15s;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16"/></svg>
+          Scrabble Strategy Guide
+        </a>
+        <a href="guides/two-letter-scrabble-words.html" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;transition:all .15s;">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+          Two-Letter Words
+        </a>
+      </div>
+    </section>
 
     <!-- Ad Slot 1 -->
     <div class="ad-slot" id="ad-below-input"></div>
@@ -723,42 +900,6 @@
         <div class="filter-item"><label for="fEnds">Ends With</label><input type="text" id="fEnds" maxlength="5" autocomplete="off" spellcheck="false"></div>
         <div class="filter-item"><label for="fContains">Contains</label><input type="text" id="fContains" maxlength="5" autocomplete="off" spellcheck="false"></div>
         <div class="filter-item"><label for="fMode">Game Mode</label><select id="fMode"><option value="all">All Words</option><option value="scrabble">Scrabble-style</option><option value="wordle">Wordle (5-letter)</option><option value="bingo">Bingo Hunter (7+)</option><option value="casual">Casual (3–6 letters)</option></select></div>
-      </div>
-    </section>
-
-    <!-- Results -->
-    <section class="results" id="resultsSection">
-      <div id="resultsGrid" class="results-grid"></div>
-      <div id="showingNote" class="showing-note hidden"></div>
-      <div id="navTip"></div>
-      <div id="emptyState" class="empty-state">
-        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-        <p>Type letters above to find words</p>
-      </div>
-    </section>
-
-    <!-- Educational Context (shown when results are displayed) -->
-    <section id="eduContext" class="hidden" style="background:var(--bg-alt);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:12px;padding:20px 24px;margin:16px 0;">
-      <h3 style="font-size:16px;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent)"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
-        Why These Words Score High
-      </h3>
-      <p style="font-size:14px;color:var(--text-2);margin-bottom:12px;line-height:1.6;">
-        Scrabble scores are based on letter rarity. <strong>E, A, I, O, U, L, N, S, T, R</strong> are worth 1 point (most common). <strong>J, Q, X, Z</strong> are worth 8-10 points (rarest). Words with high-value letters or bingos (7+ letters) score highest.
-      </p>
-      <div style="display:flex;flex-wrap:wrap;gap:8px;">
-        <a href="guides/letter-frequency-data.html" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;transition:all .15s;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/></svg>
-          Letter Frequency Data
-        </a>
-        <a href="guides/scrabble-strategy-guide.html" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;transition:all .15s;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16"/></svg>
-          Scrabble Strategy Guide
-        </a>
-        <a href="guides/two-letter-scrabble-words.html" style="display:inline-flex;align-items:center;gap:6px;padding:6px 14px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:13px;font-weight:600;color:var(--text-2);text-decoration:none;transition:all .15s;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-          Two-Letter Words
-        </a>
       </div>
     </section>
 
@@ -1878,13 +2019,16 @@
       }
       return a;
     }
-    function getDayIndex(){
-      var now=new Date();
-      var start=new Date(now.getFullYear(),0,0);
-      var diff=now-start;
+    function getDayIndex(targetDate){
+      var date = targetDate || new Date();
+      var start=new Date(date.getFullYear(),0,0);
+      var diff=date-start;
       return Math.floor(diff/(1000*60*60*24));
     }
-    var dayIdx=getDayIndex();
+    // Get date from carousel or use today
+    var carouselDateStr = window.carouselDate ? window.carouselDate.toISOString().slice(0,10) : null;
+    var targetDate = carouselDateStr ? new Date(carouselDateStr) : new Date();
+    var dayIdx=getDayIndex(targetDate);
     var entry=DC_WORDS[dayIdx % DC_WORDS.length];
     var dcWord=entry.w;
     var dcHint=entry.h;
@@ -1895,15 +2039,40 @@
     if(scrambled===dcWord) scrambled=shuffle(dcWord.split(''),dayIdx+13).join('');
     // Render tiles
     var tilesEl=document.getElementById('dcTiles');
+    tilesEl.innerHTML='';
     scrambled.split('').forEach(function(ch){
       var t=document.createElement('div');
       t.className='dc-tile';t.textContent=ch.toUpperCase();
       tilesEl.appendChild(t);
     });
     // Date label
-    var d=new Date();
-    document.getElementById('dcDate').textContent=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-    document.getElementById('wcDate').textContent=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    document.getElementById('dcDate').textContent=targetDate.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    
+    // Expose reload function for carousel date changes
+    window.reloadUnscrambleChallenge=function(newDate){
+      var newDayIdx=getDayIndex(newDate);
+      var newEntry=DC_WORDS[newDayIdx % DC_WORDS.length];
+      dcWord=newEntry.w;
+      dcHint=newEntry.h;
+      dcRevealed=false;
+      dcAttempts=0;
+      var newScrambled=shuffle(dcWord.split(''),newDayIdx+7).join('');
+      if(newScrambled===dcWord) newScrambled=shuffle(dcWord.split(''),newDayIdx+13).join('');
+      var tilesEl=document.getElementById('dcTiles');
+      tilesEl.innerHTML='';
+      newScrambled.split('').forEach(function(ch){
+        var t=document.createElement('div');
+        t.className='dc-tile';t.textContent=ch.toUpperCase();
+        tilesEl.appendChild(t);
+      });
+      document.getElementById('dcDate').textContent=newDate.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+      var fb=document.getElementById('dcFeedback');
+      fb.className='dc-feedback';
+      fb.textContent='';
+      document.getElementById('dcInput').disabled=false;
+      document.getElementById('dcInput').value='';
+      document.getElementById('dcRevealBtn').disabled=false;
+    };
     /* ---- Inline confetti (no app.js dependency) ---- */
     function dcConfetti(){
       var el=document.getElementById('wup-confetti');
