@@ -51,6 +51,11 @@ header{background:var(--s);border-bottom:1px solid var(--b);padding:0 16px}
 .theme-btn{background:none;border:1px solid var(--b);border-radius:8px;padding:6px;cursor:pointer;color:var(--t2);display:flex;align-items:center;flex-shrink:0;margin-left:8px;transition:border-color .15s}
 .theme-btn:hover{border-color:var(--p)}
 #date-label{font-size:12px;color:var(--t3);text-align:center;padding:8px 0 4px;font-weight:600;letter-spacing:.04em}
+.date-nav-container{display:flex;align-items:center;justify-content:center;gap:8px;margin:8px 0}
+.date-nav-btn{display:flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:6px;background:var(--s);border:1px solid var(--b);color:var(--t2);font-size:14px;font-weight:700;cursor:pointer;transition:all .15s;padding:0}
+.date-nav-btn:hover:not(:disabled){background:var(--pb);color:var(--p);border-color:var(--p);transform:scale(1.1)}
+.date-nav-btn:disabled{opacity:.4;cursor:not-allowed}
+.date-label-highlight{font-size:14px;font-weight:700;color:var(--p);background:var(--pb);padding:4px 12px;border-radius:6px;border:1px solid var(--p)}
 main{flex:1;padding:0 12px 32px}
 .game-wrap{max-width:500px;margin:0 auto}
 /* Board */
@@ -160,7 +165,11 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
 
 <main>
   <div class="game-wrap">
-    <div id="date-label"></div>
+    <div class="date-nav-container">
+      <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day">◄</button>
+      <div id="date-label" class="date-label-highlight"></div>
+      <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">►</button>
+    </div>
     <div id="challenge-meta" style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:8px"></div>
     <div id="board"></div>
 
@@ -1100,6 +1109,41 @@ function dateDiff(a, b) {
   return Math.round((new Date(b) - new Date(a)) / 86400000);
 }
 
+/* ---- Date Navigation ---- */
+function navigateDate(offset) {
+  const currentDate = urlDate || new Date();
+  const newDate = new Date(currentDate);
+  newDate.setDate(newDate.getDate() + offset);
+  
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  newDate.setHours(0,0,0,0);
+  
+  if (newDate > today) return; // Prevent future dates
+  
+  const dateStr = `${newDate.getFullYear()}-${String(newDate.getMonth()+1).padStart(2,'0')}-${String(newDate.getDate()).padStart(2,'0')}`;
+  window.location.href = `?date=${dateStr}`;
+}
+
+function updateDateNavButtons() {
+  const datePrevBtn = document.getElementById('datePrev');
+  const dateNextBtn = document.getElementById('dateNext');
+  const currentDate = urlDate || new Date();
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  currentDate.setHours(0,0,0,0);
+  
+  if (datePrevBtn) {
+    datePrevBtn.disabled = false;
+    datePrevBtn.style.pointerEvents = 'auto';
+  }
+  if (dateNextBtn) {
+    const isToday = currentDate.getTime() === today.getTime();
+    dateNextBtn.disabled = isToday;
+    dateNextBtn.style.pointerEvents = isToday ? 'none' : 'auto';
+  }
+}
+
 /* ---- Init ---- */
 const challengeNum = getDayIndex() + 1;
 document.getElementById('date-label').textContent = formatDateLabel();
@@ -1108,6 +1152,11 @@ buildBoard();
 buildKeyboard();
 document.getElementById('streak-count').textContent = LS.get('stats', {streak:0}).streak;
 trackEvent('challenge_start', {challenge: challengeNum, word_theme: getTheme(TARGET)});
+
+// Setup date navigation
+document.getElementById('datePrev').addEventListener('click', () => navigateDate(-1));
+document.getElementById('dateNext').addEventListener('click', () => navigateDate(1));
+updateDateNavButtons();
 
 const alreadyPlayed = checkAlreadyPlayed();
 if (alreadyPlayed) {

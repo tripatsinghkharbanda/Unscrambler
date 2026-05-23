@@ -383,9 +383,13 @@
       cursor: not-allowed;
     }
     .carousel-date #carouselDateLabel {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 700;
-      color: var(--text);
+      color: var(--primary);
+      background: var(--primary-bg);
+      padding: 4px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--primary);
     }
     .carousel-sub {
       font-size: 12px;
@@ -400,6 +404,7 @@
       gap: 16px;
       padding: 0 4px;
       scrollbar-width: none;
+      align-items: stretch;
     }
     .carousel-track::-webkit-scrollbar {
       display: none;
@@ -408,6 +413,14 @@
       flex: 0 0 100%;
       scroll-snap-align: start;
       min-width: 280px;
+      display: flex;
+    }
+    .carousel-slide .daily-challenge {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     .carousel-dots {
       display: flex;

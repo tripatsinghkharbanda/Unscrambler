@@ -974,8 +974,14 @@
     var datePrevBtn = document.getElementById('datePrev');
     var dateNextBtn = document.getElementById('dateNext');
     
-    if (datePrevBtn) datePrevBtn.disabled = false;
-    if (dateNextBtn) dateNextBtn.disabled = isToday(carouselDate);
+    if (datePrevBtn) {
+      datePrevBtn.disabled = false;
+      datePrevBtn.style.pointerEvents = 'auto';
+    }
+    if (dateNextBtn) {
+      dateNextBtn.disabled = isToday(carouselDate);
+      dateNextBtn.style.pointerEvents = isToday(carouselDate) ? 'none' : 'auto';
+    }
   }
 
   /* ================================================================
