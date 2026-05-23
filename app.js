@@ -1090,11 +1090,15 @@
     // Date navigation buttons
     if (e.target.id === 'datePrev' || e.target.closest('#datePrev')) {
       e.preventDefault();
-      updateCarouselDate(-1);
+      if (window.updateCarouselDate) {
+        window.updateCarouselDate(-1);
+      }
     }
     if (e.target.id === 'dateNext' || e.target.closest('#dateNext')) {
       e.preventDefault();
-      updateCarouselDate(1);
+      if (window.updateCarouselDate) {
+        window.updateCarouselDate(1);
+      }
     }
     
     // Carousel navigation buttons

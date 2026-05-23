@@ -166,9 +166,7 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
 <main>
   <div class="game-wrap">
     <div class="date-nav-container">
-      <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day">◄</button>
       <div id="date-label" class="date-label-highlight"></div>
-      <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">►</button>
     </div>
     <div id="challenge-meta" style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:8px"></div>
     <div id="board"></div>
@@ -1109,60 +1107,6 @@ function dateDiff(a, b) {
   return Math.round((new Date(b) - new Date(a)) / 86400000);
 }
 
-/* ---- Date Navigation ---- */
-function navigateDate(offset) {
-  const currentDate = urlDate || new Date();
-  const newDate = new Date(currentDate);
-  newDate.setDate(newDate.getDate() + offset);
-  
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  newDate.setHours(0,0,0,0);
-  
-  if (newDate > today) return; // Prevent future dates
-  
-  const dateStr = `${newDate.getFullYear()}-${String(newDate.getMonth()+1).padStart(2,'0')}-${String(newDate.getDate()).padStart(2,'0')}`;
-  window.location.href = `?date=${dateStr}`;
-}
-
-// Expose navigateDate to window for event delegation
-window.navigateDate = navigateDate;
-
-function updateDateNavButtons() {
-  const datePrevBtn = document.getElementById('datePrev');
-  const dateNextBtn = document.getElementById('dateNext');
-  const currentDate = urlDate || new Date();
-  const today = new Date();
-  today.setHours(0,0,0,0);
-  currentDate.setHours(0,0,0,0);
-  
-  if (datePrevBtn) {
-    datePrevBtn.disabled = false;
-    datePrevBtn.style.pointerEvents = 'auto';
-  }
-  if (dateNextBtn) {
-    const isToday = currentDate.getTime() === today.getTime();
-    dateNextBtn.disabled = isToday;
-    dateNextBtn.style.pointerEvents = isToday ? 'none' : 'auto';
-  }
-}
-
-// Use event delegation for date navigation - works regardless of timing
-document.addEventListener('click', function(e) {
-  if (e.target.id === 'datePrev' || e.target.closest('#datePrev')) {
-    e.preventDefault();
-    if (window.navigateDate) {
-      window.navigateDate(-1);
-    }
-  }
-  if (e.target.id === 'dateNext' || e.target.closest('#dateNext')) {
-    e.preventDefault();
-    if (window.navigateDate) {
-      window.navigateDate(1);
-    }
-  }
-});
-
 /* ---- Init ---- */
 const challengeNum = getDayIndex() + 1;
 document.getElementById('date-label').textContent = formatDateLabel();
@@ -1171,8 +1115,6 @@ buildBoard();
 buildKeyboard();
 document.getElementById('streak-count').textContent = LS.get('stats', {streak:0}).streak;
 trackEvent('challenge_start', {challenge: challengeNum, word_theme: getTheme(TARGET)});
-
-updateDateNavButtons();
 
 const alreadyPlayed = checkAlreadyPlayed();
 if (alreadyPlayed) {
