@@ -175,24 +175,25 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
         var datePrevBtn = document.getElementById('datePrev');
         var dateNextBtn = document.getElementById('dateNext');
         
-        function attachListeners() {
-          if (typeof navigateDate === 'function') {
-            if (datePrevBtn) {
-              datePrevBtn.onclick = function() {
-                navigateDate(-1);
-              };
+        if (datePrevBtn) {
+          datePrevBtn.onclick = function() {
+            if (typeof navigateDate === 'function') {
+              navigateDate(-1);
+            } else {
+              console.error('navigateDate not available');
             }
-            if (dateNextBtn) {
-              dateNextBtn.onclick = function() {
-                navigateDate(1);
-              };
-            }
-          } else {
-            setTimeout(attachListeners, 50);
-          }
+          };
         }
         
-        attachListeners();
+        if (dateNextBtn) {
+          dateNextBtn.onclick = function() {
+            if (typeof navigateDate === 'function') {
+              navigateDate(1);
+            } else {
+              console.error('navigateDate not available');
+            }
+          };
+        }
       })();
     </script>
     <div id="challenge-meta" style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:8px"></div>
