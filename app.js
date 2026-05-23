@@ -900,6 +900,7 @@
   window.carouselDate = carouselDate;
 
   function updateCarouselDate(offset) {
+    console.log('updateCarouselDate called with offset:', offset);
     var newDate = new Date(carouselDate);
     newDate.setDate(newDate.getDate() + offset);
     
@@ -1085,32 +1086,61 @@
      ================================================================ */
   var dots = document.querySelectorAll('.dot');
 
-  // Use event delegation for date navigation - works regardless of timing
-  document.addEventListener('click', function(e) {
-    // Date navigation buttons
-    if (e.target.id === 'datePrev' || e.target.closest('#datePrev')) {
-      e.preventDefault();
-      if (window.updateCarouselDate) {
-        window.updateCarouselDate(-1);
-      }
-    }
-    if (e.target.id === 'dateNext' || e.target.closest('#dateNext')) {
-      e.preventDefault();
-      if (window.updateCarouselDate) {
-        window.updateCarouselDate(1);
-      }
+  // Date navigation event listeners - attach directly to buttons
+  function attachDateNavListeners() {
+    var datePrevBtn = document.getElementById('datePrev');
+    var dateNextBtn = document.getElementById('dateNext');
+    
+    if (datePrevBtn) {
+      datePrevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateCarouselDate(-1);
+      });
     }
     
-    // Carousel navigation buttons
-    if (e.target.id === 'carouselPrev' || e.target.closest('#carouselPrev')) {
-      e.preventDefault();
-      prevSlide();
+    if (dateNextBtn) {
+      dateNextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        updateCarouselDate(1);
+      });
     }
-    if (e.target.id === 'carouselNext' || e.target.closest('#carouselNext')) {
-      e.preventDefault();
-      nextSlide();
+  }
+  
+  // Carousel navigation event listeners - attach directly to buttons
+  function attachCarouselNavListeners() {
+    var carouselPrevBtn = document.getElementById('carouselPrev');
+    var carouselNextBtn = document.getElementById('carouselNext');
+    
+    if (carouselPrevBtn) {
+      carouselPrevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        prevSlide();
+      });
     }
-  });
+    
+    if (carouselNextBtn) {
+      carouselNextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        nextSlide();
+      });
+    }
+  }
+  
+  // Attach listeners immediately
+  attachDateNavListeners();
+  attachCarouselNavListeners();
+  
+  // Also attach after DOM is fully loaded (in case buttons aren't ready yet)
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      attachDateNavListeners();
+      attachCarouselNavListeners();
+    });
+  }
 
   dots.forEach(function(dot, index) {
     dot.addEventListener('click', function() {
