@@ -834,31 +834,17 @@
       <div id="bestGrid" class="best-grid"></div>
     </section>
 
-    <script>
-      // Global date navigation handler - defined before buttons
-      window.handleMainDateNav = function(offset) {
-        // Store the pending offset
-        window.pendingDateNavOffset = offset;
-        
-        // Try to call immediately if function is available
-        if (window.updateCarouselDate) {
-          window.updateCarouselDate(offset);
-          window.pendingDateNavOffset = null;
-        }
-      };
-    </script>
-
     <!-- Daily Challenges (side by side) -->
     <div class="game-carousel">
       <div class="carousel-header">
-        <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day" onclick="window.handleMainDateNav(-1)">◄</button>
+        <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day">◄</button>
         <div class="carousel-date">
           <div class="date-label-wrapper">
             <span id="carouselDateLabel">Today</span>
             <span class="carousel-sub">Daily Challenges</span>
           </div>
         </div>
-        <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day" onclick="window.handleMainDateNav(1)">►</button>
+        <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">►</button>
       </div>
       <div class="carousel-track" id="carouselTrack">
         <!-- Unscramble Daily Challenge -->

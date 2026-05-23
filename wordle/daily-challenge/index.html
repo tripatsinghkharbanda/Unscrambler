@@ -166,23 +166,10 @@ footer a{color:var(--t3);margin:0 8px}footer a:hover{color:var(--p)}
 <main>
   <div class="game-wrap">
     <div class="date-nav-container">
-      <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day" onclick="window.handleWordleDateNav(-1)">◄</button>
+      <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day">◄</button>
       <div id="date-label" class="date-label-highlight"></div>
-      <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day" onclick="window.handleWordleDateNav(1)">►</button>
+      <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">►</button>
     </div>
-    <script>
-      // Global date navigation handler - defined before navigateDate function
-      window.handleWordleDateNav = function(offset) {
-        // Store the pending offset
-        window.pendingWordleDateNavOffset = offset;
-        
-        // Try to call immediately if function is available
-        if (typeof navigateDate === 'function') {
-          navigateDate(offset);
-          window.pendingWordleDateNavOffset = null;
-        }
-      };
-    </script>
     <div id="challenge-meta" style="font-size:11px;color:var(--t3);text-align:center;margin-bottom:8px"></div>
     <div id="board"></div>
 
@@ -1157,11 +1144,21 @@ function updateDateNavButtons() {
   }
 }
 
-// Process any pending date navigation from before navigateDate was defined
-if (window.pendingWordleDateNavOffset) {
-  navigateDate(window.pendingWordleDateNavOffset);
-  window.pendingWordleDateNavOffset = null;
-}
+// Use event delegation for date navigation - works regardless of timing
+document.addEventListener('click', function(e) {
+  if (e.target.id === 'datePrev' || e.target.closest('#datePrev')) {
+    e.preventDefault();
+    if (typeof navigateDate === 'function') {
+      navigateDate(-1);
+    }
+  }
+  if (e.target.id === 'dateNext' || e.target.closest('#dateNext')) {
+    e.preventDefault();
+    if (typeof navigateDate === 'function') {
+      navigateDate(1);
+    }
+  }
+});
 
 /* ---- Init ---- */
 const challengeNum = getDayIndex() + 1;

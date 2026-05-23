@@ -1085,6 +1085,18 @@
      ================================================================ */
   var dots = document.querySelectorAll('.dot');
 
+  // Use event delegation for date navigation - works regardless of timing
+  document.addEventListener('click', function(e) {
+    if (e.target.id === 'datePrev' || e.target.closest('#datePrev')) {
+      e.preventDefault();
+      updateCarouselDate(-1);
+    }
+    if (e.target.id === 'dateNext' || e.target.closest('#dateNext')) {
+      e.preventDefault();
+      updateCarouselDate(1);
+    }
+  });
+
   dots.forEach(function(dot, index) {
     dot.addEventListener('click', function() {
       goToSlide(index);
@@ -1102,11 +1114,5 @@
   renderStreakPill(loadStreakData().streak);
   updateDateLabel();
   updateNavButtons();
-
-  // Process any pending date navigation from before app.js loaded
-  if (window.pendingDateNavOffset) {
-    updateCarouselDate(window.pendingDateNavOffset);
-    window.pendingDateNavOffset = null;
-  }
 
 })();
