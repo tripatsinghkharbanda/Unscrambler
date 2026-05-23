@@ -1075,23 +1075,9 @@
   /* ================================================================
      CAROUSEL EVENT LISTENERS
      ================================================================ */
-  var carouselPrev = document.getElementById('carouselPrev');
-  var carouselNext = document.getElementById('carouselNext');
   var datePrev = document.getElementById('datePrev');
   var dateNext = document.getElementById('dateNext');
   var dots = document.querySelectorAll('.dot');
-
-  if (carouselPrev) {
-    carouselPrev.addEventListener('click', function() {
-      prevSlide();
-    });
-  }
-
-  if (carouselNext) {
-    carouselNext.addEventListener('click', function() {
-      nextSlide();
-    });
-  }
 
   if (datePrev) {
     datePrev.addEventListener('click', function() {
