@@ -1086,28 +1086,6 @@
      ================================================================ */
   var dots = document.querySelectorAll('.dot');
 
-  // Date navigation event listeners - attach directly to buttons
-  function attachDateNavListeners() {
-    var datePrevBtn = document.getElementById('datePrev');
-    var dateNextBtn = document.getElementById('dateNext');
-    
-    if (datePrevBtn) {
-      datePrevBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        updateCarouselDate(-1);
-      });
-    }
-    
-    if (dateNextBtn) {
-      dateNextBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        updateCarouselDate(1);
-      });
-    }
-  }
-  
   // Carousel navigation event listeners - attach directly to buttons
   function attachCarouselNavListeners() {
     var carouselPrevBtn = document.getElementById('carouselPrev');
@@ -1130,14 +1108,12 @@
     }
   }
   
-  // Attach listeners immediately
-  attachDateNavListeners();
+  // Attach carousel navigation listeners immediately
   attachCarouselNavListeners();
   
   // Also attach after DOM is fully loaded (in case buttons aren't ready yet)
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', function() {
-      attachDateNavListeners();
       attachCarouselNavListeners();
     });
   }

@@ -2206,5 +2206,24 @@
     document.getElementById('dcInput').addEventListener('keydown',function(e){if(e.key==='Enter')checkDC();});
   })();
   </script>
+  <script>
+    // Date navigation - attach after app.js loads
+    (function() {
+      var datePrevBtn = document.getElementById('datePrev');
+      var dateNextBtn = document.getElementById('dateNext');
+      
+      if (datePrevBtn && window.updateCarouselDate) {
+        datePrevBtn.onclick = function() {
+          window.updateCarouselDate(-1);
+        };
+      }
+      
+      if (dateNextBtn && window.updateCarouselDate) {
+        dateNextBtn.onclick = function() {
+          window.updateCarouselDate(1);
+        };
+      }
+    })();
+  </script>
 </body>
 </html>
