@@ -42,7 +42,8 @@
     copyAllBtn:   $("copyAllBtn"),
     recentSection:$("recentSection"),
     recentChips:  $("recentChips"),
-    recentClear:  $("recentClear")
+    recentClear:  $("recentClear"),
+    eduContext:   $("eduContext")
   };
 
   /* ---------- Constants ---------- */
@@ -316,6 +317,10 @@
     if (!words || words.length === 0) { el.classList.remove("visible"); el.innerHTML = ""; return; }
     var has7plus = words.some(function(w){ return w.length >= 7; });
     var all5     = words.length > 0 && words.every(function(w){ return w.length === 5; });
+    var hasQ     = words.some(function(w){ return w.indexOf('q') >= 0; });
+    var hasZ     = words.some(function(w){ return w.indexOf('z') >= 0; });
+    var hasX     = words.some(function(w){ return w.indexOf('x') >= 0; });
+    var hasJ     = words.some(function(w){ return w.indexOf('j') >= 0; });
     var topScore = 0;
     for (var i = 0; i < Math.min(words.length, 20); i++) { var s = scoreWord(words[i]); if (s > topScore) topScore = s; }
     var msg;
@@ -323,6 +328,10 @@
       msg = '&#129001; Using for Wordle? <a href="guides/best-wordle-starting-words.html">See the Best Starting Words &rarr;</a>';
     } else if (f.mode === "bingo" || has7plus) {
       msg = '&#127942; Found bingo-length words! <a href="guides/scrabble-strategy-guide.html">Learn Bingo &amp; Rack Strategy &rarr;</a>';
+    } else if (hasQ) {
+      msg = '&#128214; Found Q-words! <a href="guides/q-words-scrabble.html">Master Q Without U Strategy &rarr;</a>';
+    } else if (hasZ || hasX || hasJ) {
+      msg = '&#11088; High-value letters! <a href="guides/letter-frequency-data.html">See Letter Frequency Data &rarr;</a>';
     } else if (topScore >= 20) {
       msg = '&#11088; High-scoring rack! <a href="guides/scrabble-strategy-guide.html">Maximise your score &rarr;</a>';
     } else {
@@ -360,6 +369,15 @@
       dom.showingNote.classList.remove("hidden");
     } else {
       dom.showingNote.classList.add("hidden");
+    }
+
+    /* educational context - show when results are found */
+    if (dom.eduContext) {
+      if (total > 0 && dom.input.value.replace(/[^a-z]/gi, "").length >= 2) {
+        dom.eduContext.classList.remove("hidden");
+      } else {
+        dom.eduContext.classList.add("hidden");
+      }
     }
 
     /* find top score (across all visible words) */
