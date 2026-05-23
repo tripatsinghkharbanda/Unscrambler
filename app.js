@@ -1087,6 +1087,7 @@
 
   // Use event delegation for date navigation - works regardless of timing
   document.addEventListener('click', function(e) {
+    // Date navigation buttons
     if (e.target.id === 'datePrev' || e.target.closest('#datePrev')) {
       e.preventDefault();
       updateCarouselDate(-1);
@@ -1094,6 +1095,16 @@
     if (e.target.id === 'dateNext' || e.target.closest('#dateNext')) {
       e.preventDefault();
       updateCarouselDate(1);
+    }
+    
+    // Carousel navigation buttons
+    if (e.target.id === 'carouselPrev' || e.target.closest('#carouselPrev')) {
+      e.preventDefault();
+      prevSlide();
+    }
+    if (e.target.id === 'carouselNext' || e.target.closest('#carouselNext')) {
+      e.preventDefault();
+      nextSlide();
     }
   });
 
