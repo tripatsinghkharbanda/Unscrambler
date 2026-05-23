@@ -358,21 +358,25 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
-      border-radius: 4px;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
       background: var(--surface);
       border: 1px solid var(--border);
       color: var(--text-2);
-      font-size: 12px;
+      font-size: 14px;
+      font-weight: 700;
       cursor: pointer;
       transition: all .15s;
       padding: 0;
+      pointer-events: auto;
+      z-index: 5;
     }
     .date-nav-btn:hover:not(:disabled) {
       background: var(--primary-bg);
       color: var(--primary);
       border-color: var(--primary);
+      transform: scale(1.1);
     }
     .date-nav-btn:disabled {
       opacity: .4;
@@ -404,10 +408,6 @@
       flex: 0 0 100%;
       scroll-snap-align: start;
       min-width: 280px;
-      transition: opacity .3s ease;
-    }
-    .carousel-slide:not(.active) {
-      opacity: .6;
     }
     .carousel-dots {
       display: flex;
@@ -435,6 +435,15 @@
     @media (min-width: 768px) {
       .carousel-slide {
         flex: 0 0 calc(50% - 8px);
+      }
+      .carousel-track {
+        overflow-x: hidden;
+      }
+      .carousel-nav {
+        display: none;
+      }
+      .carousel-dots {
+        display: none;
       }
     }
     @media (min-width: 1024px) {
@@ -815,18 +824,18 @@
       <div class="carousel-header">
         <button class="carousel-nav prev" id="carouselPrev" aria-label="Previous game">←</button>
         <div class="carousel-date">
-          <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day">◀</button>
+          <button class="date-nav-btn" id="datePrev" aria-label="Previous day" title="Previous day">◄</button>
           <div class="date-label-wrapper">
             <span id="carouselDateLabel">Today</span>
             <span class="carousel-sub">Daily Challenges</span>
           </div>
-          <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">▶</button>
+          <button class="date-nav-btn" id="dateNext" aria-label="Next day" title="Next day">►</button>
         </div>
         <button class="carousel-nav next" id="carouselNext" aria-label="Next game">→</button>
       </div>
       <div class="carousel-track" id="carouselTrack">
         <!-- Unscramble Daily Challenge -->
-        <div class="carousel-slide active" id="slide-unscramble">
+        <div class="carousel-slide" id="slide-unscramble">
           <div class="daily-challenge" id="dailyChallenge" aria-label="Word Unscramble Daily Challenge">
             <div class="dc-top">
               <span class="dc-badge">&#127881; Word Unscramble</span>

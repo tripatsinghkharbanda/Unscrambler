@@ -992,15 +992,11 @@
     
     currentSlide = index;
     
-    slides.forEach(function(slide, i) {
-      slide.classList.toggle('active', i === currentSlide);
-    });
-    
     dots.forEach(function(dot, i) {
       dot.classList.toggle('active', i === currentSlide);
     });
     
-    // Scroll to slide
+    // Scroll to slide (only on mobile where overflow-x is auto)
     var track = document.getElementById('carouselTrack');
     if (track) {
       var slideWidth = slides[0].offsetWidth;
@@ -1012,11 +1008,13 @@
   }
 
   function nextSlide() {
-    goToSlide((currentSlide + 1) % totalSlides);
+    var newIndex = (currentSlide + 1) % totalSlides;
+    goToSlide(newIndex);
   }
 
   function prevSlide() {
-    goToSlide((currentSlide - 1 + totalSlides) % totalSlides);
+    var newIndex = (currentSlide - 1 + totalSlides) % totalSlides;
+    goToSlide(newIndex);
   }
 
   /* ================================================================
